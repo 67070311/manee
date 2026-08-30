@@ -26,23 +26,23 @@ const menus: Menu[] = [
     items: [
       {
         label: "Active",
-        href: "/challenges/active",
+        href: "/challenge/active",
       },
       {
         label: "Upload design",
-        href: "/challenges/upload-design",
+        href: "/challenge/upload-design",
       },
       {
         label: "Voting",
-        href: "/challenges/voting",
+        href: "/challenge/voting-design",
       },
       {
         label: "Upcoming",
-        href: "/challenges/upcoming",
+        href: "/challenge/upcoming-design",
       },
       {
         label: "Completed",
-        href: "/challenges/completed",
+        href: "/challenge/complete-design",
       },
     ],
   },
@@ -111,7 +111,7 @@ export default function Navbar() {
 
     if (!value) return;
 
-    router.push(`/search?q=${encodeURIComponent(value)}`);
+    router.push(`/explore?q=${encodeURIComponent(value)}`);
     setOpenMenu(null);
   };
 
@@ -192,7 +192,6 @@ export default function Navbar() {
                     </svg>
                   </button>
 
-                  {/* DROPDOWN */}
                   {openMenu === menu.label && (
                     <div className="absolute left-1/2 top-full z-[100] -translate-x-1/2 pt-[18px]">
                       <div className="w-[200px] rounded-[12px] border border-[#ECECEC] bg-white p-[8px] shadow-[0_12px_35px_rgba(0,0,0,0.10)]">
@@ -216,7 +215,6 @@ export default function Navbar() {
 
           {/* RIGHT */}
           <div className="ml-[30px] flex min-w-0 shrink-0 items-center gap-[14px]">
-            {/* SEARCH */}
             <form
               onSubmit={handleSearch}
               className="flex h-[44px] w-[210px] items-center rounded-[10px] border border-[#DFE4EE] bg-white px-[14px]"
@@ -252,7 +250,6 @@ export default function Navbar() {
               />
             </form>
 
-            {/* LOGIN */}
             <Link
               href="/login"
               onClick={() => setOpenMenu(null)}
@@ -261,7 +258,6 @@ export default function Navbar() {
               Login to your Account
             </Link>
 
-            {/* PROFILE */}
             <Link
               href="/profile"
               onClick={() => setOpenMenu(null)}

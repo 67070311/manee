@@ -2,346 +2,415 @@
 
 import Link from "next/link";
 import { Icon } from "@iconify/react";
+import { motion } from "framer-motion";
+
+const itemVariants = {
+  hidden: {
+    opacity: 0,
+    y: 18,
+  },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: [0.16, 1, 0.3, 1] as const,
+    },
+  },
+};
 
 export default function Body() {
   return (
-    <div className="relative flex min-h-[360px] w-full flex-col items-center justify-center overflow-hidden">
-      {/* =========================
-          LEFT CONFETTI
-      ========================== */}
-
-      <div className="pointer-events-none absolute inset-y-0 left-0 w-[34%]">
-        {/* Blue triangle */}
-        <span
-          className="confetti-float absolute left-[28%] top-[4%] block h-0 w-0 border-b-[10px] border-l-[7px] border-r-[7px] border-b-[#4C82F7] border-l-transparent border-r-transparent"
-          style={{ animationDelay: "0s" }}
+    <div className="relative w-full py-[18px]">
+      {/* MAIN BAR */}
+      <motion.div
+        initial={{
+          opacity: 0,
+          y: 40,
+          scale: 0.985,
+        }}
+        whileInView={{
+          opacity: 1,
+          y: 0,
+          scale: 1,
+        }}
+        viewport={{
+          once: true,
+          amount: 0.35,
+        }}
+        transition={{
+          duration: 0.85,
+          ease: [0.16, 1, 0.3, 1],
+        }}
+        className="relative mx-auto flex min-h-[116px] w-full items-center justify-between overflow-hidden rounded-[20px] border border-[#E7EDF7] bg-[#F9FBFF] px-[28px]"
+      >
+        {/* LEFT LIGHT */}
+        <motion.div
+          initial={{
+            opacity: 0,
+            scale: 0.8,
+          }}
+          whileInView={{
+            opacity: 1,
+            scale: 1,
+          }}
+          viewport={{ once: true }}
+          transition={{
+            duration: 1.1,
+            delay: 0.1,
+          }}
+          className="pointer-events-none absolute left-[-80px] top-1/2 h-[180px] w-[280px] -translate-y-1/2 rounded-full bg-[#DCEBFF] blur-[80px]"
         />
 
-        {/* Pink dot */}
-        <span
-          className="confetti-float-slow absolute left-[8%] top-[24%] h-[7px] w-[7px] rounded-full bg-[#F83F79]"
-          style={{ animationDelay: "0.3s" }}
+        {/* CENTER LIGHT */}
+        <motion.div
+          initial={{
+            opacity: 0,
+          }}
+          whileInView={{
+            opacity: 1,
+          }}
+          viewport={{ once: true }}
+          transition={{
+            duration: 1.2,
+            delay: 0.2,
+          }}
+          className="pointer-events-none absolute left-1/2 top-1/2 h-[130px] w-[360px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white blur-[50px]"
         />
 
-        {/* Orange ring */}
-        <span
-          className="confetti-rotate absolute left-[38%] top-[26%] h-[18px] w-[18px] rounded-full border-[4px] border-[#FF7A3D]"
-          style={{ animationDelay: "0.8s" }}
-        />
-
-        {/* Orange diamond */}
-        <span
-          className="confetti-float absolute left-[16%] top-[40%] h-[10px] w-[10px] rotate-45 bg-[#FF7E3E]"
-          style={{ animationDelay: "1.1s" }}
-        />
-
-        {/* Pink circle */}
-        <span
-          className="confetti-float-slow absolute left-[35%] top-[45%] h-[14px] w-[14px] rounded-full bg-[#F63B70]"
-          style={{ animationDelay: "0.5s" }}
-        />
-
-        {/* Purple square */}
-        <span
-          className="confetti-rotate absolute left-[22%] top-[58%] h-[22px] w-[22px] rotate-12 bg-[#6C56EA]"
-          style={{ animationDelay: "0.9s" }}
-        />
-
-        {/* Blue triangle */}
-        <span
-          className="confetti-float absolute left-[8%] top-[70%] block h-0 w-0 -rotate-12 border-b-[10px] border-l-[7px] border-r-[7px] border-b-[#487EF4] border-l-transparent border-r-transparent"
-          style={{ animationDelay: "0.4s" }}
-        />
-
-        {/* Green triangle */}
-        <span
-          className="confetti-float-slow absolute left-[26%] bottom-[6%] block h-0 w-0 rotate-[75deg] border-b-[13px] border-l-[9px] border-r-[9px] border-b-[#42C99B] border-l-transparent border-r-transparent"
-          style={{ animationDelay: "1.4s" }}
-        />
-
-        {/* Purple dot */}
-        <span
-          className="confetti-float absolute left-[44%] bottom-[10%] h-[10px] w-[10px] rounded-full bg-[#7259EE]"
-          style={{ animationDelay: "0.2s" }}
-        />
-
-        {/* Squiggle */}
-        <svg
-          viewBox="0 0 50 20"
-          className="confetti-wave absolute left-[13%] bottom-[20%] h-[20px] w-[48px]"
+        {/* LEFT CONTENT */}
+        <motion.div
+          variants={itemVariants}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          transition={{
+            delay: 0.15,
+          }}
+          className="relative z-10 flex items-center gap-[14px]"
         >
-          <path
-            d="M2 12C7 2 12 18 17 8C22 -2 27 16 32 6C37 -4 42 14 48 4"
-            fill="none"
-            stroke="#F23C72"
-            strokeWidth="5"
-            strokeLinecap="round"
-          />
-        </svg>
+          {/* ICON */}
+          <motion.div
+            initial={{
+              opacity: 0,
+              scale: 0.7,
+              rotate: -8,
+            }}
+            whileInView={{
+              opacity: 1,
+              scale: 1,
+              rotate: 0,
+            }}
+            viewport={{ once: true }}
+            transition={{
+              duration: 0.55,
+              delay: 0.2,
+              ease: [0.16, 1, 0.3, 1],
+            }}
+            whileHover={{
+              y: -2,
+              rotate: 4,
+            }}
+            className="flex h-[46px] w-[46px] shrink-0 items-center justify-center rounded-[14px] bg-[#287CFF] text-white shadow-[0_8px_22px_rgba(40,124,255,0.22)]"
+          >
+            <Icon
+              icon="solar:clock-circle-bold-duotone"
+              width="24"
+              height="24"
+            />
+          </motion.div>
 
-        {/* Small squiggle */}
-        <svg
-          viewBox="0 0 50 20"
-          className="confetti-wave-reverse absolute left-[36%] bottom-[30%] h-[18px] w-[42px]"
+          <div>
+            <p className="text-[11px] font-medium uppercase tracking-[1px] text-[#8B96A8]">
+              Submission opens in
+            </p>
+
+            <p className="mt-[3px] text-[16px] font-medium text-[#171717]">
+              Ready for the next challenge?
+            </p>
+          </div>
+        </motion.div>
+
+        {/* COUNTDOWN */}
+        <motion.div
+          initial={{
+            opacity: 0,
+            y: 20,
+            scale: 0.96,
+          }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+            scale: 1,
+          }}
+          viewport={{ once: true }}
+          transition={{
+            duration: 0.7,
+            delay: 0.28,
+            ease: [0.16, 1, 0.3, 1],
+          }}
+          className="relative z-10 flex items-center gap-[7px]"
         >
-          <path
-            d="M2 12C7 2 12 18 17 8C22 -2 27 16 32 6C37 -4 42 14 48 4"
-            fill="none"
-            stroke="#F23C72"
-            strokeWidth="5"
-            strokeLinecap="round"
-          />
-        </svg>
-      </div>
-
-      {/* =========================
-          RIGHT CONFETTI
-      ========================== */}
-
-      <div className="pointer-events-none absolute inset-y-0 right-0 w-[34%]">
-        {/* Orange dot */}
-        <span
-          className="confetti-float absolute right-[32%] top-[10%] h-[9px] w-[9px] rounded-full bg-[#FF7C3A]"
-          style={{ animationDelay: "0.6s" }}
-        />
-
-        {/* Green dot */}
-        <span
-          className="confetti-float-slow absolute right-[8%] top-[20%] h-[6px] w-[6px] rounded-full bg-[#42C99B]"
-          style={{ animationDelay: "0.1s" }}
-        />
-
-        {/* Pink wave */}
-        <svg
-          viewBox="0 0 50 20"
-          className="confetti-wave-reverse absolute right-[40%] top-[25%] h-[21px] w-[52px]"
-        >
-          <path
-            d="M2 12C7 2 12 18 17 8C22 -2 27 16 32 6C37 -4 42 14 48 4"
-            fill="none"
-            stroke="#F23C72"
-            strokeWidth="5"
-            strokeLinecap="round"
-          />
-        </svg>
-
-        {/* Blue triangle */}
-        <span
-          className="confetti-float absolute right-[20%] top-[32%] block h-0 w-0 rotate-[15deg] border-b-[12px] border-l-[8px] border-r-[8px] border-b-[#4C82F7] border-l-transparent border-r-transparent"
-          style={{ animationDelay: "1.2s" }}
-        />
-
-        {/* Blue circle */}
-        <span
-          className="confetti-float-slow absolute right-[31%] top-[47%] h-[12px] w-[12px] rounded-full bg-[#4B7CF3]"
-          style={{ animationDelay: "0.7s" }}
-        />
-
-        {/* Orange diamond */}
-        <span
-          className="confetti-rotate absolute right-[3%] top-[53%] h-[11px] w-[11px] rotate-45 bg-[#FF7C3A]"
-          style={{ animationDelay: "0.9s" }}
-        />
-
-        {/* Green ring */}
-        <span
-          className="confetti-float absolute right-[12%] top-[62%] h-[19px] w-[19px] rounded-full border-[4px] border-[#3FC698]"
-          style={{ animationDelay: "0.2s" }}
-        />
-
-        {/* Green triangle */}
-        <span
-          className="confetti-float-slow absolute right-[22%] bottom-[12%] block h-0 w-0 rotate-[72deg] border-b-[13px] border-l-[9px] border-r-[9px] border-b-[#42C99B] border-l-transparent border-r-transparent"
-          style={{ animationDelay: "0.5s" }}
-        />
-
-        {/* Pink square */}
-        <span
-          className="confetti-rotate absolute right-[7%] bottom-[22%] h-[14px] w-[14px] rotate-12 bg-[#F23C72]"
-          style={{ animationDelay: "1s" }}
-        />
-
-        {/* Purple wave */}
-        <svg
-          viewBox="0 0 50 20"
-          className="confetti-wave absolute right-[32%] bottom-[4%] h-[20px] w-[50px]"
-        >
-          <path
-            d="M2 12C7 2 12 18 17 8C22 -2 27 16 32 6C37 -4 42 14 48 4"
-            fill="none"
-            stroke="#6657E8"
-            strokeWidth="5"
-            strokeLinecap="round"
-          />
-        </svg>
-      </div>
-
-      {/* =========================
-          COUNTDOWN
-      ========================== */}
-
-      <div className="relative z-10 flex min-w-[360px] flex-col items-center rounded-[22px] bg-white px-[40px] py-[24px] shadow-[0_8px_28px_rgba(40,124,255,0.10)]">
-        <p className="text-[16px] font-medium text-[#1D1D1D]">Start in!</p>
-
-        <div className="mt-[14px] flex items-start gap-[42px]">
-          <div className="text-center">
-            <p className="text-[36px] font-medium leading-none text-[#287CFF]">
+          {/* DAYS */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{
+              duration: 0.5,
+              delay: 0.32,
+            }}
+            className="flex min-w-[67px] flex-col items-center"
+          >
+            <span className="text-[28px] font-medium leading-none text-[#287CFF]">
               14
-            </p>
-            <p className="mt-[10px] text-[16px] font-normal text-[#333333]">
-              Days
-            </p>
-          </div>
+            </span>
 
-          <div className="text-center">
-            <p className="text-[36px] font-medium leading-none text-[#287CFF]">
+            <span className="mt-[5px] text-[10px] text-[#7C8593]">DAYS</span>
+          </motion.div>
+
+          <motion.span
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{
+              duration: 0.4,
+              delay: 0.38,
+            }}
+            className="mb-[17px] text-[17px] text-[#CCD5E2]"
+          >
+            :
+          </motion.span>
+
+          {/* HOURS */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{
+              duration: 0.5,
+              delay: 0.42,
+            }}
+            className="flex min-w-[67px] flex-col items-center"
+          >
+            <span className="text-[28px] font-medium leading-none text-[#287CFF]">
               28
-            </p>
-            <p className="mt-[10px] text-[16px] font-normal text-[#333333]">
-              Hours
-            </p>
-          </div>
+            </span>
 
-          <div className="text-center">
-            <p className="text-[36px] font-medium leading-none text-[#287CFF]">
+            <span className="mt-[5px] text-[10px] text-[#7C8593]">HOURS</span>
+          </motion.div>
+
+          <motion.span
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{
+              duration: 0.4,
+              delay: 0.48,
+            }}
+            className="mb-[17px] text-[17px] text-[#CCD5E2]"
+          >
+            :
+          </motion.span>
+
+          {/* MINUTES */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{
+              duration: 0.5,
+              delay: 0.52,
+            }}
+            className="flex min-w-[67px] flex-col items-center"
+          >
+            <span className="text-[28px] font-medium leading-none text-[#287CFF]">
               45
-            </p>
-            <p className="mt-[10px] text-[16px] font-normal text-[#333333]">
-              Minutes
-            </p>
-          </div>
+            </span>
+
+            <span className="mt-[5px] text-[10px] text-[#7C8593]">MINUTES</span>
+          </motion.div>
+        </motion.div>
+
+        {/* ACTIONS */}
+        <motion.div
+          initial={{
+            opacity: 0,
+            x: 22,
+          }}
+          whileInView={{
+            opacity: 1,
+            x: 0,
+          }}
+          viewport={{ once: true }}
+          transition={{
+            duration: 0.7,
+            delay: 0.42,
+            ease: [0.16, 1, 0.3, 1],
+          }}
+          className="relative z-10 flex items-center gap-[9px]"
+        >
+          <motion.div
+            whileHover={{
+              y: -2,
+              scale: 1.02,
+            }}
+            whileTap={{
+              scale: 0.97,
+            }}
+          >
+            <Link
+              href="/challenge/upload"
+              className="group flex h-[43px] items-center gap-[7px] rounded-[12px] bg-[#287CFF] px-[17px] text-white shadow-[0_7px_20px_rgba(40,124,255,0.18)] transition-colors duration-300 hover:bg-[#176DE8]"
+            >
+              <Icon
+                icon="solar:upload-minimalistic-bold-duotone"
+                width="18"
+                height="18"
+                className="transition-transform duration-300 group-hover:-translate-y-[2px]"
+              />
+
+              <span className="text-[12px] font-medium">Upload design</span>
+            </Link>
+          </motion.div>
+
+          <motion.div
+            whileHover={{
+              y: -2,
+              scale: 1.02,
+            }}
+            whileTap={{
+              scale: 0.97,
+            }}
+          >
+            <Link
+              href="/challenge/brief"
+              className="group flex h-[43px] items-center gap-[6px] rounded-[12px] border border-[#DDE6F3] bg-white px-[15px] text-[12px] font-medium text-[#287CFF] transition-colors duration-300 hover:border-[#C7D8F1]"
+            >
+              Brief
+              <Icon
+                icon="solar:arrow-right-up-linear"
+                width="15"
+                height="15"
+                className="transition-transform duration-300 group-hover:-translate-y-[2px] group-hover:translate-x-[2px]"
+              />
+            </Link>
+          </motion.div>
+        </motion.div>
+
+        {/* DECORATIVE SHAPES */}
+        <div className="pointer-events-none absolute inset-0 overflow-hidden">
+          <span className="shape-float absolute left-[31%] top-[14px] h-[5px] w-[5px] rounded-full bg-[#73A8FF]/40" />
+
+          <span className="shape-float-slow absolute left-[39%] bottom-[12px] h-[7px] w-[7px] rotate-45 bg-[#FF9A3D]/50" />
+
+          <span className="shape-float absolute right-[31%] top-[14px] h-[10px] w-[10px] rounded-full border-2 border-[#8CC9BA]/50" />
+
+          <svg
+            viewBox="0 0 50 20"
+            className="shape-wave absolute right-[24%] bottom-[4px] h-[15px] w-[38px]"
+          >
+            <path
+              d="M2 12C7 2 12 18 17 8C22 -2 27 16 32 6C37 -4 42 14 48 4"
+              fill="none"
+              stroke="#F8739D"
+              strokeWidth="4"
+              strokeLinecap="round"
+              opacity="0.35"
+            />
+          </svg>
         </div>
-      </div>
+      </motion.div>
 
-      {/* =========================
-          UPLOAD
-      ========================== */}
-
-      <Link
-        href="/challenge/upload"
-        className="relative z-10 mt-[44px] flex h-[64px] items-center rounded-full border-[2px] border-[#287CFF] bg-white p-[6px] transition-all duration-300 hover:scale-[1.02]"
+      {/* BOTTOM META */}
+      <motion.div
+        initial={{
+          opacity: 0,
+          y: 12,
+        }}
+        whileInView={{
+          opacity: 1,
+          y: 0,
+        }}
+        viewport={{ once: true }}
+        transition={{
+          duration: 0.6,
+          delay: 0.58,
+        }}
+        className="mt-[9px] flex items-center justify-center gap-[18px]"
       >
-        <div className="flex h-[48px] items-center gap-[12px] rounded-full bg-[#287CFF] px-[26px] text-white">
+        <div className="flex items-center gap-[5px] text-[10px] text-[#9AA3B1]">
           <Icon
-            icon="solar:upload-minimalistic-bold-duotone"
-            width="24"
-            height="24"
+            icon="solar:users-group-rounded-linear"
+            width="13"
+            height="13"
           />
 
-          <span className="text-[16px] font-normal">Upload your design!</span>
+          <span>Open for all designers</span>
         </div>
-      </Link>
 
-      {/* Read Brief */}
-      <Link
-        href="/challenge/brief"
-        className="relative z-10 mt-[14px] text-[16px] font-normal text-[#287CFF] underline underline-offset-4"
-      >
-        Read Brief
-      </Link>
+        <span className="h-[3px] w-[3px] rounded-full bg-[#D5DCE7]" />
 
-      {/* =========================
-          ANIMATION
-      ========================== */}
+        <div className="flex items-center gap-[5px] text-[10px] text-[#9AA3B1]">
+          <Icon icon="solar:cup-star-linear" width="13" height="13" />
+
+          <span>Top 5 designs will be featured</span>
+        </div>
+      </motion.div>
 
       <style jsx>{`
-        @keyframes float {
+        @keyframes floatShape {
           0% {
-            transform: translate3d(0, 0, 0) rotate(0deg);
+            transform: translate3d(0, 0, 0);
           }
 
           50% {
-            transform: translate3d(8px, -12px, 0) rotate(7deg);
+            transform: translate3d(5px, -5px, 0);
           }
 
           100% {
-            transform: translate3d(0, 0, 0) rotate(0deg);
+            transform: translate3d(0, 0, 0);
           }
         }
 
         @keyframes floatSlow {
           0% {
-            transform: translate3d(0, 0, 0) rotate(0deg);
-          }
-
-          33% {
-            transform: translate3d(-7px, -9px, 0) rotate(-5deg);
-          }
-
-          66% {
-            transform: translate3d(5px, 5px, 0) rotate(4deg);
-          }
-
-          100% {
-            transform: translate3d(0, 0, 0) rotate(0deg);
-          }
-        }
-
-        @keyframes rotateSoft {
-          0% {
-            transform: rotate(0deg) translateY(0);
+            transform: translate3d(0, 0, 0) rotate(45deg);
           }
 
           50% {
-            transform: rotate(18deg) translateY(-8px);
+            transform: translate3d(-5px, 4px, 0) rotate(60deg);
           }
 
           100% {
-            transform: rotate(0deg) translateY(0);
+            transform: translate3d(0, 0, 0) rotate(45deg);
           }
         }
 
         @keyframes waveMove {
           0% {
-            transform: translate3d(0, 0, 0) rotate(0deg);
+            transform: translate3d(0, 0, 0);
           }
 
           50% {
-            transform: translate3d(9px, -9px, 0) rotate(6deg);
+            transform: translate3d(7px, -3px, 0);
           }
 
           100% {
-            transform: translate3d(0, 0, 0) rotate(0deg);
+            transform: translate3d(0, 0, 0);
           }
         }
 
-        @keyframes waveReverse {
-          0% {
-            transform: translate3d(0, 0, 0) rotate(0deg);
-          }
-
-          50% {
-            transform: translate3d(-9px, 8px, 0) rotate(-7deg);
-          }
-
-          100% {
-            transform: translate3d(0, 0, 0) rotate(0deg);
-          }
+        .shape-float {
+          animation: floatShape 4s ease-in-out infinite;
         }
 
-        .confetti-float {
-          animation: float 4.2s ease-in-out infinite;
-          will-change: transform;
+        .shape-float-slow {
+          animation: floatSlow 5.5s ease-in-out infinite;
         }
 
-        .confetti-float-slow {
-          animation: floatSlow 5.8s ease-in-out infinite;
-          will-change: transform;
-        }
-
-        .confetti-rotate {
-          animation: rotateSoft 5s ease-in-out infinite;
-          will-change: transform;
-        }
-
-        .confetti-wave {
-          animation: waveMove 4.8s ease-in-out infinite;
-          will-change: transform;
-        }
-
-        .confetti-wave-reverse {
-          animation: waveReverse 5.4s ease-in-out infinite;
-          will-change: transform;
+        .shape-wave {
+          animation: waveMove 5s ease-in-out infinite;
         }
       `}</style>
     </div>

@@ -29,7 +29,7 @@ export default function Poster() {
         </Link>
       </div>
 
-      <div className="flex h-[245px] gap-[12px] overflow-hidden rounded-[18px] bg-[#F5F6FD] p-[16px]">
+      <div className="flex h-[300px] gap-[12px] overflow-hidden rounded-[18px] bg-[#F5F6FD] p-[16px]">
         {images.map((src, index) => (
           <Link
             key={src}

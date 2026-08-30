@@ -33,7 +33,6 @@ export default function Footer() {
 
             {/* SOCIAL */}
             <div className="mt-[25px] flex items-center gap-[16px]">
-              {/* INSTAGRAM */}
               <Link
                 href="#"
                 aria-label="Instagram"
@@ -60,7 +59,6 @@ export default function Footer() {
                 </svg>
               </Link>
 
-              {/* FACEBOOK */}
               <Link
                 href="#"
                 aria-label="Facebook"
@@ -76,7 +74,6 @@ export default function Footer() {
                 </svg>
               </Link>
 
-              {/* TIKTOK */}
               <Link
                 href="#"
                 aria-label="TikTok"
@@ -92,7 +89,6 @@ export default function Footer() {
                 </svg>
               </Link>
 
-              {/* EMAIL */}
               <Link
                 href="mailto:hello@designcup.com"
                 aria-label="Email"
@@ -128,28 +124,28 @@ export default function Footer() {
 
             <div className="flex flex-col gap-[12px] text-[14px] text-[#222222]">
               <Link
-                href="/challenges/active"
+                href="/challenge/active"
                 className="transition hover:text-[#287CFF]"
               >
                 Active
               </Link>
 
               <Link
-                href="/challenges/voting"
+                href="/challenge/voting-design"
                 className="transition hover:text-[#287CFF]"
               >
                 Voting
               </Link>
 
               <Link
-                href="/challenges/upcoming"
+                href="/challenge/upcoming-design"
                 className="transition hover:text-[#287CFF]"
               >
                 Upcoming
               </Link>
 
               <Link
-                href="/challenges/completed"
+                href="/challenge/complete-design"
                 className="transition hover:text-[#287CFF]"
               >
                 Completed
@@ -303,10 +299,8 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* DIVIDER */}
         <div className="mt-[45px] h-px w-full bg-[#E7E7E7]" />
 
-        {/* COPYRIGHT */}
         <div className="pt-[38px] text-center">
           <p className="text-[14px] font-medium text-[#111111]">
             © 2026 DesignCup. All rights reserved.
