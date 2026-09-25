@@ -674,3 +674,167 @@
     transform: none;
   }
 }
+
+/* Final home artwork */
+.endArtwork {
+  margin: 22px -20px -48px;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.endArtworkImage {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+@media (max-width: 360px) {
+  .endArtwork {
+    margin-left: -16px;
+    margin-right: -16px;
+  }
+}
+
+/* Home section motion */
+.homeTopbar {
+  animation: homeTopIn 420ms ease-out 70ms both;
+}
+
+.homeArtworkImage {
+  animation: heroImageIn 700ms ease-out both;
+}
+
+.homeHeroKicker,
+.homeHeroTitle,
+.homeHeroDescription,
+.homeHeroButton {
+  opacity: 0;
+  transform: translateY(14px);
+  animation: homeCopyIn 440ms cubic-bezier(0.22, 0.8, 0.3, 1) forwards;
+}
+
+.homeHeroKicker { animation-delay: 120ms; }
+.homeHeroTitle { animation-delay: 190ms; }
+.homeHeroDescription { animation-delay: 260ms; }
+.homeHeroButton { animation-delay: 330ms; }
+
+.flowQuoteSection {
+  opacity: 0;
+  transform: translateY(18px) scale(0.992);
+  transition: opacity 440ms ease, transform 500ms cubic-bezier(0.22, 0.8, 0.3, 1);
+}
+
+.flowQuoteVisible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.flowQuoteContent {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 360ms ease 80ms, transform 420ms cubic-bezier(0.22, 0.8, 0.3, 1) 80ms;
+}
+
+.flowQuoteVisible .flowQuoteContent {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.topicsSection .sectionIntro,
+.topicChip {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 400ms ease, transform 460ms cubic-bezier(0.22, 0.8, 0.3, 1);
+}
+
+.topicsVisible .sectionIntro,
+.topicsVisible .topicChip {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.topicsVisible .topicChip:nth-child(1) { transition-delay: 70ms; }
+.topicsVisible .topicChip:nth-child(2) { transition-delay: 110ms; }
+.topicsVisible .topicChip:nth-child(3) { transition-delay: 150ms; }
+.topicsVisible .topicChip:nth-child(4) { transition-delay: 190ms; }
+.topicsVisible .topicChip:nth-child(5) { transition-delay: 230ms; }
+.topicsVisible .topicChip:nth-child(6) { transition-delay: 270ms; }
+
+.quoteSection .quoteMark,
+.quoteSection .quoteText,
+.quoteSection .quoteBy {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 380ms ease, transform 440ms cubic-bezier(0.22, 0.8, 0.3, 1);
+}
+
+.quoteVisible .quoteMark,
+.quoteVisible .quoteText,
+.quoteVisible .quoteBy {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.quoteVisible .quoteText { transition-delay: 70ms; }
+.quoteVisible .quoteBy { transition-delay: 140ms; }
+
+.revealBlock {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 430ms ease, transform 500ms cubic-bezier(0.22, 0.8, 0.3, 1);
+}
+
+.revealVisible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.endArtwork.revealBlock {
+  transform: translateY(18px) scale(0.992);
+}
+
+.endArtwork.revealVisible {
+  transform: translateY(0) scale(1);
+}
+
+@keyframes homeTopIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes heroImageIn {
+  from { opacity: 0.78; transform: scale(1.018); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes homeCopyIn {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .homeTopbar,
+  .homeArtworkImage,
+  .homeHeroKicker,
+  .homeHeroTitle,
+  .homeHeroDescription,
+  .homeHeroButton {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .flowQuoteSection,
+  .flowQuoteContent,
+  .topicsSection .sectionIntro,
+  .topicChip,
+  .quoteSection .quoteMark,
+  .quoteSection .quoteText,
+  .quoteSection .quoteBy,
+  .revealBlock {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

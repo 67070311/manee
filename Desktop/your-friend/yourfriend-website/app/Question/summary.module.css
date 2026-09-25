@@ -116,12 +116,7 @@
   height: 105px;
   z-index: 2;
   pointer-events: none;
-  background: linear-gradient(
-    to bottom,
-    rgba(251, 251, 247, 0) 0%,
-    rgba(251, 251, 247, 0.42) 46%,
-    #fbfbf7 100%
-  );
+  background: linear-gradient(to bottom, rgba(251, 251, 247, 0) 0%, rgba(251, 251, 247, 0.42) 46%, #fbfbf7 100%);
 }
 
 .heroImage {
@@ -224,21 +219,10 @@
   height: 31px;
 }
 
-.greenTile {
-  background: #dfeeda;
-}
-
-.blueTile {
-  background: #dcecf8;
-}
-
-.pinkTile {
-  background: #f6e0e9;
-}
-
-.yellowTile {
-  background: #f8eccd;
-}
+.greenTile { background: #dfeeda; }
+.blueTile { background: #dcecf8; }
+.pinkTile { background: #f6e0e9; }
+.yellowTile { background: #f8eccd; }
 
 .cardEyebrow {
   margin: 1px 0 6px;
@@ -263,17 +247,9 @@
   background: #fff;
 }
 
-.strengthCard + .strengthCard {
-  margin-top: 12px;
-}
-
-.blueCard {
-  border-color: rgba(102, 153, 190, 0.18);
-}
-
-.pinkCard {
-  border-color: rgba(187, 119, 147, 0.18);
-}
+.strengthCard + .strengthCard { margin-top: 12px; }
+.blueCard { border-color: rgba(102, 153, 190, 0.18); }
+.pinkCard { border-color: rgba(187, 119, 147, 0.18); }
 
 .skillTag {
   display: inline-flex;
@@ -327,9 +303,7 @@
   font-weight: 700;
 }
 
-.environmentList {
-  padding: 0 18px;
-}
+.environmentList { padding: 0 18px; }
 
 .environmentItem {
   display: grid;
@@ -351,13 +325,8 @@
   height: 24px;
 }
 
-.greenMini {
-  background: #e5f0df;
-}
-
-.blueMini {
-  background: #e1eef8;
-}
+.greenMini { background: #e5f0df; }
+.blueMini { background: #e1eef8; }
 
 .environmentItem strong {
   display: block;
@@ -402,9 +371,7 @@
   height: 28px;
 }
 
-.nextStepHeading h2 {
-  font-size: 18px;
-}
+.nextStepHeading h2 { font-size: 18px; }
 
 .actionGrid {
   display: grid;
@@ -445,14 +412,8 @@
   height: 25px;
 }
 
-.instagramTile {
-  background: #f6edf3;
-}
-
-.instagramTile img {
-  width: 28px;
-  height: 28px;
-}
+.instagramTile { background: #f6edf3; }
+.instagramTile img { width: 28px; height: 28px; }
 
 .actionCard strong {
   color: #43513f;
@@ -490,10 +451,7 @@
   background: rgba(255, 255, 255, 0.14);
 }
 
-.premiumIcon img {
-  width: 29px;
-  height: 29px;
-}
+.premiumIcon img { width: 29px; height: 29px; }
 
 .premiumAction small {
   display: block;
@@ -515,10 +473,7 @@
   height: 28px;
 }
 
-.arrowIcon img {
-  width: 20px;
-  height: 20px;
-}
+.arrowIcon img { width: 20px; height: 20px; }
 
 .homeAction {
   width: 100%;
@@ -541,14 +496,8 @@
   place-items: center;
 }
 
-.homeAction img {
-  width: 20px;
-  height: 20px;
-}
-
-.homeAction strong {
-  font-size: 12px;
-}
+.homeAction img { width: 20px; height: 20px; }
+.homeAction strong { font-size: 12px; }
 
 .actionCard:active,
 .premiumAction:active,
@@ -556,65 +505,52 @@
 .backButton:active {
   transform: scale(0.985);
 }
+@media screen {
+  .heroVisual,
+  .heroCopy,
+  .summarySection,
+  .actionsSection,
+  .footer {
+    opacity: 0;
+    transform: translateY(18px);
+    animation: summaryFadeUp 760ms cubic-bezier(0.22, 0.8, 0.3, 1) forwards;
+  }
 
-.footer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 7px;
-  padding: 28px 0 6px;
-  color: #9aa393;
+  .heroVisual { animation-delay: 80ms; }
+  .heroCopy { animation-delay: 180ms; }
+  .summarySection:nth-child(1) { animation-delay: 360ms; }
+  .summarySection:nth-child(2) { animation-delay: 520ms; }
+  .summarySection:nth-child(3) { animation-delay: 680ms; }
+  .actionsSection { animation-delay: 840ms; }
+  .footer { animation-delay: 980ms; }
 }
 
-.footerBrand {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: #718168;
-}
-
-.footerBrand strong {
-  font-size: 12px;
-}
-
-.footer p {
-  margin: 0;
-  font-size: 9px;
+@keyframes summaryFadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @media (max-width: 360px) {
-  .hero {
-    min-height: 530px;
-  }
-
-  .heroCopy {
-    top: 28px;
-    left: 20px;
-    right: 20px;
-  }
-
-  .heroCopy h1 {
-    font-size: 29px;
-  }
-
-  .heroSub {
-    font-size: 11px;
-  }
-
-  .content {
-    padding-left: 14px;
-    padding-right: 14px;
-  }
-
+  .hero { min-height: 530px; }
+  .heroCopy { top: 28px; left: 20px; right: 20px; }
+  .heroCopy h1 { font-size: 29px; }
+  .heroSub { font-size: 11px; }
+  .content { padding-left: 14px; padding-right: 14px; }
   .goalCard,
   .strengthCard,
-  .environmentIntro {
-    grid-template-columns: 48px 1fr;
-  }
+  .environmentIntro { grid-template-columns: 48px 1fr; }
+  .iconTile { width: 48px; height: 48px; }
+}
 
-  .iconTile {
-    width: 48px;
-    height: 48px;
+@media (prefers-reduced-motion: reduce) {
+  .heroVisual,
+  .heroCopy,
+  .summarySection,
+  .actionsSection,
+  .footer {
+    opacity: 1;
+    transform: none;
+    animation: none;
   }
 }
 
@@ -652,7 +588,5 @@
     print-color-adjust: exact;
   }
 
-  .heroVisual::after {
-    height: 90px;
-  }
+  .heroVisual::after { height: 90px; }
 }

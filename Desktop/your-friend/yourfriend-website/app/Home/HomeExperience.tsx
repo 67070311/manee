@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
 import { FutureFogQuestion } from "../Question/FutureFogQuestion";
 import { SummaryPage } from "../Question/SummaryPage";
 import { SplashScreen } from "../Splash-Screen/SplashScreen";
@@ -17,6 +18,34 @@ export function HomeExperience() {
   const [showSplash, setShowSplash] = useState(true);
   const [leaving, setLeaving] = useState(false);
   const [view, setView] = useState<View>("home");
+  const closingRef = useRef<HTMLElement | null>(null);
+  const footerRef = useRef<HTMLElement | null>(null);
+  const endRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (showSplash || view !== "home") return;
+
+    const targets = [closingRef.current, footerRef.current, endRef.current].filter(
+      (target): target is HTMLElement => Boolean(target),
+    );
+
+    if (!targets.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add(styles.revealVisible);
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.14, rootMargin: "0px 0px -7% 0px" },
+    );
+
+    targets.forEach((target) => observer.observe(target));
+    return () => observer.disconnect();
+  }, [showSplash, view]);
 
   const continueFromSplash = () => {
     if (leaving) return;
@@ -65,7 +94,7 @@ export function HomeExperience() {
         <HomeTopics />
         <HomeQuote />
 
-        <section className={styles.closingCta}>
+        <section ref={closingRef} className={`${styles.closingCta} ${styles.revealBlock}`}>
           <p className={styles.closingEyebrow}>READY WHEN YOU ARE</p>
           <h2>
             ถ้าพร้อมแล้ว
@@ -84,10 +113,21 @@ export function HomeExperience() {
           <small className={styles.closingNote}>พื้นที่นี้มีไว้ให้เธอค่อย ๆ รู้จักตัวเองมากขึ้น</small>
         </section>
 
-        <footer className={styles.footer}>
+        <footer ref={footerRef} className={`${styles.footer} ${styles.revealBlock}`}>
           <span>Your Friend</span>
           <span>พื้นที่เล็ก ๆ ของหัวใจ</span>
         </footer>
+
+        <div ref={endRef} className={`${styles.endArtwork} ${styles.revealBlock}`} aria-hidden="true">
+          <Image
+            src="/home/End.png"
+            alt=""
+            width={430}
+            height={287}
+            sizes="(max-width: 430px) 100vw, 430px"
+            className={styles.endArtworkImage}
+          />
+        </div>
       </div>
     </main>
   );
