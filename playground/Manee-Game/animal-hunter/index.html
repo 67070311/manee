@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="theme-color" content="#8fd05e" />
+    <title>Animal Hunter</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <main class="page-shell">
+      <div class="phone-frame" aria-label="iPhone game preview">
+        <span class="phone-button phone-button-silent" aria-hidden="true"></span>
+        <span class="phone-button phone-button-volume-up" aria-hidden="true"></span>
+        <span class="phone-button phone-button-volume-down" aria-hidden="true"></span>
+        <span class="phone-button phone-button-power" aria-hidden="true"></span>
+        <section class="game-shell" id="gameShell">
+          <div class="phone-island" aria-hidden="true"><span class="phone-camera"></span></div>
+        <canvas id="game" width="540" height="960" aria-label="Animal Hunter game"></canvas>
+
+        <div class="hud">
+          <div class="hud-top">
+            <div class="stat-pill">
+              <img src="/asset-game/other-asset/heart.png" alt="" />
+              <div class="bar hp-bar"><span id="hpFill"></span></div>
+            </div>
+            <div class="coin-pill">
+              <img src="/asset-game/other-asset/coin.png" alt="" />
+              <span id="coinText">0</span>
+            </div>
+          </div>
+          <div class="hud-row">
+            <span id="levelText">LV 1</span>
+            <span id="timeText">00:00</span>
+          </div>
+          <div class="bar exp-bar"><span id="expFill"></span></div>
+        </div>
+
+        <div class="joystick" id="joystick" aria-hidden="true">
+          <div class="joystick-stick" id="joystickStick"></div>
+        </div>
+
+        <div class="upgrade-modal hidden" id="upgradeModal">
+          <div class="upgrade-panel">
+            <div class="upgrade-kicker">LEVEL UP!</div>
+            <h1>Choose one</h1>
+            <div class="upgrade-grid" id="upgradeGrid"></div>
+          </div>
+        </div>
+
+        <div class="gameover-modal hidden" id="gameoverModal">
+          <div class="gameover-card">
+            <div class="gameover-title">GAME OVER</div>
+            <p id="gameoverStats">You survived 00:00</p>
+            <button id="restartBtn">PLAY AGAIN</button>
+          </div>
+        </div>
+
+        <div class="splash-screen" id="splashScreen">
+          <img class="splash-bg" src="/asset-game/splash-screen/bg.png" alt="" />
+          <div class="splash-content">
+            <img class="splash-logo" src="/asset-game/splash-screen/game-name.png" alt="Animal Hunter" />
+            <button class="splash-start" id="startBtn" aria-label="Start game">
+              <img src="/asset-game/splash-screen/start-button.png" alt="Start game" />
+            </button>
+          </div>
+        </div>
+        </section>
+        <div class="phone-home-indicator" aria-hidden="true"></div>
+      </div>
+    </main>
+    <script defer src="./phone-fit.js"></script>
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>

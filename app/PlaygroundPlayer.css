@@ -1,0 +1,145 @@
+/* Playable demos inside the portfolio project dialog */
+.work-modal.is-playable{width:min(1130px,100%);background:#f8faf5}
+.work-modal.is-playable .work-modal-details{padding-top:25px}
+.playground-player{position:relative;background:#142b39;color:#edf6f1;font-family:'DM Sans','Noto Sans Thai',sans-serif}
+.playground-player-toolbar{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:14px;min-height:66px;padding:13px 82px 13px 22px;background:#1e3a4c;border-bottom:1px solid #ffffff24}
+.playground-player-indicator{display:flex;align-items:center;gap:10px;min-width:0}
+.playground-player-indicator>span:nth-child(2){color:#b9d1d5;white-space:nowrap;font-size:10px;font-weight:800;letter-spacing:.11em}
+.playground-player-indicator strong{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:13px;letter-spacing:-.015em}
+.playground-player-light{flex-shrink:0;display:block;width:9px;height:9px;border-radius:50%;background:#b8dda3;box-shadow:0 0 0 5px #b8dda324}
+.playground-player-controls{display:flex;align-items:center;gap:8px}
+.playground-player-controls button{border:1px solid #90b5c35c;border-radius:100px;background:#dceef0;color:#28516b;display:flex;gap:10px;align-items:center;white-space:nowrap;cursor:pointer;font-size:11px;font-weight:750;padding:10px 13px;transition:background .2s,transform .2s}
+.playground-player-controls button:hover{background:white;transform:translateY(-1px)}
+.playground-player-controls button span[aria-hidden="true"]{font-size:17px;line-height:.7}
+.playground-control-label{font-size:inherit;line-height:inherit}
+.playground-player-stage{position:relative;width:100%;height:clamp(410px,68dvh,750px);background:#091a23;overflow:hidden}
+.playground-player-stage:fullscreen{height:100vh;width:100vw}
+.playground-player-frame{width:100%;height:100%;display:block;border:0;background:#101c25}
+.playground-player-loading{position:absolute;z-index:0;inset:0;display:flex;justify-content:center;align-items:center;flex-direction:column;gap:9px;font-size:14px;color:#b7d0d7;pointer-events:none}
+.playground-player-loading span{font-size:27px;color:#bbdfa8}
+.playground-player-frame{position:relative;z-index:1}
+.playground-player-foot{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:12px 22px;color:#acc4cb;background:#1b3647;font-size:10px;line-height:1.65;letter-spacing:.02em}
+.playground-player-foot span:last-child{font-weight:800;letter-spacing:.11em;font-size:9px;white-space:nowrap;color:#7faebf}
+.work-modal.is-playable .work-modal-floating-close{position:sticky;top:12px;z-index:15;width:43px;height:43px;margin:12px 13px -55px auto;box-shadow:0 4px 16px #061d2b70}
+@media(max-width:820px){
+ .playground-player-toolbar{min-height:59px;padding:12px 62px 12px 13px}
+ .playground-player-indicator>span:nth-child(2){display:none}
+ .playground-player-indicator strong{font-size:12px}
+ .playground-player-controls{gap:5px}
+ .playground-player-controls button{font-size:10px;padding:8px 9px;gap:5px}
+ .playground-player-stage{height:min(67dvh,680px);min-height:410px}
+ .playground-player-foot{padding:10px 14px;font-size:9px}
+ .playground-player-foot span:last-child{display:none}
+}
+@media(max-width:450px){
+ .playground-player-indicator strong{max-width:90px}
+ .playground-player-controls button{font-size:9px;padding:8px 7px}
+ .playground-player-stage{height:65dvh;min-height:350px}
+ .work-modal.is-playable .work-modal-floating-close{width:37px;height:37px;margin:8px 8px -45px auto;top:8px}
+}
+@media(prefers-reduced-motion:reduce){.playground-player-controls button{transition:none}}
+
+
+/* Always-visible exit control within the actual fullscreen element. */
+.playground-player-stage:fullscreen{
+ width:100vw;height:100dvh;min-height:0;max-height:none;background:#131e2c;
+}
+.playground-fullscreen-controls{
+ position:absolute;z-index:30;top:max(16px,env(safe-area-inset-top));right:max(16px,env(safe-area-inset-right));
+ display:flex;justify-content:flex-end;pointer-events:none;
+}
+.playground-exit-button{
+ display:inline-flex;align-items:center;gap:9px;pointer-events:auto;
+ min-height:44px;padding:10px 17px 10px 10px;
+ border:1px solid rgba(230,244,249,.45);border-radius:100px;
+ background:rgba(19,37,53,.88);color:#fff;
+ box-shadow:0 8px 26px rgba(0,0,0,.35);
+ backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+ font:750 12px 'DM Sans','Noto Sans Thai',sans-serif;
+ cursor:pointer;transition:background .2s ease,transform .2s ease;
+}
+.playground-exit-button>span{
+ width:29px;height:29px;display:grid;place-items:center;
+ border-radius:50%;background:#f3f8f5;color:#163a55;
+ font:400 23px/1 sans-serif;
+}
+.playground-exit-button:hover{background:#31566a;transform:translateY(-2px)}
+.playground-exit-button:focus-visible{outline:3px solid #aeddf2;outline-offset:3px}
+@media(max-width:600px){
+ .playground-fullscreen-controls{top:max(10px,env(safe-area-inset-top));right:max(10px,env(safe-area-inset-right))}
+ .playground-exit-button{font-size:11px;min-height:38px;padding:7px 11px 7px 7px;gap:7px}
+ .playground-exit-button>span{width:26px;height:26px}
+}
+
+
+/* The handset is a single layout object fully controlled by the popup.
+   Its iframe has a fixed 430×932 viewport, so the inner apps use their
+   native mobile layouts, eliminating double-scaling and vertical clipping. */
+.playground-player-stage.has-phone{
+  background:radial-gradient(ellipse at 50% 42%,#38465a 0%,#273445 39%,#151d2b 100%);
+  isolation:isolate;
+}
+.playground-device-shell{
+ position:absolute;
+ top:50%;left:50%;
+ box-sizing:border-box;
+ width:446px;height:948px;
+ border:8px solid #080a0d;
+ border-radius:54px;
+ overflow:hidden;
+ background:#080a0d;
+ outline:2px solid #596675;
+ box-shadow:0 26px 80px rgba(0,0,0,.55),inset 0 0 0 1px rgba(255,255,255,.12);
+ transform:translate(-50%,-50%) scale(var(--device-scale,1));
+ transform-origin:center center;
+ z-index:2;
+}
+.playground-phone-screen{
+ display:block;
+ width:430px;height:932px;
+ max-width:none;max-height:none;
+ border:0;border-radius:45px;
+ overflow:hidden;
+ background:#0d1420;
+}
+.playground-device-island{
+ position:absolute;z-index:5;
+ top:9px;left:50%;
+ transform:translateX(-50%);
+ width:105px;height:29px;
+ border-radius:999px;
+ background:#07090e;
+ box-shadow:0 1px 0 rgba(255,255,255,.10),0 4px 9px rgba(0,0,0,.28);
+ pointer-events:none;
+}
+.playground-device-island span{
+ display:block;position:absolute;right:12px;top:50%;
+ width:9px;height:9px;border-radius:50%;
+ transform:translateY(-50%);
+ background:radial-gradient(circle at 40% 40%,#304d65 0 24%,#101b2a 25% 56%,#05070a 57% 100%);
+}
+.playground-device-home{
+ position:absolute;z-index:5;bottom:9px;left:50%;
+ transform:translateX(-50%);
+ width:120px;height:5px;border-radius:999px;
+ background:rgba(255,255,255,.9);
+ box-shadow:0 1px 4px rgba(0,0,0,.32);
+ pointer-events:none;
+}
+/* Never crop the handset to fake a larger preview. The scale is always
+   computed from the actual container's width and height by ResizeObserver. */
+.playground-player-stage.has-phone:fullscreen{background:radial-gradient(ellipse at center,#333d51,#111a29 75%)}
+@media(max-width:600px){
+ .playground-device-shell{border-radius:54px}
+}
+
+
+/* Give portrait games enough vertical space for readable controls on desktop. */
+@media(min-width:821px){
+ .playground-player-stage.has-phone{height:clamp(520px,76dvh,830px)}
+}
+@media(min-width:451px) and (max-width:820px){
+ .playground-player-stage.has-phone{height:clamp(440px,70dvh,720px)}
+}
+
+.playground-player-stage.has-phone:fullscreen{width:100vw;height:100dvh;min-height:0;max-height:none}

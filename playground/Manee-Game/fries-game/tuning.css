@@ -1,0 +1,176 @@
+/* Bright mobile-game tuning */
+.game-shell::after{background:linear-gradient(to bottom,rgba(255,255,255,.06) 0%,rgba(255,255,255,0) 55%,rgba(255,255,255,.04) 100%)}
+.sky-glow{height:45%;background:linear-gradient(to bottom,rgba(255,255,255,.22),rgba(255,255,255,.04) 58%,transparent)}
+.world{filter:saturate(1.18) brightness(1.05);touch-action:pan-y}
+
+/* Splash */
+.splash-word{top:8%;left:8%;width:84%}
+.start-game-btn{top:68%;left:20%;width:60%}
+.tap-hint{top:81%;font-size:14px;letter-spacing:2.5px}
+
+/* Brighter HUD + larger type */
+.top-hud{gap:8px}
+.hud-pill{height:44px;border-color:#5b4d69;box-shadow:0 4px 0 rgba(63,48,73,.42),inset 0 0 0 2px rgba(255,255,255,.58)}
+.level-pill{background:#b8e5ff;min-width:66px}
+.progress-pill{background:#ffd1cc}
+.coin-pill{background:#ffe6a8;min-width:88px}
+.hud-label{font-size:12px}
+.level-pill strong{font-size:21px}
+.xp-text{font-size:12px}
+.coin-pill strong{font-size:20px}
+.location-badge{font-size:12px;padding:8px 14px;background:rgba(255,255,255,.9)}
+.shop-title{font-size:24px;padding:7px 16px;background:#cf6556;color:#fff2d2}
+.shop-subtitle{font-size:13px;line-height:1.2;padding:6px 10px;background:rgba(255,255,255,.92)}
+
+/* Smaller purchase feedback so it does not cover furniture */
+.coin-float{font-size:12px;padding:2px 5px;gap:3px;border-width:2px;border-radius:8px}
+.coin-float img{width:14px!important;height:14px!important}
+.food-order-bubble{width:34px!important;height:31px!important;bottom:58px!important;border-radius:9px 9px 9px 3px!important;border-width:2px!important}
+.food-order-bubble img{width:22px!important;height:22px!important;object-fit:contain!important;image-rendering:auto!important}
+.food-order-bubble.food-fallback{width:40px!important}
+.food-order-bubble.food-fallback span{font-size:8px!important}
+
+.bottom-panel{background:linear-gradient(to bottom,rgba(96,67,87,0),rgba(96,67,87,.07) 14%,rgba(96,67,87,.30) 100%)}
+.shop-card{background:#ffd9cf;border-color:#614f69;box-shadow:0 6px 0 #4b3d52,inset 0 0 0 3px #fff4e9}
+.eyebrow{font-size:11px;color:#9a6570}
+.shop-copy h1{font-size:24px;color:#c94f4c}
+.shop-copy p{font-size:12px}
+.stat-box{padding:8px 10px;background:rgba(255,250,242,.78)}
+.stat-box span{font-size:11px}
+.stat-box strong{font-size:17px}
+.upgrade-copy small{font-size:10px}
+.upgrade-copy strong{font-size:16px}
+.upgrade-price{font-size:16px}
+.tip-row{font-size:10.5px}
+.upgrade-btn{background:#a9eb8f;box-shadow:inset 0 0 0 3px #e2ffd2,0 2px 0 rgba(73,59,72,.22)}
+.upgrade-btn.unlock-new-shop{background:#ffd66f;border-bottom-color:#b26d36;color:#5d3b2f;animation:newShopPulse 1.15s steps(2,end) infinite}
+.upgrade-btn.unlock-new-shop .upgrade-price{background:#fff3c3;color:#a55334}
+
+.upgrade-kicker{font-size:17px}
+.upgrade-dialog h2{font-size:25px}
+.upgrade-dialog p{font-size:13px}
+.pixel-continue-btn{font-size:17px}
+
+/* Store navigation */
+.shop-nav{position:absolute;inset:0;z-index:60;pointer-events:none}
+.shop-nav-btn{position:absolute;top:56%;width:46px;height:50px;border:3px solid #594a66;border-bottom-width:6px;border-radius:13px;background:#fff0b8;color:#5d445f;font-family:"Pixelify Sans","Courier New",monospace;font-size:38px;line-height:32px;display:grid;place-items:center;opacity:0;transform:scale(.82);pointer-events:none;cursor:pointer;transition:opacity .18s ease,transform .18s ease,filter .18s ease;box-shadow:inset 0 0 0 2px rgba(255,255,255,.72),0 4px 0 rgba(63,48,73,.3)}
+.shop-nav-btn.is-visible{opacity:1;transform:scale(1);pointer-events:auto}
+.shop-nav-btn:disabled{opacity:.25;pointer-events:none;filter:grayscale(.5)}
+.shop-nav-prev{left:7px}.shop-nav-next{right:7px}
+.shop-dots{position:absolute;z-index:65;left:50%;bottom:1%;transform:translateX(-50%);display:flex;gap:6px;opacity:0;pointer-events:none;transition:opacity .18s ease}
+.shop-dots.is-visible{opacity:1;pointer-events:auto}
+.shop-dot{appearance:none;border:2px solid #685268;border-bottom-width:4px;border-radius:8px;background:#f1d9c4;color:#725669;padding:4px 8px;font-family:"Pixelify Sans","Courier New",monospace;font-size:9px;font-weight:700;line-height:1;cursor:pointer;box-shadow:inset 0 0 0 1px rgba(255,255,255,.6)}
+.shop-dot.active{background:#fff0a3;color:#513f55;transform:translateY(-1px)}
+.shop-zone.switch-from-right{animation:storeInRight .34s steps(6,end)}
+.shop-zone.switch-from-left{animation:storeInLeft .34s steps(6,end)}
+.shop-stage{touch-action:pan-y}
+
+/* Tables: fries keeps the existing position. */
+.shop-table{bottom:-4%!important;width:22%!important;z-index:1}
+.shop-table.table-left{left:12%!important;bottom:-2%!important;width:20%!important}
+.shop-table.table-center{left:50%!important;bottom:-5%!important;width:22%!important}
+.shop-table.table-right{right:12%!important;bottom:-2%!important;width:20%!important}
+
+/* Pizza table PNG has more transparent space, so its visible tabletop must sit much lower.
+   Use fixed logical-canvas pixels so it visually lines up with the Fries tables. */
+.shop-table-pizza{display:block!important;visibility:visible!important;opacity:1!important;width:22%!important;bottom:-56px!important;z-index:1!important}
+.shop-table-pizza.table-left{left:12%!important;bottom:-50px!important;width:20%!important}
+.shop-table-pizza.table-center{left:50%!important;bottom:-62px!important;width:22%!important}
+.shop-table-pizza.table-right{right:12%!important;bottom:-50px!important;width:20%!important}
+@media (min-width:600px){
+  html,body{width:100%;height:100%;min-height:100%}
+  body{display:block;position:relative;padding:0;overflow:hidden;background:radial-gradient(circle at 50% 30%,#39465d 0%,#202838 52%,#111721 100%)}
+  .game-shell{
+    position:absolute;
+    left:50%;
+    top:50%;
+    width:430px;
+    height:932px;
+    min-height:0;
+    max-height:none;
+    border:8px solid #080a0d;
+    border-radius:54px;
+    outline:2px solid #555c67;
+    box-shadow:0 26px 80px rgba(0,0,0,.58),0 0 0 1px rgba(255,255,255,.12) inset;
+    overflow:hidden;
+    transform:translate(-50%,-50%) scale(var(--phone-scale,1));
+    transform-origin:center center;
+  }
+  .game-shell::before{
+    content:"";
+    position:absolute;
+    z-index:500;
+    top:10px;
+    left:50%;
+    transform:translateX(-50%);
+    width:96px;
+    height:28px;
+    border-radius:18px;
+    background:radial-gradient(circle at 77% 50%,#1d2735 0 3px,#050608 4px 100%);
+    box-shadow:0 1px 0 rgba(255,255,255,.08),0 2px 8px rgba(0,0,0,.35);
+    pointer-events:none;
+  }
+  .top-hud{top:47px}
+  .location-badge{top:102px}
+  .bottom-panel{height:31%;min-height:0}
+  .street-wrap{bottom:29.5%;height:15%}
+  .shop-zone{height:55%}
+}
+
+/* Real phones: fill the viewport and remove the decorative desktop frame */
+@media (max-width:599px){
+  body{display:block;padding:0;overflow:hidden}
+  .game-shell{position:relative;left:auto;top:auto;width:100vw;height:100dvh;min-height:0;max-height:none;border:0;border-radius:0;outline:0;transform:none}
+  .game-shell::before{display:none}
+}
+
+@media(max-height:720px){
+  .splash-word{top:6%;left:12%;width:76%}
+  .start-game-btn{top:66%;left:23%;width:54%}
+  .tap-hint{top:79%}
+  .shop-title{font-size:21px}
+  .shop-subtitle{font-size:11px}
+  .shop-copy h1{font-size:21px}
+  .shop-copy p{font-size:11px}
+  .shop-nav-btn{top:54%;width:40px;height:44px;font-size:32px}
+  .shop-dot{font-size:8px;padding:3px 6px}
+  .shop-table{bottom:-2%!important;width:20%!important}
+  .shop-table.table-left{left:13%!important;bottom:0!important;width:18%!important}
+  .shop-table.table-center{bottom:-3%!important;width:20%!important}
+  .shop-table.table-right{right:13%!important;bottom:0!important;width:18%!important}
+}
+
+
+/* Compact shop card: move Customers/Income into the top-right and reduce vertical footprint. */
+.bottom-panel{height:27%!important;min-height:188px!important;padding:0 10px max(8px,env(safe-area-inset-bottom))!important}
+.shop-card{padding:12px 12px 10px!important}
+.shop-card-top{display:grid;grid-template-columns:minmax(0,1fr) 96px;gap:10px;align-items:start}
+.shop-card-left{gap:10px!important;align-items:flex-start!important}
+.mini-shop-frame{width:62px!important;height:56px!important;flex:0 0 62px!important}
+.shop-copy h1{font-size:18px!important;line-height:1.02!important;margin:1px 0 2px!important}
+.shop-copy p{font-size:9px!important}
+.shop-mini-stats{display:flex;flex-direction:column;gap:5px}
+.mini-stat{display:flex;flex-direction:column;align-items:flex-end;justify-content:center;min-height:36px;padding:5px 7px;border-radius:9px;background:rgba(255,247,238,.72);border:2px solid rgba(100,77,91,.18);text-align:right}
+.mini-stat span{font-size:7.5px;color:#7b6772;font-weight:800;line-height:1}
+.mini-stat strong{font-size:12px;color:#4f4355;line-height:1.05;margin-top:2px}
+.stats-row{display:none!important}
+.upgrade-btn{margin-top:7px!important;padding:7px 9px!important}
+.upgrade-copy small{font-size:7px!important}
+.upgrade-copy strong{font-size:12.5px!important}
+.upgrade-price{font-size:12.5px!important;padding:3px 6px!important}
+.tip-row{margin-top:5px!important;font-size:7.5px!important}
+.street-wrap{bottom:26%!important}
+.shop-zone{height:58%!important}
+
+@media(max-height:720px){
+  .bottom-panel{height:29%!important;min-height:174px!important}
+  .shop-card{padding:10px 10px 8px!important}
+  .shop-card-top{grid-template-columns:minmax(0,1fr) 86px;gap:8px}
+  .mini-shop-frame{width:56px!important;height:50px!important;flex:0 0 56px!important}
+  .shop-copy h1{font-size:16px!important}
+  .shop-copy p{font-size:8px!important}
+  .mini-stat{min-height:32px;padding:4px 6px}
+  .mini-stat span{font-size:7px}
+  .mini-stat strong{font-size:11px}
+  .street-wrap{bottom:28%!important}
+}

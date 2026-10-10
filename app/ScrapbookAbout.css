@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Caveat:wght@500;600;700&display=swap');
+.scrapbook-about{--scrap-ink:#252525;position:relative;background:#fbfaf6;color:var(--scrap-ink);overflow:hidden;isolation:isolate;font-family:'Patrick Hand',cursive;background-image:repeating-linear-gradient(to bottom,transparent 0,transparent 30px,rgba(105,131,159,.22) 31px,transparent 32px);background-size:100% 32px;padding:65px 0 95px}
+.scrapbook-inner{position:relative;max-width:1450px;min-height:545px;margin:auto;padding:0 36px;display:flex;align-items:center;justify-content:center}
+.scrapbook-tiny{position:absolute;top:0;left:6%;font-family:'Caveat',cursive;font-size:21px;transform:rotate(-7deg)}
+.scrapbook-center{position:relative;text-align:center;z-index:3;width:min(690px,64%);margin-top:12px;opacity:0;transform:translateY(34px);transition:opacity .85s ease,transform .85s cubic-bezier(.18,.85,.2,1)}
+.scrapbook-visible .scrapbook-center{opacity:1;transform:translateY(0)}
+.scrapbook-stamp{display:inline-block;font-size:27px;border:2px solid #242424;padding:1px 16px 4px;background:rgba(255,255,255,.75);box-shadow:2px 3px 0 #d0ceca;transform:rotate(-2deg)}
+.scrapbook-center h2{font-size:clamp(38px,4.1vw,63px);font-weight:400;line-height:1.1;margin:25px 0 10px;letter-spacing:0}
+.scrapbook-center h2 span:first-child{font-family:'Caveat',cursive;font-weight:700;color:#2e64bd}.scrapbook-wave{color:#efa335;font-size:28px}
+.scrapbook-center p{font-size:clamp(23px,2.45vw,35px);line-height:1.37;max-width:700px;margin:20px auto 30px;font-weight:400}.scrapbook-center strong{font-weight:400;text-decoration:underline;text-decoration-color:#edca58;text-decoration-thickness:4px;text-underline-offset:3px}
+.scrapbook-center em{font-style:normal;color:#3b8365}
+.scrapbook-stickers{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;max-width:570px;margin:auto}
+.scrapbook-sticker{display:inline-flex;align-items:center;gap:13px;padding:7px 15px 8px;font:600 clamp(15px,1.5vw,21px) 'Patrick Hand',cursive;clip-path:polygon(0 8%,4% 0,96% 0,100% 8%,98% 22%,100% 39%,98% 56%,100% 76%,97% 100%,3% 100%,0 93%,2% 71%,0 54%,2% 35%);transition:transform .25s,filter .25s}
+.scrapbook-sticker:hover{transform:translateY(-6px) rotate(-2deg);filter:saturate(1.3)}
+.scrapbook-sticker b{font-size:23px;font-weight:400}.scrapbook-sticker.yellow{background:#fdd35a;color:#302c24}.scrapbook-sticker.green{background:#35ba76;color:#fff}.scrapbook-sticker.pink{background:#f44d94;color:#fff}.scrapbook-sticker.blue{background:#456cde;color:#fff}
+.scrapbook-polaroid{position:absolute;z-index:2;background:#fff;padding:9px 9px 20px;width:clamp(140px,16vw,225px);box-shadow:1px 6px 13px rgba(22,33,39,.18);border:1px solid #eee;opacity:0;transition:opacity .8s .3s,transform .8s .3s}
+.scrapbook-visible .scrapbook-polaroid{opacity:1}.scrapbook-left{left:4%;top:30%;transform:translate(-25px,15px) rotate(-5deg)}.scrapbook-visible .scrapbook-left{transform:translate(0,0) rotate(-5deg)}
+.scrapbook-right{right:4%;top:13%;transform:translate(25px,15px) rotate(6deg)}.scrapbook-visible .scrapbook-right{transform:translate(0,0) rotate(6deg)}
+.scrapbook-polaroid small{display:block;text-align:center;margin-top:8px;font:16px 'Caveat',cursive;color:#666}
+.scrapbook-photo{height:clamp(155px,19vw,260px);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;position:relative;overflow:hidden}
+.scrapbook-photo-one{background:linear-gradient(145deg,#bfd6e4 0%,#d8dfd6 48%,#638878 49%,#314f53 100%);color:#fff}
+.scrapbook-photo-two{background:radial-gradient(circle at 70% 20%,#d0ba8c,#505e53 45%,#1d343c 100%);color:#f1e1c0}
+.scrapbook-photo-sun{font-size:65px;opacity:.6}.scrapbook-code{font-size:50px;opacity:.6}
+.scrapbook-tape{position:absolute;top:-9px;width:52px;height:19px;opacity:.65}.scrapbook-tape-blue{left:-10px;transform:rotate(-36deg);background:#a8bce7}.scrapbook-tape-yellow{right:-12px;transform:rotate(38deg);background:#e9ce7b}
+.scrapbook-doodle{position:absolute;font-family:'Caveat',cursive;pointer-events:none}.scrapbook-doodle-a{right:26%;top:8%;font-size:37px;color:#f8af3b}.scrapbook-doodle-b{left:25%;bottom:8%;font-size:53px;color:#ed68a1}
+@media(max-width:900px){.scrapbook-inner{min-height:690px;padding:25px 20px}.scrapbook-center{width:min(670px,100%);margin-top:180px}.scrapbook-left{top:20px;left:7%}.scrapbook-right{top:8px;right:7%}.scrapbook-polaroid{width:145px}.scrapbook-photo{height:150px}.scrapbook-center p{font-size:25px}.scrapbook-tiny{left:42%;top:0}}
+@media(max-width:520px){.scrapbook-about{padding:36px 0 60px}.scrapbook-inner{min-height:710px}.scrapbook-center{margin-top:185px}.scrapbook-polaroid{width:125px;padding:6px 6px 14px}.scrapbook-photo{height:120px}.scrapbook-left{left:5%}.scrapbook-right{right:5%}.scrapbook-center h2{font-size:39px}.scrapbook-center p{font-size:23px;line-height:1.27}.scrapbook-sticker{font-size:16px;padding:5px 10px}.scrapbook-sticker b{font-size:18px}}
+@media(prefers-reduced-motion:reduce){.scrapbook-center,.scrapbook-polaroid{opacity:1;transition:none;transform:none}}
+
+/* Muted sage tape replaces the saturated pink accent. */
+.scrapbook-sticker.sage{background:#a8d2bd;color:#244f4c}
+.scrapbook-sticker.sage b{color:#437b6d}

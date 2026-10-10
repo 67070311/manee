@@ -1,0 +1,263 @@
+/* Contact / cinematic invitation, inspired by an airy video-first landing page.
+   The Portfolio's existing nav and working contact form stay intact. */
+.contact-page .contact-cinematic{
+ --contact-ink:#1b2347;
+ --contact-muted:#58667c;
+ position:relative;
+ isolation:isolate;
+ overflow:hidden;
+ display:flex;
+ flex-direction:column;
+ align-items:center;
+ justify-content:center;
+ box-sizing:border-box;
+ width:100%;
+ min-height:660px;
+ height:100vh;
+ height:100svh;
+ padding:clamp(152px,17vh,196px) 25px 115px;
+ color:var(--contact-ink);
+ background:linear-gradient(160deg,#f8f8f2 0%,#dbe8f4 100%);
+ font-family:Inter,'Noto Sans Thai',Arial,sans-serif;
+}
+.contact-cinematic-video-wrap{
+ position:absolute;
+ z-index:-3;
+ inset:0;
+ overflow:hidden;
+ pointer-events:none;
+ background:linear-gradient(155deg,#edf4f6 0%,#d0dcea 60%,#aebed1 100%);
+}
+.contact-cinematic-video{
+ display:block;
+ position:absolute;
+ top:0;left:0;
+ width:100%;
+ height:130%;
+ max-width:none;
+ object-fit:cover;
+ object-position:center top;
+ pointer-events:none;
+}
+.contact-cinematic-veil{
+ position:absolute;
+ z-index:-2;
+ inset:0;
+ pointer-events:none;
+ background:linear-gradient(
+  180deg,
+  rgba(250,252,250,.91) 0%,
+  rgba(250,251,249,.84) 22%,
+  rgba(249,251,249,.66) 43%,
+  rgba(249,251,248,.18) 72%,
+  rgba(25,52,67,.27) 100%
+ );
+}
+.contact-cinematic-grain{
+ position:absolute;
+ z-index:-1;inset:0;
+ pointer-events:none;
+ opacity:.25;
+ background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 140 140' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.53' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.09'/%3E%3C/svg%3E");
+}
+.contact-cinematic-content{
+ position:relative;
+ width:100%;
+ max-width:1020px;
+ margin:0 auto;
+ display:flex;
+ flex-direction:column;
+ justify-content:center;
+ align-items:center;
+ text-align:center;
+ animation:contact-cinematic-rise .85s ease-out both;
+}
+.contact-cinematic-label{
+ display:inline-flex;align-items:center;gap:10px;
+ margin:0 0 clamp(25px,3vw,37px);
+ padding:8px 15px 8px 8px;
+ background:rgba(255,255,255,.68);
+ border:1px solid rgba(111,145,155,.20);
+ border-radius:999px;
+ box-shadow:0 3px 20px rgba(39,70,82,.05);
+ backdrop-filter:blur(12px);
+ -webkit-backdrop-filter:blur(12px);
+ font:700 10px/1.25 Inter,'Noto Sans Thai',sans-serif;
+ letter-spacing:.12em;color:#4f6d80;
+}
+.contact-cinematic-symbol{
+ display:grid;place-items:center;
+ width:27px;height:27px;
+ border-radius:9px;
+ color:#fff;
+ background:#417d9c;
+ font-size:20px;
+ font-weight:400;
+}
+.contact-cinematic-content h1{
+ display:flex;flex-direction:column;
+ gap:0;
+ max-width:100%;
+ margin:0;
+ font:400 clamp(66px,8.1vw,132px)/.98 'Instrument Serif',Georgia,serif;
+ letter-spacing:-.04em;
+ color:#172e48;
+}
+.contact-cinematic-content h1 span{display:block}
+.contact-cinematic-content h1 em{
+ color:#5a859f;
+ font-style:italic;
+ white-space:nowrap;
+}
+.contact-cinematic-content p{
+ margin:clamp(20px,2.8vw,34px) 0 0;
+ max-width:640px;
+ padding:0 4px;
+ color:#526777;
+ font:400 clamp(14px,1.2vw,17px)/1.8 Inter,'Noto Sans Thai',Arial,sans-serif;
+ text-wrap:pretty;
+}
+.contact-cinematic-cta{
+ margin-top:clamp(26px,3.3vw,41px);
+ display:inline-flex;align-items:center;justify-content:center;gap:17px;
+ text-decoration:none;
+ min-height:52px;
+ padding:14px 24px;
+ border:1px solid rgba(255,255,255,.75);
+ border-radius:999px;
+ background:rgba(255,255,255,.89);
+ color:#223c53;
+ box-shadow:0 9px 29px rgba(36,58,70,.13),0 1px 0 rgba(255,255,255,.74) inset;
+ backdrop-filter:blur(15px);
+ -webkit-backdrop-filter:blur(15px);
+ font:650 13px Inter,'Noto Sans Thai',sans-serif;
+ transition:transform .3s ease,background .3s ease,box-shadow .3s ease;
+}
+.contact-cinematic-cta span{color:#6da29b;font-size:20px;font-weight:400}
+.contact-cinematic-cta:hover{
+ transform:translateY(-3px);
+ background:#fff;
+ box-shadow:0 15px 36px rgba(36,58,70,.18);
+}
+.contact-cinematic-foot{
+ position:absolute;
+ left:clamp(24px,5vw,75px);right:clamp(24px,5vw,75px);
+ bottom:clamp(25px,4vw,45px);
+ display:flex;
+ align-items:center;justify-content:space-between;
+ gap:24px;
+ font:750 10px/1.6 Inter,'Noto Sans Thai',sans-serif;
+ letter-spacing:.14em;
+ color:#f5fcfa;
+ text-shadow:0 2px 10px rgba(8,29,46,.32);
+}
+.contact-cinematic-foot a{
+ display:inline-flex;align-items:center;gap:13px;
+ color:inherit;text-decoration:none;
+}
+.contact-cinematic-foot a span{font-size:19px;line-height:1}
+.contact-cinematic :is(a):focus-visible{outline:3px solid #87b5d1;outline-offset:4px}
+@keyframes contact-cinematic-rise{
+ from{opacity:0;transform:translateY(20px)}
+ to{opacity:1;transform:translateY(0)}
+}
+/* A spacious handoff from the film to the real contact information & form. */
+.contact-page .contact-page-main{
+ padding:0 clamp(20px,5vw,68px) 90px;
+ position:relative;
+ background:linear-gradient(180deg,#f0f6f5 0%,#f8fbf6 43%,#edf4f2 100%);
+}
+.contact-page .contact-page-intro{
+ scroll-margin-top:112px;
+ padding-top:clamp(75px,9vw,123px);
+}
+.contact-page .contact-page-columns{margin-top:0;align-items:center}
+.contact-page .contact-page-copy{padding-top:8px}
+.contact-page .contact-page-copy h2{
+ font-size:clamp(61px,6.6vw,100px);
+ line-height:.96;
+}
+.contact-page .contact-page-links{margin-top:43px}
+.contact-page .contact-page-form-card{
+ background:rgba(255,255,255,.92);
+ box-shadow:0 22px 68px rgba(35,67,88,.09);
+}
+/* Avoid duplicating the large heading from the video hero on smaller screens. */
+@media(max-width:980px){
+ .contact-page .contact-page-columns{
+   align-items:stretch;
+   gap:34px;
+ }
+ .contact-page .contact-page-copy{padding-top:0}
+}
+@media(max-width:600px){
+ .contact-page .contact-cinematic{
+   min-height:620px;
+   height:100svh;
+   padding:130px 22px 100px;
+ }
+ .contact-cinematic-video{height:130%;object-position:55% top}
+ .contact-cinematic-veil{
+   background:linear-gradient(
+    180deg,
+    rgba(250,252,251,.92) 0%,
+    rgba(250,251,249,.91) 31%,
+    rgba(249,251,250,.74) 53%,
+    rgba(249,251,248,.10) 82%,
+    rgba(21,51,72,.35) 100%);
+ }
+ .contact-cinematic-content{max-width:100%}
+ .contact-cinematic-label{
+   font-size:8px;letter-spacing:.07em;
+   margin-bottom:26px;
+   padding:7px 12px 7px 7px;
+ }
+ .contact-cinematic-symbol{width:24px;height:24px;font-size:18px}
+ .contact-cinematic-content h1{
+   font-size:clamp(57px,14vw,79px);
+   line-height:.99;letter-spacing:-.045em;
+ }
+ .contact-cinematic-content p{
+   margin-top:22px;
+   max-width:340px;
+   font-size:13px;line-height:1.7;
+ }
+ .contact-cinematic-cta{
+   margin-top:26px;
+   min-height:46px;
+   padding:12px 18px;
+   font-size:12px;
+ }
+ .contact-cinematic-foot{left:19px;right:19px;bottom:24px;gap:12px;font-size:8px;letter-spacing:.06em}
+ .contact-cinematic-foot>span{max-width:155px}
+ .contact-cinematic-foot a{gap:7px;text-align:right}
+ .contact-page .contact-page-main{padding:0 17px 57px}
+ .contact-page .contact-page-intro{padding-top:67px;scroll-margin-top:90px}
+ .contact-page .contact-page-copy h2{font-size:clamp(60px,12vw,77px)}
+ .contact-page .contact-page-copy>p{margin-top:21px}
+ .contact-page .contact-page-links{margin-top:33px}
+}
+@media(max-width:360px){
+ .contact-cinematic-content h1{font-size:52px}
+ .contact-cinematic-label{letter-spacing:0}
+ .contact-cinematic-foot{font-size:7px}
+}
+.contact-page[lang="th"] .contact-cinematic-content h1{
+ font-family:'Noto Sans Thai',Inter,sans-serif;
+ font-size:clamp(53px,6vw,89px);
+ font-weight:600;line-height:1.4;letter-spacing:-.07em;
+}
+.contact-page[lang="th"] .contact-cinematic-content h1 em{
+ font-style:normal;font-weight:700;
+}
+@media(max-width:600px){
+ .contact-page[lang="th"] .contact-cinematic-content h1{
+  font-size:clamp(36px,9.8vw,48px);
+  line-height:1.36;
+ }
+ .contact-page[lang="th"] .contact-cinematic-content p{line-height:1.85}
+ .contact-page[lang="th"] .contact-page-copy h2{font-size:clamp(42px,10vw,54px)}
+}
+@media(prefers-reduced-motion:reduce){
+ .contact-cinematic-content,.contact-cinematic-cta{animation:none;transition:none}
+}

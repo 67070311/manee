@@ -1,0 +1,4 @@
+/* Work hero display and body fonts, scoped to the cinematic banner. */
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap');
+.work-cinematic{--work-cinematic-display:'Instrument Serif',Georgia,serif;--work-cinematic-body:Inter,'Noto Sans Thai',Arial,sans-serif}
+.work-cinematic[lang="th"]{--work-cinematic-display:'IBM Plex Sans Thai','Noto Sans Thai',sans-serif;--work-cinematic-body:'Noto Sans Thai',Inter,Arial,sans-serif}

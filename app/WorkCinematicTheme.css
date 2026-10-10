@@ -1,0 +1,14 @@
+/* Entrance animations shared by the Work cinematic hero. */
+@keyframes work-fade-rise{
+ from{opacity:0;transform:translate3d(0,20px,0)}
+ to{opacity:1;transform:translate3d(0,0,0)}
+}
+.work-cinematic .work-fade-rise{animation:work-fade-rise .8s ease-out both}
+.work-cinematic .work-fade-rise-delay{animation:work-fade-rise .8s ease-out .2s both}
+.work-cinematic .work-fade-rise-delay-2{animation:work-fade-rise .8s ease-out .4s both}
+@media(prefers-reduced-motion:reduce){
+ .work-cinematic .work-fade-rise,
+ .work-cinematic .work-fade-rise-delay,
+ .work-cinematic .work-fade-rise-delay-2{animation:none}
+ .work-cinematic .work-cinematic-cta{transition:none}
+}

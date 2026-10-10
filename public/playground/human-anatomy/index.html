@@ -1,0 +1,959 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Human Anatomy — Buildifyx</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Libre+Baskerville:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        margin: 0;
+        width: 100%;
+        min-height: 100%;
+        background: #fff;
+        scroll-snap-type: y mandatory;
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        width: 100%;
+        min-height: 100%;
+        overflow-x: hidden;
+        background: #fff;
+        color: #111;
+        font-family:
+          "DM Sans",
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          sans-serif;
+      }
+      .page {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        height: 100dvh;
+        overflow: hidden;
+        background: #fff;
+        scroll-snap-align: start;
+        scroll-snap-stop: always;
+      }
+      .page-image {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+      }
+      .page-reveal {
+        z-index: 2;
+        pointer-events: none;
+        -webkit-mask-image: radial-gradient(
+          circle 0px at -999px -999px,
+          #fff,
+          transparent
+        );
+        mask-image: radial-gradient(
+          circle 0px at -999px -999px,
+          #fff,
+          transparent
+        );
+      }
+
+      .page-one .page-base {
+        background-image: url("./banner.png");
+        opacity: 0;
+        transform: scale(1.035);
+        animation: imageIn 1.1s cubic-bezier(0.22, 0.61, 0.36, 1) 0.08s forwards;
+      }
+      .page-one .page-reveal {
+        background-image: url("./banner2.png");
+      }
+      .page-two .page-base {
+        background-image: url("./1.png");
+      }
+      .page-two .page-reveal {
+        background-image: url("./2.png");
+      }
+      .page-three .page-base {
+        background-image: url("./3.png");
+      }
+      .page-three .page-reveal {
+        background-image: url("./4.png");
+      }
+      .page-three .page-image {
+        background-size: 58% auto;
+        background-position: center 49%;
+      }
+      .page-four .page-base {
+        background-image: url("./5.png");
+      }
+      .page-four .page-reveal {
+        background-image: url("./6.png");
+      }
+      .page-four .page-image {
+        background-size: cover;
+        background-position: center;
+      }
+
+      .brand {
+        position: fixed;
+        top: 28px;
+        left: 34px;
+        z-index: 50;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.22em;
+        color: #111;
+        user-select: none;
+        pointer-events: none;
+        opacity: 0;
+        transform: translateY(8px);
+        animation: fadeUp 0.65s ease 0.18s forwards;
+      }
+      .copy,
+      .detail-title,
+      .detail-meta,
+      .chapter-title,
+      .chapter-meta {
+        position: absolute;
+        z-index: 10;
+        pointer-events: none;
+      }
+      .copy {
+        left: clamp(42px, 7vw, 110px);
+        top: 50%;
+        width: min(520px, 38vw);
+        transform: translateY(-50%);
+      }
+      h1 {
+        margin: 0;
+        font-family: "Libre Baskerville", Georgia, serif;
+        font-weight: 400;
+        line-height: 0.96;
+        letter-spacing: -0.045em;
+        color: #080808;
+      }
+      .copy h1 {
+        font-size: clamp(54px, 6vw, 96px);
+      }
+      .detail-title h1 {
+        font-size: clamp(46px, 5vw, 80px);
+      }
+      .chapter-title h1 {
+        font-size: clamp(42px, 4.4vw, 72px);
+      }
+      .subtitle {
+        margin: 22px 0 0;
+        font-size: clamp(12px, 1.05vw, 15px);
+        font-weight: 600;
+        letter-spacing: 0.34em;
+        text-transform: uppercase;
+        color: #111;
+      }
+      .description {
+        max-width: 430px;
+        margin: 20px 0 0;
+        font-size: clamp(14px, 1.15vw, 18px);
+        line-height: 1.55;
+        font-weight: 400;
+        color: rgba(17, 17, 17, 0.62);
+      }
+      .eyebrow {
+        margin: 0 0 16px;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: rgba(17, 17, 17, 0.46);
+      }
+      .interaction-note {
+        margin-top: 24px;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: rgba(17, 17, 17, 0.42);
+      }
+      .interaction-note::before {
+        content: "";
+        width: 28px;
+        height: 1px;
+        background: rgba(17, 17, 17, 0.35);
+      }
+
+      .page-one .copy h1,
+      .page-one .copy .subtitle,
+      .page-one .copy .description {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      .page-one .copy h1 {
+        animation: titleIn 0.9s cubic-bezier(0.22, 0.61, 0.36, 1) 0.28s forwards;
+      }
+      .page-one .copy .subtitle {
+        animation: fadeUp 0.75s ease 0.48s forwards;
+      }
+      .page-one .copy .description {
+        animation: fadeUp 0.75s ease 0.62s forwards;
+      }
+      .detail-title {
+        left: clamp(42px, 7vw, 110px);
+        top: 50%;
+        width: min(440px, 31vw);
+        opacity: 0;
+        transform: translateY(calc(-50% + 26px));
+        transition:
+          opacity 0.8s ease,
+          transform 0.9s cubic-bezier(0.22, 0.61, 0.36, 1);
+      }
+      .detail-meta {
+        right: clamp(42px, 6vw, 96px);
+        top: 50%;
+        width: min(360px, 24vw);
+        opacity: 0;
+        transform: translateY(calc(-50% + 26px));
+        transition:
+          opacity 0.8s ease 0.08s,
+          transform 0.9s cubic-bezier(0.22, 0.61, 0.36, 1) 0.08s;
+      }
+      .detail-meta .subtitle {
+        margin-top: 0;
+      }
+      .detail-meta .description {
+        max-width: 340px;
+      }
+      .page-two.is-visible .detail-title,
+      .page-two.is-visible .detail-meta {
+        opacity: 1;
+        transform: translateY(-50%);
+      }
+      .chapter-title {
+        top: 9%;
+        left: 50%;
+        width: min(650px, 68vw);
+        text-align: center;
+        opacity: 0;
+        transform: translate(-50%, 22px);
+        transition:
+          opacity 0.8s ease,
+          transform 0.9s cubic-bezier(0.22, 0.61, 0.36, 1);
+      }
+      .chapter-meta {
+        left: 50%;
+        bottom: 4.5%;
+        width: min(760px, 78vw);
+        text-align: center;
+        opacity: 0;
+        transform: translate(-50%, 22px);
+        transition:
+          opacity 0.8s ease 0.08s,
+          transform 0.9s cubic-bezier(0.22, 0.61, 0.36, 1) 0.08s;
+      }
+      .chapter-meta .eyebrow {
+        margin-bottom: 10px;
+      }
+      .chapter-meta .subtitle {
+        margin-top: 0;
+      }
+      .chapter-meta .description {
+        max-width: 660px;
+        margin: 14px auto 0;
+        font-size: clamp(13px, 0.98vw, 16px);
+      }
+      .chapter-meta .interaction-note {
+        margin-top: 16px;
+      }
+      .page-three.is-visible .chapter-title,
+      .page-three.is-visible .chapter-meta {
+        opacity: 1;
+        transform: translate(-50%, 0);
+      }
+
+      .organ-overlay {
+        position: absolute;
+        inset: 0;
+        z-index: 12;
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.8s ease 0.15s;
+      }
+      .page-four.is-visible .organ-overlay {
+        opacity: 1;
+      }
+      .organ-lines {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+      }
+      .organ-lines .leader {
+        fill: none;
+        stroke: #111;
+        stroke-width: 1.35;
+        vector-effect: non-scaling-stroke;
+        opacity: 0.9;
+      }
+      .organ-label {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        min-width: 170px;
+        max-width: 230px;
+        padding: 11px 13px;
+        border: 1px solid rgba(17, 17, 17, 0.08);
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.78);
+        backdrop-filter: blur(9px);
+        -webkit-backdrop-filter: blur(9px);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+        color: #111;
+      }
+      .organ-label strong {
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+      .organ-label span {
+        font-size: 10px;
+        line-height: 1.35;
+        letter-spacing: 0.01em;
+        text-transform: none;
+        color: rgba(17, 17, 17, 0.62);
+      }
+
+      .label-liver {
+        left: 7%;
+        top: 10%;
+      }
+      .label-gallbladder {
+        left: 7%;
+        top: 29%;
+      }
+      .label-colon {
+        left: 6%;
+        top: 53%;
+      }
+      .label-spleen {
+        right: 6%;
+        top: 9%;
+        text-align: right;
+        align-items: flex-end;
+      }
+      .label-stomach {
+        right: 6%;
+        top: 24%;
+        text-align: right;
+        align-items: flex-end;
+      }
+      .label-pancreas {
+        right: 6%;
+        top: 43%;
+        text-align: right;
+        align-items: flex-end;
+      }
+      .label-small-intestine {
+        right: 6%;
+        top: 70%;
+        text-align: right;
+        align-items: flex-end;
+      }
+
+      .custom-cursor {
+        position: fixed;
+        left: 0;
+        top: 0;
+        z-index: 9999;
+        width: 64px;
+        height: 64px;
+        border: 1px solid rgba(17, 17, 17, 0.42);
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        box-shadow:
+          0 8px 30px rgba(0, 0, 0, 0.08),
+          inset 0 0 0 1px rgba(255, 255, 255, 0.28);
+        backdrop-filter: blur(2px);
+        -webkit-backdrop-filter: blur(2px);
+        pointer-events: none;
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.86);
+        transition:
+          opacity 0.18s ease,
+          transform 0.18s ease,
+          border-color 0.18s ease,
+          background 0.18s ease;
+      }
+      .custom-cursor::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #111;
+        transform: translate(-50%, -50%);
+        box-shadow: 0 0 0 5px rgba(255, 255, 255, 0.32);
+      }
+      .custom-cursor::after {
+        content: "";
+        position: absolute;
+        inset: 8px;
+        border-radius: 50%;
+        border: 1px solid rgba(17, 17, 17, 0.12);
+      }
+      .custom-cursor.is-visible {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+      }
+
+      .scroll-cue {
+        position: absolute;
+        z-index: 12;
+        left: 50%;
+        bottom: 28px;
+        transform: translateX(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: rgba(17, 17, 17, 0.42);
+        pointer-events: none;
+        animation: cueFloat 1.8s ease-in-out infinite;
+      }
+      .scroll-cue span {
+        width: 1px;
+        height: 28px;
+        background: rgba(17, 17, 17, 0.32);
+      }
+      @keyframes imageIn {
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+      @keyframes titleIn {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes fadeUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes cueFloat {
+        0%,
+        100% {
+          transform: translate(-50%, 0);
+        }
+        50% {
+          transform: translate(-50%, 6px);
+        }
+      }
+
+      @media (pointer: fine) {
+        body {
+          cursor: none;
+        }
+      }
+      @media (pointer: coarse) {
+        .custom-cursor {
+          display: none;
+        }
+      }
+      @media (max-width: 1100px) {
+        .detail-meta {
+          right: 34px;
+          width: min(320px, 28vw);
+        }
+        .detail-title {
+          left: 34px;
+          width: min(390px, 32vw);
+        }
+        .page-three .page-image {
+          background-size: 64% auto;
+        }
+        .chapter-title {
+          top: 9.5%;
+        }
+        .chapter-meta {
+          bottom: 4%;
+          width: min(700px, 82vw);
+        }
+        .organ-label {
+          min-width: 150px;
+          max-width: 200px;
+        }
+        .organ-label strong {
+          font-size: 11px;
+        }
+        .organ-label span {
+          font-size: 9px;
+        }
+      }
+
+
+
+    </style>
+    <link rel="stylesheet" href="./mobile.css?v=anatomy5" />
+  </head>
+  <body>
+    <div class="brand">BUILDIFYX</div>
+    <div class="custom-cursor" id="custom-cursor" aria-hidden="true"></div>
+
+    <main>
+      <section class="page page-one" id="intro">
+        <div class="page-image page-base" aria-hidden="true"></div>
+        <div
+          class="page-image page-reveal"
+          id="reveal-intro"
+          aria-hidden="true"
+        ></div>
+        <section class="copy">
+          <h1>Human<br />Anatomy</h1>
+          <p class="subtitle">The Muscular System</p>
+          <p class="description">
+            Explore the structure of the human muscular system and how the body
+            works beneath the surface.
+          </p>
+        </section>
+        <div class="scroll-cue" aria-hidden="true">Scroll<span></span></div>
+      </section>
+
+      <section class="page page-two" id="layer-detail">
+        <div class="page-image page-base" aria-hidden="true"></div>
+        <div
+          class="page-image page-reveal"
+          id="reveal-detail"
+          aria-hidden="true"
+        ></div>
+        <section class="detail-title">
+          <h1>Anatomy<br />in Layers</h1>
+        </section>
+        <aside class="detail-meta">
+          <p class="eyebrow">Anatomical Study / 01</p>
+          <p class="subtitle">Surface to Structure</p>
+          <p class="description">
+            Move across the figure to compare two anatomical views. The
+            interactive layer reveals structures beneath the visible surface and
+            helps show how the body is organized from the outside inward.
+          </p>
+          <div class="interaction-note">Move the cursor to reveal</div>
+        </aside>
+      </section>
+
+      <section class="page page-three" id="deeper-detail">
+        <div class="page-image page-base" aria-hidden="true"></div>
+        <div
+          class="page-image page-reveal"
+          id="reveal-deeper"
+          aria-hidden="true"
+        ></div>
+        <section class="chapter-title"><h1>Inside the Body</h1></section>
+        <aside class="chapter-meta">
+          <p class="eyebrow">Anatomical Study / 02</p>
+          <p class="subtitle">Deeper Structure</p>
+          <p class="description">
+            Continue through the anatomical layers to compare the next
+            structural view. Move across the figure to reveal how deeper tissues
+            and supporting structures relate to the visible surface.
+          </p>
+          <div class="interaction-note">Move the cursor to reveal</div>
+        </aside>
+      </section>
+
+      <section class="page page-four" id="organ-map">
+        <div class="page-image page-base" aria-hidden="true"></div>
+        <div
+          class="page-image page-reveal"
+          id="reveal-organs"
+          aria-hidden="true"
+        ></div>
+
+        <div class="organ-overlay" aria-label="Organ labels">
+          <svg
+            class="organ-lines"
+            viewBox="0 0 1000 1000"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+          >
+            <defs>
+              <marker
+                id="arrow-solid"
+                markerWidth="10"
+                markerHeight="8"
+                refX="9"
+                refY="4"
+                orient="auto"
+                markerUnits="userSpaceOnUse"
+              >
+                <path d="M0 0 L9 4 L0 8 Z" fill="#111"></path>
+              </marker>
+            </defs>
+            <path
+              class="leader"
+              d="M245 145 L402 162"
+              marker-end="url(#arrow-solid)"
+            ></path>
+            <path
+              class="leader"
+              d="M245 315 L374 315"
+              marker-end="url(#arrow-solid)"
+            ></path>
+            <path
+              class="leader"
+              d="M255 540 L337 535"
+              marker-end="url(#arrow-solid)"
+            ></path>
+            <path
+              class="leader"
+              d="M820 125 L730 185"
+              marker-end="url(#arrow-solid)"
+            ></path>
+            <path
+              class="leader"
+              d="M820 250 L638 255"
+              marker-end="url(#arrow-solid)"
+            ></path>
+            <path
+              class="leader"
+              d="M810 430 L580 360"
+              marker-end="url(#arrow-solid)"
+            ></path>
+            <path
+              class="leader"
+              d="M810 735 L585 720"
+              marker-end="url(#arrow-solid)"
+            ></path>
+          </svg>
+
+          <div class="organ-label label-liver">
+            <strong>Liver</strong
+            ><span
+              >Processes nutrients, detoxifies blood, and produces bile.</span
+            >
+          </div>
+          <div class="organ-label label-gallbladder">
+            <strong>Gallbladder</strong
+            ><span>Stores and concentrates bile used to digest fats.</span>
+          </div>
+          <div class="organ-label label-colon">
+            <strong>Large Intestine</strong
+            ><span>Absorbs water and electrolytes and forms stool.</span>
+          </div>
+          <div class="organ-label label-spleen">
+            <strong>Spleen</strong
+            ><span>Filters blood and supports immune function.</span>
+          </div>
+          <div class="organ-label label-stomach">
+            <strong>Stomach</strong
+            ><span>Mixes food with acid and digestive enzymes.</span>
+          </div>
+          <div class="organ-label label-pancreas">
+            <strong>Pancreas</strong
+            ><span
+              >Releases digestive enzymes and hormones that regulate blood
+              sugar.</span
+            >
+          </div>
+          <div class="organ-label label-small-intestine">
+            <strong>Small Intestine</strong
+            ><span>Completes digestion and absorbs most nutrients.</span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      (() => {
+        const revealLayers = [
+          document.getElementById("reveal-intro"),
+          document.getElementById("reveal-detail"),
+          document.getElementById("reveal-deeper"),
+          document.getElementById("reveal-organs"),
+        ].filter(Boolean);
+        const cursor = document.getElementById("custom-cursor");
+        let cursorX = window.innerWidth / 2;
+        let cursorY = window.innerHeight / 2;
+        let renderX = cursorX;
+        let renderY = cursorY;
+
+        const getRadius = () =>
+          window.innerWidth < 480 ? 120 : window.innerWidth < 720 ? 160 : 260;
+        const update = (reveal, x, y) => {
+          const r = reveal.getBoundingClientRect();
+          const mask = `radial-gradient(circle ${getRadius()}px at ${x - r.left}px ${y - r.top}px,#fff 0%,#fff 40%,rgba(255,255,255,.75) 60%,rgba(255,255,255,.4) 75%,rgba(255,255,255,.12) 88%,transparent 100%)`;
+          reveal.style.webkitMaskImage = mask;
+          reveal.style.maskImage = mask;
+        };
+
+        const animateCursor = () => {
+          if (cursor) {
+            renderX += (cursorX - renderX) * 0.2;
+            renderY += (cursorY - renderY) * 0.2;
+            cursor.style.left = `${renderX}px`;
+            cursor.style.top = `${renderY}px`;
+          }
+          requestAnimationFrame(animateCursor);
+        };
+        animateCursor();
+
+        window.addEventListener(
+          "mousemove",
+          (e) => {
+            cursorX = e.clientX;
+            cursorY = e.clientY;
+            if (cursor) cursor.classList.add("is-visible");
+            revealLayers.forEach((reveal) => {
+              const r = reveal.getBoundingClientRect();
+              if (e.clientY >= r.top && e.clientY <= r.bottom)
+                update(reveal, e.clientX, e.clientY);
+            });
+          },
+          { passive: true },
+        );
+
+        document.documentElement.addEventListener("mouseleave", () => {
+          if (cursor) cursor.classList.remove("is-visible");
+        });
+
+        // Desktop hover is preserved. On phones, tapping and dragging over
+        // the figure moves the X-ray lens. Scroll normally outside that zone.
+        const allPages = [...document.querySelectorAll(".page")];
+        const phoneView=window.matchMedia("(max-width: 900px)");
+        let activePageIndex=0;
+        const showPage=(index)=>{
+          activePageIndex=Math.max(0,Math.min(allPages.length-1,index));
+          allPages.forEach((page,i)=>{
+            const active=i===activePageIndex;
+            page.classList.toggle("is-active",active);
+            page.classList.toggle("is-visible",active);
+            if(phoneView.matches)page.setAttribute("aria-hidden",active?"false":"true");
+            else page.removeAttribute("aria-hidden");
+          });
+          if(!phoneView.matches){
+            allPages[activePageIndex]?.scrollIntoView({
+              behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"instant":"smooth"
+            });
+          }
+        };
+        const resetDesktopLayout=()=>{
+          allPages.forEach(page=>{
+            page.classList.remove("is-active");
+            page.removeAttribute("aria-hidden");
+            page.querySelectorAll(".page-image").forEach(layer=>{
+              layer.style.removeProperty("background-size");
+              layer.style.removeProperty("background-position");
+            });
+            const zone=page.querySelector(".mobile-scan-zone");
+            if(zone){
+              zone.style.removeProperty("left");
+              zone.style.removeProperty("top");
+              zone.style.removeProperty("width");
+              zone.style.removeProperty("height");
+            }
+          });
+        };
+        const refreshMode=()=>{
+          document.body.classList.toggle("anatomy-touch-layout",phoneView.matches);
+          if(phoneView.matches)showPage(activePageIndex);
+          else resetDesktopLayout();
+        };
+        refreshMode();
+        phoneView.addEventListener?.("change",refreshMode);
+        window.addEventListener("keydown",(e)=>{
+          if(!phoneView.matches)return;
+          if(e.key==="ArrowRight"){e.preventDefault();showPage((activePageIndex+1)%allPages.length)}
+          if(e.key==="ArrowLeft"){e.preventDefault();showPage(Math.max(0,activePageIndex-1))}
+        });
+        allPages.forEach((page,index)=>{
+          const zone=document.createElement("div");
+          zone.className="mobile-scan-zone";
+          zone.setAttribute("role","group");
+          zone.setAttribute("aria-label","Drag a finger here to X-ray the anatomy image");
+          const reveal=page.querySelector(".page-reveal");
+          if(reveal){
+            let activePointer=null;
+            const lens=document.createElement("div");
+            lens.className="mobile-scan-lens";
+            lens.setAttribute("aria-hidden","true");
+            zone.appendChild(lens);
+            const paint=(e)=>{
+              update(reveal,e.clientX,e.clientY);
+              const r=zone.getBoundingClientRect();
+              lens.style.left=`${Math.max(16,Math.min(r.width-16,e.clientX-r.left))}px`;
+              lens.style.top=`${Math.max(16,Math.min(r.height-16,e.clientY-r.top))}px`;
+              zone.classList.add("is-scanning");
+            };
+            zone.addEventListener("pointerdown",(e)=>{
+              if(e.pointerType==="mouse"&&e.button!==0)return;
+              activePointer=e.pointerId;
+              try{zone.setPointerCapture(e.pointerId)}catch(_){}
+              paint(e);
+              e.preventDefault();
+            });
+            zone.addEventListener("pointermove",(e)=>{
+              if(e.pointerId!==activePointer)return;
+              paint(e);
+              if(e.cancelable)e.preventDefault();
+            });
+            const finish=(e)=>{
+              if(activePointer!==e.pointerId)return;
+              activePointer=null;
+              try{zone.releasePointerCapture(e.pointerId)}catch(_){}
+            };
+            zone.addEventListener("pointerup",finish);
+            zone.addEventListener("pointercancel",finish);
+            page.appendChild(zone);
+          }
+          const nav=document.createElement("nav");
+          nav.className="mobile-anatomy-nav";
+          nav.setAttribute("aria-label","Anatomy chapters");
+          const previous=document.createElement("button");
+          previous.type="button";
+          previous.textContent="← Previous";
+          previous.disabled=index===0;
+          previous.addEventListener("click",()=>showPage(index-1));
+          const next=document.createElement("button");
+          next.type="button";
+          next.textContent=index===allPages.length-1?"Back to start":"Next chapter →";
+          next.addEventListener("click",()=>showPage((index+1)%allPages.length));
+          nav.append(previous,next);
+          page.appendChild(nav);
+        });
+
+
+        // Fit the colored anatomical figure in each landscape source image into
+        // the portrait viewport. A fixed background-position percentage causes
+        // the model to disappear on some source assets.
+        const imageSources=["./banner.png","./1.png","./3.png","./5.png"];
+        const modelBounds=new Map();
+        const modelFocus=[
+          {centerY:.535,height:.47,width:.84},
+          {centerY:.50,height:.43,width:.82},
+          {centerY:.49,height:.44,width:.85},
+          {centerY:.45,height:.47,width:.89}
+        ];
+        function calculateMobileFocus(){
+          if(!phoneView.matches)return;
+          const vw=window.innerWidth;
+          const vh=window.innerHeight;
+          allPages.forEach((page,index)=>{
+            const info=modelBounds.get(index);
+            if(!info)return;
+            const focus=modelFocus[index];
+            const smallLandscape=vw>vh&&vh<520;
+            const centerX=smallLandscape?vw*.69:vw*.5;
+            const centerY=(smallLandscape?.51:focus.centerY)*vh;
+            const height=(smallLandscape?.80:focus.height)*vh;
+            const width=vw*(smallLandscape?.42:focus.width);
+            const cropW=Math.max(1,info.maxX-info.minX)*1.10;
+            const cropH=Math.max(1,info.maxY-info.minY)*1.10;
+            const scale=Math.min(width/cropW,height/cropH);
+            const cx=(info.maxX+info.minX)/2,cy=(info.maxY+info.minY)/2;
+            const left=centerX-cx*scale,top=centerY-cy*scale;
+            const size=`${info.width*scale}px ${info.height*scale}px`;
+            const position=`${left}px ${top}px`;
+            page.querySelectorAll(".page-image").forEach(el=>{
+              el.style.backgroundSize=size;
+              el.style.backgroundPosition=position;
+            });
+            const zone=page.querySelector(".mobile-scan-zone");
+            if(zone){
+              const figLeft=left+info.minX*scale,figRight=left+info.maxX*scale;
+              const figTop=top+info.minY*scale,figBottom=top+info.maxY*scale;
+              const pad=20;
+              const zl=Math.max(0,figLeft-pad),zt=Math.max(0,figTop-pad);
+              zone.style.left=`${zl}px`;
+              zone.style.top=`${zt}px`;
+              zone.style.width=`${Math.max(80,Math.min(vw-zl,figRight-zl+pad))}px`;
+              zone.style.height=`${Math.max(120,Math.min(vh-zt,figBottom-zt+pad))}px`;
+            }
+          });
+        }
+        imageSources.forEach((source,index)=>{
+          const image=new Image();
+          image.onload=()=>{
+            const w=image.naturalWidth,h=image.naturalHeight;
+            const cw=Math.min(280,w),ch=Math.max(1,Math.round(cw*h/w));
+            const canvas=document.createElement("canvas");
+            canvas.width=cw;canvas.height=ch;
+            const ctx=canvas.getContext("2d",{willReadFrequently:true});
+            if(!ctx)return;
+            try{
+              ctx.drawImage(image,0,0,cw,ch);
+              const pix=ctx.getImageData(0,0,cw,ch).data;
+              const xs=[],ys=[];
+              for(let y=0;y<ch;y+=1){
+                for(let x=0;x<cw;x+=1){
+                  const k=(y*cw+x)*4;
+                  const red=pix[k],green=pix[k+1],blue=pix[k+2];
+                  // Musculature/skin tones distinguish the model from the
+                  // near-white backdrop even in illustrations with large margins.
+                  if(pix[k+3]>90&&red>90&&red-green>24&&red-blue>20){
+                    xs.push(x);ys.push(y);
+                  }
+                }
+              }
+              if(xs.length<45)return;
+              xs.sort((a,b)=>a-b);ys.sort((a,b)=>a-b);
+              const lower=Math.floor(xs.length*.015);
+              const upper=Math.min(xs.length-1,Math.ceil(xs.length*.985));
+              const x0=xs[lower]*w/cw,x1=xs[upper]*w/cw;
+              const y0=ys[lower]*h/ch,y1=ys[upper]*h/ch;
+              if(x1-x0<20||y1-y0<20)return;
+              modelBounds.set(index,{width:w,height:h,minX:x0,maxX:x1,minY:y0,maxY:y1});
+              calculateMobileFocus();
+            }catch(err){
+              // Keep centered contain fallback if pixel inspection fails.
+            }
+          };
+          image.src=source;
+        });
+        let resizeRaf=0;
+        window.addEventListener("resize",()=>{
+          cancelAnimationFrame(resizeRaf);
+          resizeRaf=requestAnimationFrame(calculateMobileFocus);
+        },{passive:true});
+        calculateMobileFocus();
+        
+        const pages = document.querySelectorAll(
+          ".page-two,.page-three,.page-four",
+        );
+        if ("IntersectionObserver" in window) {
+          const o = new IntersectionObserver(
+            (es) =>
+              es.forEach((e) => {
+                if (e.isIntersecting && e.intersectionRatio > 0.35)
+                  e.target.classList.add("is-visible");
+              }),
+            { threshold: [0.35, 0.6] },
+          );
+          pages.forEach((p) => o.observe(p));
+        } else pages.forEach((p) => p.classList.add("is-visible"));
+      })();
+    </script>
+  </body>
+</html>

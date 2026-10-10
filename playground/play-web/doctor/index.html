@@ -1,0 +1,908 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Human Anatomy — Buildifyx</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Libre+Baskerville:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        margin: 0;
+        width: 100%;
+        min-height: 100%;
+        background: #fff;
+        scroll-snap-type: y mandatory;
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        width: 100%;
+        min-height: 100%;
+        overflow-x: hidden;
+        background: #fff;
+        color: #111;
+        font-family:
+          "DM Sans",
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          sans-serif;
+      }
+      .page {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        height: 100dvh;
+        overflow: hidden;
+        background: #fff;
+        scroll-snap-align: start;
+        scroll-snap-stop: always;
+      }
+      .page-image {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+      }
+      .page-reveal {
+        z-index: 2;
+        pointer-events: none;
+        -webkit-mask-image: radial-gradient(
+          circle 0px at -999px -999px,
+          #fff,
+          transparent
+        );
+        mask-image: radial-gradient(
+          circle 0px at -999px -999px,
+          #fff,
+          transparent
+        );
+      }
+
+      .page-one .page-base {
+        background-image: url("./banner.png");
+        opacity: 0;
+        transform: scale(1.035);
+        animation: imageIn 1.1s cubic-bezier(0.22, 0.61, 0.36, 1) 0.08s forwards;
+      }
+      .page-one .page-reveal {
+        background-image: url("./banner2.png");
+      }
+      .page-two .page-base {
+        background-image: url("./1.png");
+      }
+      .page-two .page-reveal {
+        background-image: url("./2.png");
+      }
+      .page-three .page-base {
+        background-image: url("./3.png");
+      }
+      .page-three .page-reveal {
+        background-image: url("./4.png");
+      }
+      .page-three .page-image {
+        background-size: 58% auto;
+        background-position: center 49%;
+      }
+      .page-four .page-base {
+        background-image: url("./5.png");
+      }
+      .page-four .page-reveal {
+        background-image: url("./6.png");
+      }
+      .page-four .page-image {
+        background-size: cover;
+        background-position: center;
+      }
+
+      .brand {
+        position: fixed;
+        top: 28px;
+        left: 34px;
+        z-index: 50;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.22em;
+        color: #111;
+        user-select: none;
+        pointer-events: none;
+        opacity: 0;
+        transform: translateY(8px);
+        animation: fadeUp 0.65s ease 0.18s forwards;
+      }
+      .copy,
+      .detail-title,
+      .detail-meta,
+      .chapter-title,
+      .chapter-meta {
+        position: absolute;
+        z-index: 10;
+        pointer-events: none;
+      }
+      .copy {
+        left: clamp(42px, 7vw, 110px);
+        top: 50%;
+        width: min(520px, 38vw);
+        transform: translateY(-50%);
+      }
+      h1 {
+        margin: 0;
+        font-family: "Libre Baskerville", Georgia, serif;
+        font-weight: 400;
+        line-height: 0.96;
+        letter-spacing: -0.045em;
+        color: #080808;
+      }
+      .copy h1 {
+        font-size: clamp(54px, 6vw, 96px);
+      }
+      .detail-title h1 {
+        font-size: clamp(46px, 5vw, 80px);
+      }
+      .chapter-title h1 {
+        font-size: clamp(42px, 4.4vw, 72px);
+      }
+      .subtitle {
+        margin: 22px 0 0;
+        font-size: clamp(12px, 1.05vw, 15px);
+        font-weight: 600;
+        letter-spacing: 0.34em;
+        text-transform: uppercase;
+        color: #111;
+      }
+      .description {
+        max-width: 430px;
+        margin: 20px 0 0;
+        font-size: clamp(14px, 1.15vw, 18px);
+        line-height: 1.55;
+        font-weight: 400;
+        color: rgba(17, 17, 17, 0.62);
+      }
+      .eyebrow {
+        margin: 0 0 16px;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: rgba(17, 17, 17, 0.46);
+      }
+      .interaction-note {
+        margin-top: 24px;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: rgba(17, 17, 17, 0.42);
+      }
+      .interaction-note::before {
+        content: "";
+        width: 28px;
+        height: 1px;
+        background: rgba(17, 17, 17, 0.35);
+      }
+
+      .page-one .copy h1,
+      .page-one .copy .subtitle,
+      .page-one .copy .description {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      .page-one .copy h1 {
+        animation: titleIn 0.9s cubic-bezier(0.22, 0.61, 0.36, 1) 0.28s forwards;
+      }
+      .page-one .copy .subtitle {
+        animation: fadeUp 0.75s ease 0.48s forwards;
+      }
+      .page-one .copy .description {
+        animation: fadeUp 0.75s ease 0.62s forwards;
+      }
+      .detail-title {
+        left: clamp(42px, 7vw, 110px);
+        top: 50%;
+        width: min(440px, 31vw);
+        opacity: 0;
+        transform: translateY(calc(-50% + 26px));
+        transition:
+          opacity 0.8s ease,
+          transform 0.9s cubic-bezier(0.22, 0.61, 0.36, 1);
+      }
+      .detail-meta {
+        right: clamp(42px, 6vw, 96px);
+        top: 50%;
+        width: min(360px, 24vw);
+        opacity: 0;
+        transform: translateY(calc(-50% + 26px));
+        transition:
+          opacity 0.8s ease 0.08s,
+          transform 0.9s cubic-bezier(0.22, 0.61, 0.36, 1) 0.08s;
+      }
+      .detail-meta .subtitle {
+        margin-top: 0;
+      }
+      .detail-meta .description {
+        max-width: 340px;
+      }
+      .page-two.is-visible .detail-title,
+      .page-two.is-visible .detail-meta {
+        opacity: 1;
+        transform: translateY(-50%);
+      }
+      .chapter-title {
+        top: 9%;
+        left: 50%;
+        width: min(650px, 68vw);
+        text-align: center;
+        opacity: 0;
+        transform: translate(-50%, 22px);
+        transition:
+          opacity 0.8s ease,
+          transform 0.9s cubic-bezier(0.22, 0.61, 0.36, 1);
+      }
+      .chapter-meta {
+        left: 50%;
+        bottom: 4.5%;
+        width: min(760px, 78vw);
+        text-align: center;
+        opacity: 0;
+        transform: translate(-50%, 22px);
+        transition:
+          opacity 0.8s ease 0.08s,
+          transform 0.9s cubic-bezier(0.22, 0.61, 0.36, 1) 0.08s;
+      }
+      .chapter-meta .eyebrow {
+        margin-bottom: 10px;
+      }
+      .chapter-meta .subtitle {
+        margin-top: 0;
+      }
+      .chapter-meta .description {
+        max-width: 660px;
+        margin: 14px auto 0;
+        font-size: clamp(13px, 0.98vw, 16px);
+      }
+      .chapter-meta .interaction-note {
+        margin-top: 16px;
+      }
+      .page-three.is-visible .chapter-title,
+      .page-three.is-visible .chapter-meta {
+        opacity: 1;
+        transform: translate(-50%, 0);
+      }
+
+      .organ-overlay {
+        position: absolute;
+        inset: 0;
+        z-index: 12;
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.8s ease 0.15s;
+      }
+      .page-four.is-visible .organ-overlay {
+        opacity: 1;
+      }
+      .organ-lines {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+      }
+      .organ-lines .leader {
+        fill: none;
+        stroke: #111;
+        stroke-width: 1.35;
+        vector-effect: non-scaling-stroke;
+        opacity: 0.9;
+      }
+      .organ-label {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        min-width: 170px;
+        max-width: 230px;
+        padding: 11px 13px;
+        border: 1px solid rgba(17, 17, 17, 0.08);
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.78);
+        backdrop-filter: blur(9px);
+        -webkit-backdrop-filter: blur(9px);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+        color: #111;
+      }
+      .organ-label strong {
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+      .organ-label span {
+        font-size: 10px;
+        line-height: 1.35;
+        letter-spacing: 0.01em;
+        text-transform: none;
+        color: rgba(17, 17, 17, 0.62);
+      }
+
+      .label-liver {
+        left: 7%;
+        top: 10%;
+      }
+      .label-gallbladder {
+        left: 7%;
+        top: 29%;
+      }
+      .label-colon {
+        left: 6%;
+        top: 53%;
+      }
+      .label-spleen {
+        right: 6%;
+        top: 9%;
+        text-align: right;
+        align-items: flex-end;
+      }
+      .label-stomach {
+        right: 6%;
+        top: 24%;
+        text-align: right;
+        align-items: flex-end;
+      }
+      .label-pancreas {
+        right: 6%;
+        top: 43%;
+        text-align: right;
+        align-items: flex-end;
+      }
+      .label-small-intestine {
+        right: 6%;
+        top: 70%;
+        text-align: right;
+        align-items: flex-end;
+      }
+
+      .custom-cursor {
+        position: fixed;
+        left: 0;
+        top: 0;
+        z-index: 9999;
+        width: 64px;
+        height: 64px;
+        border: 1px solid rgba(17, 17, 17, 0.42);
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        box-shadow:
+          0 8px 30px rgba(0, 0, 0, 0.08),
+          inset 0 0 0 1px rgba(255, 255, 255, 0.28);
+        backdrop-filter: blur(2px);
+        -webkit-backdrop-filter: blur(2px);
+        pointer-events: none;
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.86);
+        transition:
+          opacity 0.18s ease,
+          transform 0.18s ease,
+          border-color 0.18s ease,
+          background 0.18s ease;
+      }
+      .custom-cursor::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #111;
+        transform: translate(-50%, -50%);
+        box-shadow: 0 0 0 5px rgba(255, 255, 255, 0.32);
+      }
+      .custom-cursor::after {
+        content: "";
+        position: absolute;
+        inset: 8px;
+        border-radius: 50%;
+        border: 1px solid rgba(17, 17, 17, 0.12);
+      }
+      .custom-cursor.is-visible {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+      }
+
+      .scroll-cue {
+        position: absolute;
+        z-index: 12;
+        left: 50%;
+        bottom: 28px;
+        transform: translateX(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: rgba(17, 17, 17, 0.42);
+        pointer-events: none;
+        animation: cueFloat 1.8s ease-in-out infinite;
+      }
+      .scroll-cue span {
+        width: 1px;
+        height: 28px;
+        background: rgba(17, 17, 17, 0.32);
+      }
+      @keyframes imageIn {
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+      @keyframes titleIn {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes fadeUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes cueFloat {
+        0%,
+        100% {
+          transform: translate(-50%, 0);
+        }
+        50% {
+          transform: translate(-50%, 6px);
+        }
+      }
+
+      @media (pointer: fine) {
+        body {
+          cursor: none;
+        }
+      }
+      @media (pointer: coarse) {
+        .custom-cursor {
+          display: none;
+        }
+      }
+      @media (max-width: 1100px) {
+        .detail-meta {
+          right: 34px;
+          width: min(320px, 28vw);
+        }
+        .detail-title {
+          left: 34px;
+          width: min(390px, 32vw);
+        }
+        .page-three .page-image {
+          background-size: 64% auto;
+        }
+        .chapter-title {
+          top: 9.5%;
+        }
+        .chapter-meta {
+          bottom: 4%;
+          width: min(700px, 82vw);
+        }
+        .organ-label {
+          min-width: 150px;
+          max-width: 200px;
+        }
+        .organ-label strong {
+          font-size: 11px;
+        }
+        .organ-label span {
+          font-size: 9px;
+        }
+      }
+      @media (max-width: 900px) {
+        .page-image {
+          background-position: 58% center;
+        }
+        .copy {
+          left: 34px;
+          width: min(430px, 48vw);
+        }
+        .copy h1 {
+          font-size: clamp(46px, 7vw, 72px);
+        }
+        .detail-meta {
+          width: 280px;
+        }
+        .page-three .page-image {
+          background-size: 72% auto;
+          background-position: center 49%;
+        }
+        .chapter-title h1 {
+          font-size: clamp(38px, 5.8vw, 60px);
+        }
+        .chapter-meta .description {
+          max-width: 560px;
+        }
+        .label-liver,
+        .label-gallbladder,
+        .label-colon {
+          left: 3%;
+        }
+        .label-spleen,
+        .label-stomach,
+        .label-pancreas,
+        .label-small-intestine {
+          right: 3%;
+        }
+      }
+      @media (max-width: 720px) {
+        .page-image {
+          background-position: 65% center;
+        }
+        .brand {
+          top: 20px;
+          left: 20px;
+          font-size: 10px;
+        }
+        .copy {
+          left: 20px;
+          top: 24%;
+          width: calc(100% - 40px);
+          transform: none;
+        }
+        .copy h1 {
+          max-width: 340px;
+          font-size: clamp(40px, 12vw, 62px);
+        }
+        .copy .subtitle {
+          margin-top: 14px;
+          font-size: 10px;
+        }
+        .copy .description {
+          max-width: 320px;
+          margin-top: 14px;
+          font-size: 13px;
+        }
+        .detail-title {
+          left: 20px;
+          top: 19%;
+          width: calc(100% - 40px);
+          transform: translateY(20px);
+        }
+        .detail-meta {
+          left: 20px;
+          right: auto;
+          top: auto;
+          bottom: 58px;
+          width: min(330px, calc(100% - 40px));
+          transform: translateY(20px);
+        }
+        .page-two.is-visible .detail-title,
+        .page-two.is-visible .detail-meta {
+          transform: translateY(0);
+        }
+        .detail-title h1 {
+          max-width: 340px;
+          font-size: clamp(40px, 12vw, 62px);
+        }
+        .detail-meta .subtitle {
+          font-size: 10px;
+        }
+        .detail-meta .description {
+          max-width: 320px;
+          margin-top: 14px;
+          font-size: 13px;
+        }
+        .page-three .page-image {
+          background-size: 100% auto;
+          background-position: center 48%;
+        }
+        .chapter-title {
+          top: 10%;
+          width: calc(100% - 40px);
+        }
+        .chapter-title h1 {
+          font-size: clamp(34px, 10vw, 52px);
+        }
+        .chapter-meta {
+          bottom: 4%;
+          width: calc(100% - 40px);
+        }
+        .chapter-meta .eyebrow {
+          font-size: 9px;
+        }
+        .chapter-meta .subtitle {
+          font-size: 10px;
+        }
+        .chapter-meta .description {
+          max-width: 380px;
+          margin-top: 10px;
+          font-size: 12px;
+        }
+        .chapter-meta .interaction-note {
+          margin-top: 12px;
+          font-size: 9px;
+        }
+        .scroll-cue {
+          bottom: 18px;
+        }
+        .organ-lines {
+          display: none;
+        }
+        .organ-overlay {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          align-content: space-between;
+          padding: 90px 18px 36px;
+          gap: 8px;
+        }
+        .organ-label {
+          position: static;
+          min-width: 0;
+          max-width: none;
+        }
+        .organ-label:nth-of-type(even) {
+          text-align: right;
+          align-items: flex-end;
+        }
+        .organ-label strong {
+          font-size: 9px;
+        }
+        .organ-label span {
+          font-size: 8px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="brand">BUILDIFYX</div>
+    <div class="custom-cursor" id="custom-cursor" aria-hidden="true"></div>
+
+    <main>
+      <section class="page page-one" id="intro">
+        <div class="page-image page-base" aria-hidden="true"></div>
+        <div
+          class="page-image page-reveal"
+          id="reveal-intro"
+          aria-hidden="true"
+        ></div>
+        <section class="copy">
+          <h1>Human<br />Anatomy</h1>
+          <p class="subtitle">The Muscular System</p>
+          <p class="description">
+            Explore the structure of the human muscular system and how the body
+            works beneath the surface.
+          </p>
+        </section>
+        <div class="scroll-cue" aria-hidden="true">Scroll<span></span></div>
+      </section>
+
+      <section class="page page-two" id="layer-detail">
+        <div class="page-image page-base" aria-hidden="true"></div>
+        <div
+          class="page-image page-reveal"
+          id="reveal-detail"
+          aria-hidden="true"
+        ></div>
+        <section class="detail-title">
+          <h1>Anatomy<br />in Layers</h1>
+        </section>
+        <aside class="detail-meta">
+          <p class="eyebrow">Anatomical Study / 01</p>
+          <p class="subtitle">Surface to Structure</p>
+          <p class="description">
+            Move across the figure to compare two anatomical views. The
+            interactive layer reveals structures beneath the visible surface and
+            helps show how the body is organized from the outside inward.
+          </p>
+          <div class="interaction-note">Move the cursor to reveal</div>
+        </aside>
+      </section>
+
+      <section class="page page-three" id="deeper-detail">
+        <div class="page-image page-base" aria-hidden="true"></div>
+        <div
+          class="page-image page-reveal"
+          id="reveal-deeper"
+          aria-hidden="true"
+        ></div>
+        <section class="chapter-title"><h1>Inside the Body</h1></section>
+        <aside class="chapter-meta">
+          <p class="eyebrow">Anatomical Study / 02</p>
+          <p class="subtitle">Deeper Structure</p>
+          <p class="description">
+            Continue through the anatomical layers to compare the next
+            structural view. Move across the figure to reveal how deeper tissues
+            and supporting structures relate to the visible surface.
+          </p>
+          <div class="interaction-note">Move the cursor to reveal</div>
+        </aside>
+      </section>
+
+      <section class="page page-four" id="organ-map">
+        <div class="page-image page-base" aria-hidden="true"></div>
+        <div
+          class="page-image page-reveal"
+          id="reveal-organs"
+          aria-hidden="true"
+        ></div>
+
+        <div class="organ-overlay" aria-label="Organ labels">
+          <svg
+            class="organ-lines"
+            viewBox="0 0 1000 1000"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+          >
+            <defs>
+              <marker
+                id="arrow-solid"
+                markerWidth="10"
+                markerHeight="8"
+                refX="9"
+                refY="4"
+                orient="auto"
+                markerUnits="userSpaceOnUse"
+              >
+                <path d="M0 0 L9 4 L0 8 Z" fill="#111"></path>
+              </marker>
+            </defs>
+            <path
+              class="leader"
+              d="M245 145 L402 162"
+              marker-end="url(#arrow-solid)"
+            ></path>
+            <path
+              class="leader"
+              d="M245 315 L374 315"
+              marker-end="url(#arrow-solid)"
+            ></path>
+            <path
+              class="leader"
+              d="M255 540 L337 535"
+              marker-end="url(#arrow-solid)"
+            ></path>
+            <path
+              class="leader"
+              d="M820 125 L730 185"
+              marker-end="url(#arrow-solid)"
+            ></path>
+            <path
+              class="leader"
+              d="M820 250 L638 255"
+              marker-end="url(#arrow-solid)"
+            ></path>
+            <path
+              class="leader"
+              d="M810 430 L580 360"
+              marker-end="url(#arrow-solid)"
+            ></path>
+            <path
+              class="leader"
+              d="M810 735 L585 720"
+              marker-end="url(#arrow-solid)"
+            ></path>
+          </svg>
+
+          <div class="organ-label label-liver">
+            <strong>Liver</strong
+            ><span
+              >Processes nutrients, detoxifies blood, and produces bile.</span
+            >
+          </div>
+          <div class="organ-label label-gallbladder">
+            <strong>Gallbladder</strong
+            ><span>Stores and concentrates bile used to digest fats.</span>
+          </div>
+          <div class="organ-label label-colon">
+            <strong>Large Intestine</strong
+            ><span>Absorbs water and electrolytes and forms stool.</span>
+          </div>
+          <div class="organ-label label-spleen">
+            <strong>Spleen</strong
+            ><span>Filters blood and supports immune function.</span>
+          </div>
+          <div class="organ-label label-stomach">
+            <strong>Stomach</strong
+            ><span>Mixes food with acid and digestive enzymes.</span>
+          </div>
+          <div class="organ-label label-pancreas">
+            <strong>Pancreas</strong
+            ><span
+              >Releases digestive enzymes and hormones that regulate blood
+              sugar.</span
+            >
+          </div>
+          <div class="organ-label label-small-intestine">
+            <strong>Small Intestine</strong
+            ><span>Completes digestion and absorbs most nutrients.</span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      (() => {
+        const revealLayers = [
+          document.getElementById("reveal-intro"),
+          document.getElementById("reveal-detail"),
+          document.getElementById("reveal-deeper"),
+          document.getElementById("reveal-organs"),
+        ].filter(Boolean);
+        const cursor = document.getElementById("custom-cursor");
+        let cursorX = window.innerWidth / 2;
+        let cursorY = window.innerHeight / 2;
+        let renderX = cursorX;
+        let renderY = cursorY;
+
+        const getRadius = () =>
+          window.innerWidth < 480 ? 120 : window.innerWidth < 720 ? 160 : 260;
+        const update = (reveal, x, y) => {
+          const r = reveal.getBoundingClientRect();
+          const mask = `radial-gradient(circle ${getRadius()}px at ${x - r.left}px ${y - r.top}px,#fff 0%,#fff 40%,rgba(255,255,255,.75) 60%,rgba(255,255,255,.4) 75%,rgba(255,255,255,.12) 88%,transparent 100%)`;
+          reveal.style.webkitMaskImage = mask;
+          reveal.style.maskImage = mask;
+        };
+
+        const animateCursor = () => {
+          if (cursor) {
+            renderX += (cursorX - renderX) * 0.2;
+            renderY += (cursorY - renderY) * 0.2;
+            cursor.style.left = `${renderX}px`;
+            cursor.style.top = `${renderY}px`;
+          }
+          requestAnimationFrame(animateCursor);
+        };
+        animateCursor();
+
+        window.addEventListener(
+          "mousemove",
+          (e) => {
+            cursorX = e.clientX;
+            cursorY = e.clientY;
+            if (cursor) cursor.classList.add("is-visible");
+            revealLayers.forEach((reveal) => {
+              const r = reveal.getBoundingClientRect();
+              if (e.clientY >= r.top && e.clientY <= r.bottom)
+                update(reveal, e.clientX, e.clientY);
+            });
+          },
+          { passive: true },
+        );
+
+        document.documentElement.addEventListener("mouseleave", () => {
+          if (cursor) cursor.classList.remove("is-visible");
+        });
+
+        const pages = document.querySelectorAll(
+          ".page-two,.page-three,.page-four",
+        );
+        if ("IntersectionObserver" in window) {
+          const o = new IntersectionObserver(
+            (es) =>
+              es.forEach((e) => {
+                if (e.isIntersecting && e.intersectionRatio > 0.35)
+                  e.target.classList.add("is-visible");
+              }),
+            { threshold: [0.35, 0.6] },
+          );
+          pages.forEach((p) => o.observe(p));
+        } else pages.forEach((p) => p.classList.add("is-visible"));
+      })();
+    </script>
+  </body>
+</html>

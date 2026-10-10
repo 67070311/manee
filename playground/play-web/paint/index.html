@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Paint Reveal — BuildifyX</title>
+  <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="./extras.css" />
+</head>
+<body>
+  <main class="page-shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">INTERACTIVE IMAGE STUDY</p>
+        <h1>Paint the style.</h1>
+      </div>
+
+      <div class="top-actions">
+        <button id="beforeAfterButton" class="before-after-button" type="button" aria-label="Hold to preview original image">
+          <span class="compare-icon" aria-hidden="true"></span>
+          <span class="action-copy"><strong>Original</strong><small>hold / space</small></span>
+        </button>
+
+        <button id="saveArtworkButton" class="save-artwork-button" type="button" aria-label="Save current artwork as PNG">
+          <span class="download-icon" aria-hidden="true">↓</span>
+          <span class="action-copy"><strong>Save PNG</strong><small>current reveal</small></span>
+        </button>
+
+        <button id="focusModeButton" class="focus-mode-button" type="button" aria-label="Toggle immersive focus mode" aria-pressed="false">
+          <span class="focus-icon" aria-hidden="true"><i></i></span>
+          <span class="action-copy"><strong>Focus</strong><small>press F</small></span>
+        </button>
+
+        <button id="resetButton" class="reset-button" type="button" aria-label="Reset painted area">
+          <span class="reset-icon" aria-hidden="true">↺</span>
+          Reset
+        </button>
+      </div>
+    </header>
+
+    <section class="experience" aria-label="Interactive paint reveal">
+      <div class="mode-row">
+        <div class="mode-bar" role="group" aria-label="Choose reveal style">
+          <button class="mode-button active" type="button" data-mode="original">
+            <span class="mode-dot original-dot"></span>
+            Original
+          </button>
+          <button class="mode-button" type="button" data-mode="bubble">
+            <span class="mode-dot bubble-dot"></span>
+            Bubble
+          </button>
+          <button class="mode-button" type="button" data-mode="jelly">
+            <span class="mode-dot jelly-dot"></span>
+            Jelly
+          </button>
+          <button class="mode-button" type="button" data-mode="pixel">
+            <span class="mode-dot pixel-dot"></span>
+            Pixel
+          </button>
+        </div>
+
+        <div class="reveal-meter" aria-label="Reveal progress">
+          <span id="progressValue">0%</span>
+          <i><b id="progressBar"></b></i>
+        </div>
+      </div>
+
+      <div id="imageStage" class="image-stage original-mode" aria-label="Move the cursor over the image to paint-reveal the selected style">
+        <canvas id="bottomCanvas" class="image-canvas bottom-canvas"></canvas>
+        <canvas id="topCanvas" class="image-canvas top-canvas"></canvas>
+        <canvas id="effectsCanvas" class="image-canvas effects-canvas"></canvas>
+
+        <img id="originalPreview" class="original-preview" src="./orginal.png" alt="Original image preview" draggable="false" />
+        <div id="compareBadge" class="compare-badge" aria-hidden="true"><span>ORIGINAL</span><small>release to return</small></div>
+        <div id="saveToast" class="save-toast" role="status" aria-live="polite">Saved PNG</div>
+        <div id="focusHint" class="focus-hint" aria-hidden="true"><span>FOCUS MODE</span><small>1–4 switch material · Space original · Esc exit</small></div>
+
+        <div id="modeFlash" class="mode-flash" aria-hidden="true"></div>
+
+        <div id="completionMoment" class="completion-moment" aria-hidden="true">
+          <div class="completion-copy">
+            <span id="completionLabel">MATERIAL REVEALED</span>
+            <strong id="completionMode">BUBBLE</strong>
+            <i></i>
+          </div>
+        </div>
+
+        <div id="brushPreview" class="brush-preview" aria-hidden="true">
+          <span></span>
+          <i></i>
+        </div>
+
+        <div id="emptyHint" class="stage-hint">
+          <span class="hint-icon">✦</span>
+          <div>
+            <strong>Choose a style</strong>
+            <small>Then move your cursor across the image to reveal it.</small>
+          </div>
+        </div>
+      </div>
+
+      <footer class="status-row">
+        <div class="status-copy">
+          <span id="statusDot" class="status-dot"></span>
+          <span id="statusText">Original image</span>
+        </div>
+        <p id="modeDescription">Each material has its own brush behaviour.</p>
+      </footer>
+    </section>
+  </main>
+
+  <script src="./app.js"></script>
+  <script src="./extras.js"></script>
+</body>
+</html>

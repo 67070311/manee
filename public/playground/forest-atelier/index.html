@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#20351f" />
+  <title>Forest Atelier</title>
+  <link rel="stylesheet" href="./styles.css?v=forest5" />
+  <link rel="stylesheet" href="./mobile.css?v=forest6" />
+</head>
+<body>
+  <div id="game">
+    <div id="world">
+      <img class="background" src="./asset-game/background/bg.png" alt="" draggable="false" />
+      <div class="sun-glow"></div>
+
+      <div id="paintingZone" class="painting-zone" role="button" tabindex="0" aria-label="Open the painting station" title="Tap or click to paint">
+        <img id="paintingStation" class="painting-station" src="./asset-game/furniture/painting.png" alt="Painting station" draggable="false" />
+        <div id="artPreview" class="art-preview" aria-hidden="true"></div>
+      </div>
+
+      <div id="rabbitWrap" class="rabbit-wrap" aria-label="Rabbit painter">
+        <img id="rabbitPainter" class="rabbit-painter" src="./asset-game/character/1.png" alt="Rabbit painter" draggable="false" />
+      </div>
+
+      <div id="customerWrap" class="customer-wrap hidden">
+        <img id="customer" class="customer" alt="Forest customer" draggable="false" />
+      </div>
+
+      <div id="speech" class="speech hidden">
+        <div id="speechName" class="speech-name">Visitor</div>
+        <div id="speechText" class="speech-text"></div>
+        <div id="speechActions" class="speech-actions"></div>
+      </div>
+
+      <div class="ground-haze"></div>
+    </div>
+
+    <header class="hud">
+      <div class="brand">
+        <div class="brand-mark">FA</div>
+        <div>
+          <div class="brand-title">Forest Atelier</div>
+          <div class="brand-sub">paint • sell • grow</div>
+        </div>
+      </div>
+
+      <div class="stats">
+        <div class="stat">
+          <span>COINS</span>
+          <strong id="coinValue">35</strong>
+        </div>
+        <div class="stat">
+          <span>REPUTATION</span>
+          <strong id="repValue">0</strong>
+        </div>
+        <button id="journalBtn" class="icon-button" aria-label="Open journal">☰</button>
+      </div>
+    </header>
+
+    <div class="task-card" id="taskCard">
+      <span class="task-label">TODAY</span>
+      <strong id="taskTitle">Open the little forest studio</strong>
+      <p id="taskText">Wait for a customer, accept a request, then paint anything you like.</p>
+      <div class="task-progress"><span id="taskProgress"></span></div>
+    </div>
+
+    <button id="paintNowBtn" class="paint-now hidden">PAINT NOW</button>
+
+    <div id="toast" class="toast hidden"></div>
+
+    <div id="intro" class="overlay intro-overlay">
+      <div class="intro-card">
+        <div class="intro-leaf">✦</div>
+        <p class="eyebrow">A TINY FOREST ART GAME</p>
+        <h1>FOREST<br/>ATELIER</h1>
+        <p class="intro-copy">Run a tiny portrait shop in the woods. Paint for wandering customers, negotiate your price, and build a reputation one strange commission at a time.</p>
+        <button id="startBtn" class="primary">OPEN THE SHOP</button>
+        <p class="hint">Mouse / touch to paint</p>
+      </div>
+    </div>
+
+    <div id="paintOverlay" class="overlay hidden">
+      <div class="paint-panel">
+        <div class="paint-topbar">
+          <div>
+            <span class="eyebrow">COMMISSION</span>
+            <h2 id="commissionTitle">Paint something warm</h2>
+            <p id="commissionBrief">The customer will judge color, coverage and how closely the picture matches the mood.</p>
+          </div>
+          <button id="closePaintBtn" class="close-button" aria-label="Close">×</button>
+        </div>
+
+        <div class="paint-layout">
+          <div class="canvas-shell board-canvas-shell">
+            <div class="paint-board-stage">
+              <img class="paint-board-image" src="./asset-game/other/paint-board.png" alt="" draggable="false" />
+              <canvas id="paintCanvas" width="600" height="820"></canvas>
+            </div>
+            <div class="canvas-caption">
+              <span id="strokeCount">0 strokes</span>
+              <span id="coverageValue">0% coverage</span>
+            </div>
+          </div>
+
+          <aside class="tools">
+            <div class="tool-section">
+              <span class="tool-label">PALETTE</span>
+              <div class="palette-board">
+                <div class="palette-thumb" aria-hidden="true"></div>
+                <div id="palette" class="palette"></div>
+              </div>
+            </div>
+
+            <div class="tool-section brush-section">
+              <div class="tool-heading-row">
+                <span class="tool-label">BRUSH SIZE</span>
+                <span id="brushSizeValue" class="brush-size-value">18 px</span>
+              </div>
+              <div class="brush-slider-wrap">
+                <span class="brush-dot brush-dot-small" aria-hidden="true"></span>
+                <input id="brushSizeSlider" class="brush-slider" type="range" min="5" max="52" value="18" step="1" aria-label="Brush size" />
+                <span class="brush-dot brush-dot-large" aria-hidden="true"></span>
+              </div>
+            </div>
+
+            <div class="tool-section">
+              <span class="tool-label">TOOLS</span>
+              <div class="tool-grid icon-tools">
+                <button id="brushToolBtn" class="tool-icon active" type="button" title="Brush" aria-label="Brush">✎</button>
+                <button id="fillBtn" class="tool-icon" type="button" title="Fill" aria-label="Fill">◒</button>
+                <button id="undoBtn" class="tool-icon" type="button" title="Undo" aria-label="Undo">↶</button>
+                <button id="clearBtn" class="tool-icon" type="button" title="Clear" aria-label="Clear">⌫</button>
+              </div>
+            </div>
+
+            <div class="brief-card">
+              <span>REQUEST</span>
+              <strong id="requestMood">Warm & cheerful</strong>
+              <p id="requestTip">Try using lively colors and fill a good portion of the canvas.</p>
+            </div>
+
+            <button id="finishBtn" class="primary finish-btn">FINISH PAINTING</button>
+          </aside>
+        </div>
+      </div>
+    </div>
+
+    <div id="resultOverlay" class="overlay hidden">
+      <div class="result-card">
+        <div class="result-art-wrap">
+          <div class="sale-preview-board">
+            <img class="sale-board-image" src="./asset-game/other/paint-board.png" alt="" draggable="false" />
+            <img id="resultArt" class="sale-art-layer" alt="Your finished painting" />
+          </div>
+        </div>
+        <div class="result-info">
+          <span class="eyebrow">THE CUSTOMER SAYS</span>
+          <h2 id="resultQuote">“I love it.”</h2>
+
+          <div class="offer-row">
+            <div>
+              <span>FAIR VALUE</span>
+              <strong id="offerValue">42</strong>
+            </div>
+            <div>
+              <span>ART SCORE</span>
+              <strong id="scoreValue">78</strong>
+            </div>
+          </div>
+
+          <p id="resultReason">Nice balance of color and coverage.</p>
+
+          <div class="price-editor">
+            <label for="priceInput">YOUR ASKING PRICE</label>
+            <div class="price-input-row">
+              <span class="price-tag">COINS</span>
+              <input id="priceInput" type="number" min="1" step="1" inputmode="numeric" value="42" />
+            </div>
+            <p class="price-hint">Set the price yourself. Push too hard and the customer may walk.</p>
+          </div>
+
+          <div class="result-actions">
+            <button id="declineBtn" class="secondary">LET THEM GO</button>
+            <button id="sellBtn" class="primary">ASK THIS PRICE</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <aside id="journal" class="journal hidden">
+      <div class="journal-head">
+        <div>
+          <span class="eyebrow">SHOP JOURNAL</span>
+          <h3>Forest Atelier</h3>
+        </div>
+        <button id="journalClose" class="close-button">×</button>
+      </div>
+      <div class="journal-section">
+        <span class="journal-label">CAREER</span>
+        <div class="career-bar"><span id="careerFill"></span></div>
+        <p id="careerText">Unknown painter — 0 reputation</p>
+      </div>
+      <div class="journal-section">
+        <span class="journal-label">PAINTINGS SOLD</span>
+        <strong id="soldCount">0</strong>
+      </div>
+      <div class="journal-section">
+        <span class="journal-label">TIP</span>
+        <p>Different customers like different moods. Color choice matters, but empty canvases are hard to sell.</p>
+      </div>
+    </aside>
+  </div>
+
+  <script src="./game.js?v=forest5"></script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600&display=swap');
+.epoch-section{background:#f9fafb;padding:68px 24px 70px;color:#0a1b33;font-family:'Inter',sans-serif;overflow:hidden;--font-sans:'Inter',sans-serif;--font-display:'Outfit',sans-serif}
+.epoch-shell{position:relative;width:100%;max-width:1400px;margin:0 auto;border-radius:48px;background:white;border:1px solid rgba(226,232,240,.5);box-shadow:0 40px 100px -20px rgba(0,0,0,.03);overflow:hidden;height:600px;display:flex;flex-direction:column}
+.epoch-video-layer{position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden;user-select:none}
+.epoch-background-video{width:100%;height:100%;object-fit:cover;transform:scale(1.05);transition:transform 1000ms}
+.epoch-shell:hover .epoch-background-video{transform:scale(1)}
+.epoch-content{position:relative;z-index:20;flex:1;padding:64px 64px 0;display:flex;flex-direction:column;align-items:flex-start}
+.epoch-enter{max-width:610px;opacity:0;transform:translateY(24px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.7,.2,1)}
+.epoch-visible .epoch-enter{opacity:1;transform:translateY(0)}
+.epoch-enter h2{font-family:var(--font-display);font-size:56px;line-height:1.13;font-weight:500;letter-spacing:-.045em;color:#0a1b33;margin:0 0 24px}
+.epoch-enter p{font-family:var(--font-sans);font-size:15px;line-height:1.85;color:#64748b;max-width:510px;margin:0 0 31px}
+.epoch-contact{display:inline-flex;align-items:center;gap:25px;background:#0a152d;color:white;padding:15px 23px;border-radius:999px;font-size:13px;font-weight:600;transition:transform .3s,box-shadow .3s}
+.epoch-contact:hover{transform:scale(1.06);box-shadow:0 12px 28px rgba(10,21,45,.18)}
+.epoch-floating-nav{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);z-index:30}
+.epoch-pill-nav{display:flex;align-items:center;gap:5px;background:rgba(255,255,255,.9);backdrop-filter:blur(32px);-webkit-backdrop-filter:blur(32px);padding:6px;border-radius:999px;box-shadow:0 12px 40px rgba(0,0,0,.08);border:1px solid rgba(226,232,240,.4);opacity:0;transform:translateY(25px);transition:opacity .7s .4s,transform .7s .4s}
+.epoch-visible .epoch-pill-nav{opacity:1;transform:translateY(0)}
+.epoch-mark{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:white;border:1px solid #f1f5f9;box-shadow:0 2px 8px rgba(0,0,0,.05);font-size:21px;margin-right:12px}
+.epoch-link{font-size:12px;font-weight:600;color:#64748b;padding:10px 16px;white-space:nowrap;transition:color .2s}
+.epoch-link:hover{color:#0a1b33}
+.epoch-getintouch{display:flex;align-items:center;gap:16px;background:white;padding:8px 20px;border-radius:999px;font-size:12px;font-weight:600;color:#0a1b33;border:1px solid rgba(226,232,240,.6);box-shadow:0 1px 3px rgba(0,0,0,.06);white-space:nowrap;transition:border-color .2s}
+.epoch-getintouch:hover{border-color:#cbd5e1}
+.epoch-getintouch span{font-size:22px;font-weight:400}
+.epoch-marquee{max-width:1400px;margin:40px auto 0;overflow:hidden;-webkit-mask-image:linear-gradient(to right,transparent,black 9%,black 91%,transparent);mask-image:linear-gradient(to right,transparent,black 9%,black 91%,transparent)}
+.epoch-marquee-track{display:flex;width:max-content;gap:16px;animation:epoch-drift 32s linear infinite}
+.epoch-marquee:hover .epoch-marquee-track{animation-play-state:paused}
+.epoch-logo-card{position:relative;height:96px;width:160px;flex-shrink:0;display:flex;align-items:center;justify-content:center;border-radius:999px;background:white;border:1px solid rgba(226,232,240,.6);box-shadow:0 1px 3px rgba(0,0,0,.06);transition:border-color .25s;overflow:hidden}
+.epoch-logo-card:hover{border-color:#cbd5e1}
+.epoch-logo-gradient{position:absolute;inset:0;opacity:0;transform:scale(1.5);transition:transform .4s,opacity .4s}
+.epoch-logo-card:hover .epoch-logo-gradient{opacity:1;transform:scale(1)}
+.epoch-logo-card img{position:relative;z-index:1;width:95px;height:36px;object-fit:contain;transition:filter .3s}
+.epoch-logo-card:hover img{filter:brightness(0) invert(1)}
+@keyframes epoch-drift{to{transform:translateX(calc(-50% - 8px))}}
+@media(max-width:767px){.epoch-section{padding:42px 12px}.epoch-shell{height:600px;border-radius:28px}.epoch-content{padding:48px 32px 0}.epoch-enter h2{font-size:42px}.epoch-enter p{font-size:14px}.epoch-floating-nav{bottom:28px}.epoch-link{padding:10px 8px}.epoch-mark{margin-right:0}.epoch-getintouch{padding:8px 12px;gap:5px}.epoch-pill-nav{gap:2px}.epoch-marquee{margin-top:40px}}
+@media(max-width:390px){.epoch-content{padding:40px 22px 0}.epoch-enter h2{font-size:38px}.epoch-floating-nav{left:50%}.epoch-link{font-size:11px;padding:9px 6px}.epoch-getintouch{font-size:11px;padding:8px}.epoch-mark{width:30px;height:30px}}
+@media(prefers-reduced-motion:reduce){.epoch-enter,.epoch-pill-nav{opacity:1;transform:none;transition:none}.epoch-marquee-track{animation:none}.epoch-background-video{transition:none}}
+
+/* Personal creative disciplines */
+.epoch-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:11px;font-weight:700;letter-spacing:.16em;color:#456284;margin-bottom:19px}
+.epoch-eyebrow:before{content:"";width:26px;height:1px;background:#456284}
+.epoch-enter{max-width:720px}
+.epoch-enter h2{font-size:clamp(40px,4vw,61px);line-height:1.11;letter-spacing:-.058em}
+.epoch-enter h2 span{font-family:'Outfit',sans-serif;font-weight:400;color:#39719e}
+.epoch-enter p{max-width:530px;font-size:15px;line-height:1.75;color:#526a84}
+.epoch-logo-card{flex-direction:column;gap:7px}
+.epoch-logo-card img{height:35px;width:48px;max-width:80px;object-fit:contain}
+.epoch-logo-name{z-index:1;font:600 11px 'Inter',sans-serif;color:#475569;transition:color .25s}
+.epoch-logo-card:hover .epoch-logo-name{color:#fff}
+@media(max-width:767px){.epoch-enter h2{font-size:40px}.epoch-eyebrow{font-size:9px}.epoch-content{padding-top:40px}.epoch-enter p{font-size:14px;line-height:1.6}}
+
+/* Dreamy aesthetic: inspired by cobalt skies, cream paper and natural greens */
+.epoch-section{background:#f5f6f1;padding:78px 24px 90px;position:relative}
+.epoch-section:before,.epoch-section:after{content:none}
+.epoch-shell{border:1px solid rgba(139,163,176,.25);outline:none;border-radius:42px;box-shadow:0 26px 65px rgba(38,67,84,.08);background:#eff4f6}
+.epoch-content{padding:clamp(49px,5vw,76px) clamp(30px,5vw,74px) 0}
+.epoch-enter{max-width:730px}
+.epoch-eyebrow{display:inline-flex;color:#43657c;background:rgba(248,250,243,.86);border:1px solid rgba(95,123,143,.18);border-radius:999px;padding:9px 15px;letter-spacing:.12em;font-size:10px;transform:none;box-shadow:none;margin-bottom:24px}
+.epoch-eyebrow:before{content:none;display:none}
+.epoch-enter h2{font-family:'Outfit',sans-serif;font-size:clamp(39px,4.2vw,62px);font-weight:500;color:#102f50;line-height:1.12;letter-spacing:-.055em;text-shadow:none;margin-bottom:24px}
+.epoch-enter h2 span{font-family:'Instrument Serif',serif;font-weight:400;font-style:italic;color:#3975aa;text-shadow:none}
+.epoch-enter p{max-width:485px;color:#4c677b;font-size:15px;line-height:1.75;background:transparent;border-radius:0;padding:0;margin:0 0 30px}
+.epoch-contact{background:#1b4f84;color:#fff;border:1px solid rgba(255,255,255,.65);box-shadow:0 10px 25px rgba(25,71,122,.18);font-weight:600;gap:28px}
+.epoch-contact:hover{background:#2865a1;box-shadow:0 14px 30px rgba(25,71,122,.21);transform:translateY(-3px)}
+.epoch-pill-nav{background:rgba(255,255,255,.88);box-shadow:0 12px 35px rgba(50,75,106,.12);border:1px solid rgba(255,255,255,.7)}
+.epoch-mark{color:#315c85;background:#e6eff6}
+.epoch-getintouch{background:#e5edda;border:1px solid #d8e4ce;color:#345f50}
+.epoch-link{color:#4d667d}
+.epoch-marquee{margin-top:38px}
+.epoch-logo-card{border:1px solid rgba(206,220,223,.85);background:#fff;box-shadow:0 6px 20px rgba(63,83,98,.06);border-radius:30px;transform:none;transition:transform .3s,box-shadow .3s,border-color .3s}
+.epoch-logo-card:nth-child(even){transform:none}
+.epoch-logo-card:hover,.epoch-logo-card:nth-child(even):hover{transform:translateY(-5px);box-shadow:0 12px 24px rgba(63,83,98,.12);border-color:#c2d6e2}
+.epoch-logo-card:nth-child(4n + 1){background:#f0f5fb}.epoch-logo-card:nth-child(4n + 2){background:#f6f7f0}.epoch-logo-card:nth-child(4n + 3){background:#fff9ea}.epoch-logo-card:nth-child(4n + 4){background:#eef4ef}
+.epoch-logo-card:hover .epoch-logo-name{color:#fff}
+.epoch-react-icon{height:38px;width:45px;z-index:1;position:relative}
+.epoch-logo-card:hover .epoch-react-icon{filter:brightness(0) invert(1)}
+@media(max-width:767px){.epoch-section{padding:48px 12px 65px}.epoch-shell{border-radius:26px;min-height:630px;height:auto}.epoch-content{padding:44px 27px 145px}.epoch-enter h2{font-size:clamp(37px,8vw,48px)}.epoch-enter p{font-size:14px;line-height:1.65}.epoch-floating-nav{bottom:28px}.epoch-eyebrow{font-size:9px}}
+
+/* Refined organic linework: no green status dot */
+.epoch-eyebrow{gap:0;border:1px solid rgba(46,85,125,.25);border-radius:14px 12px 15px 11px / 12px 15px 11px 14px;background:rgba(255,255,255,.73);box-shadow:1px 2px 0 rgba(58,99,136,.08);transform:rotate(-1deg)}
+.epoch-eyebrow::before,.epoch-eyebrow::after{content:none!important;display:none!important}
+.epoch-shell{border:1px solid rgba(72,112,151,.19);box-shadow:0 20px 55px rgba(28,63,95,.075)}
+.epoch-contact{border:1px solid rgba(30,76,129,.25);box-shadow:0 9px 22px rgba(29,73,118,.14)}
+.epoch-pill-nav{border:1px solid rgba(89,120,149,.19)}
+.epoch-logo-card{border:1px solid rgba(103,137,164,.18)}

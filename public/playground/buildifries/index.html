@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#8fd6f4" />
+  <title>BuildiFries</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="tuning.css" />
+</head>
+<body>
+  <main class="game-shell" id="gameShell">
+    <section class="splash-screen" id="splashScreen" aria-label="Start screen">
+      <img class="splash-bg" src="asset-game/splash-screen/screen.png" alt="" />
+      <div class="splash-content">
+        <img class="splash-word" src="asset-game/splash-screen/word.png" alt="BuildiFries" />
+        <button class="start-game-btn" id="startGameBtn" type="button" aria-label="Start game">
+          <img src="asset-game/splash-screen/new-button.png" alt="Start game" />
+        </button>
+        <div class="tap-hint">TAP TO START</div>
+      </div>
+    </section>
+
+    <div class="sky-glow"></div>
+
+    <header class="top-hud">
+      <div class="hud-pill level-pill">
+        <span class="hud-label">LV.</span>
+        <strong id="playerLevel">1</strong>
+      </div>
+      <div class="hud-pill progress-pill">
+        <span class="tiny-star">★</span>
+        <div class="xp-track"><div id="xpFill" class="xp-fill"></div></div>
+        <span id="xpText" class="xp-text">0/10</span>
+      </div>
+      <div class="hud-pill coin-pill">
+        <img src="asset-game/coin/coin.png" alt="coin" />
+        <strong id="coinCount">700</strong>
+      </div>
+    </header>
+
+    <section class="world" id="world">
+      <div class="location-badge">
+        <span class="badge-dot"></span>
+        BEACH STREET
+      </div>
+
+      <div class="shop-zone" id="shopZone">
+        <div class="shop-title-wrap">
+          <div class="shop-title" id="shopTitle">OLD FRIES</div>
+          <div class="shop-subtitle" id="shopSubtitle">Old, worn out, but still open for business.</div>
+        </div>
+
+        <div class="shop-nav" id="shopNav" aria-label="Shop navigation">
+          <button id="prevStoreBtn" class="shop-nav-btn shop-nav-prev" type="button" aria-label="Previous shop">‹</button>
+          <button id="nextStoreBtn" class="shop-nav-btn shop-nav-next" type="button" aria-label="Next shop">›</button>
+        </div>
+        <div class="shop-dots" id="shopDots" aria-hidden="true"></div>
+
+        <div class="shop-stage">
+          <div class="shop-shadow"></div>
+          <img id="shopImage" class="shop-image" src="asset-game/restuarant/fries/level1.png" alt="current shop" />
+          <div id="shopDecor" class="shop-decor" aria-hidden="true"></div>
+          <div id="incomePopups" class="income-popups"></div>
+        </div>
+      </div>
+
+      <div class="street-wrap">
+        <div class="street-backline"></div>
+        <div class="street" id="street"></div>
+        <div class="street-frontline"></div>
+      </div>
+    </section>
+
+    <section class="bottom-panel">
+      <div class="panel-handle"></div>
+      <div class="shop-card">
+        <div class="shop-card-top">
+          <div class="shop-card-left">
+            <div class="mini-shop-frame">
+              <img id="miniShopImage" src="asset-game/restuarant/fries/level1.png" alt="shop preview" />
+            </div>
+            <div class="shop-copy">
+              <span class="eyebrow" id="shopEyebrow">YOUR FIRST SHOP</span>
+              <h1 id="shopName">FRIES STAND</h1>
+              <p id="incomeText">1 customer = 2 coins</p>
+            </div>
+          </div>
+
+          <div class="shop-mini-stats">
+            <div class="mini-stat">
+              <span>CUSTOMERS</span>
+              <strong id="servedCount">0</strong>
+            </div>
+            <div class="mini-stat">
+              <span>INCOME</span>
+              <strong id="incomePerCustomer">+2</strong>
+            </div>
+          </div>
+        </div>
+
+        <button id="upgradeBtn" class="upgrade-btn" type="button">
+          <span class="upgrade-copy">
+            <small>UPGRADE SHOP</small>
+            <strong id="upgradeLabel">Fix the storefront</strong>
+          </span>
+          <span class="upgrade-price">
+            <img src="asset-game/coin/coin.png" alt="" />
+            <b id="upgradePrice">30</b>
+          </span>
+        </button>
+
+        <div class="tip-row">
+          <span class="live-dot"></span>
+          <span id="tipText">Customers pass by and may stop for fries.</span>
+        </div>
+      </div>
+    </section>
+
+    <div id="toast" class="toast" role="status"></div>
+
+    <div class="upgrade-modal" id="upgradeModal" aria-hidden="true">
+      <div class="pixel-confetti pixel-confetti-a"></div>
+      <div class="pixel-confetti pixel-confetti-b"></div>
+      <div class="pixel-confetti pixel-confetti-c"></div>
+      <div class="upgrade-dialog">
+        <div class="upgrade-rays"></div>
+        <div class="upgrade-kicker" id="upgradeKicker">SHOP UPGRADED!</div>
+        <div class="upgrade-shop-frame">
+          <img id="upgradeModalImage" src="asset-game/restuarant/fries/level2.png" alt="upgraded shop" />
+        </div>
+        <h2 id="upgradeModalTitle">FRIES STAND LV.2</h2>
+        <p id="upgradeModalText">Your shop looks better and each customer pays more.</p>
+        <div class="upgrade-reward">
+          <span>NEW INCOME</span>
+          <strong id="upgradeModalIncome">+5</strong>
+          <img src="asset-game/coin/coin.png" alt="coin" />
+        </div>
+        <button id="upgradeContinueBtn" class="pixel-continue-btn" type="button">NICE!</button>
+      </div>
+    </div>
+  </main>
+
+  <script src="game.js"></script>
+</body>
+</html>
