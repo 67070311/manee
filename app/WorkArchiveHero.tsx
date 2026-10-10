@@ -30,7 +30,7 @@ export default function WorkArchiveHero({language="en"}:{language?:Language}){
   const video=videoRef.current;
   if(!video)return;
   let frame=0;
-  let restartTimer:ReturnType<typeof setTimeout>|undefined;
+  let restartTimer:number|undefined;
   let disposed=false;
 
   // Honor reduced-motion preferences. The first frame remains visible
