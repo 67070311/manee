@@ -1,3 +1,4 @@
+import UiIcon from "../../../../app/UiIcon";
 'use client';
 
 import { Canvas, ThreeEvent, useFrame, useThree } from '@react-three/fiber';
@@ -548,7 +549,7 @@ export default function PotionGame() {
 
     setResult(success ? 'success' : 'fail');
     if (success) {
-      setToast(`✦ ${recipe.name} created — a perfect celestial brew.`);
+      setToast(`${recipe.name} created — a perfect celestial brew.`);
       playTone(520, 0.18, 'sine');
       window.setTimeout(() => playTone(660, 0.22, 'sine'), 130);
       window.setTimeout(() => playTone(880, 0.3, 'triangle'), 260);
@@ -580,7 +581,7 @@ export default function PotionGame() {
       <section className="hud">
         <div className="topbar">
           <div className="brand">
-            <div className="brand-mark">✦</div>
+            <div className="brand-mark"><UiIcon name="sparkle" size={24}/></div>
             <div>
               <h1>Arcane Apothecary</h1>
               <p>Apprentice alchemy chamber</p>

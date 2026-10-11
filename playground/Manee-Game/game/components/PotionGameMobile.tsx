@@ -5,20 +5,21 @@ import { ContactShadows, Float, Sparkles } from '@react-three/drei';
 import * as THREE from 'three';
 import { useMemo, useRef, useState } from 'react';
 import styles from './PotionGameMobile.module.css';
+import UiIcon,{type UiIconName} from '../../../../app/UiIcon';
 
 const INGREDIENTS = [
-  { id: 'mooncap', name: 'Mooncap', emoji: '🍄', color: '#9a80ff', soft: '#e3d9ff' },
-  { id: 'crystal', name: 'Star Crystal', emoji: '💎', color: '#61d7ff', soft: '#d9f8ff' },
-  { id: 'mandrake', name: 'Mandrake', emoji: '🌿', color: '#dda56d', soft: '#ffe8ca' },
-  { id: 'ember', name: 'Ember Seed', emoji: '🔥', color: '#ff795f', soft: '#ffe0d6' },
-  { id: 'frog', name: 'Frog Eye', emoji: '🫧', color: '#8ee06e', soft: '#e2ffd8' },
-  { id: 'shade', name: 'Nightshade', emoji: '🌙', color: '#d36ce8', soft: '#f7dcff' },
+  { id: 'mooncap', name: 'Mooncap', icon: 'mushroom', color: '#9a80ff', soft: '#e3d9ff' },
+  { id: 'crystal', name: 'Star Crystal', icon: 'gem', color: '#61d7ff', soft: '#d9f8ff' },
+  { id: 'mandrake', name: 'Mandrake', icon: 'leaf', color: '#dda56d', soft: '#ffe8ca' },
+  { id: 'ember', name: 'Ember Seed', icon: 'flame', color: '#ff795f', soft: '#ffe0d6' },
+  { id: 'frog', name: 'Frog Eye', icon: 'bubble', color: '#8ee06e', soft: '#e2ffd8' },
+  { id: 'shade', name: 'Nightshade', icon: 'moon', color: '#d36ce8', soft: '#f7dcff' },
 ] as const;
 
 type IngredientId = (typeof INGREDIENTS)[number]['id'];
 type Heat = 'low' | 'medium' | 'high';
 type Result = 'idle' | 'success' | 'fail';
-type BrewItem = { id: IngredientId; name: string; color: string; emoji: string };
+type BrewItem = { id: IngredientId; name: string; color: string; icon: UiIconName };
 
 const RECIPE = {
   name: 'Moonveil Elixir',
@@ -250,8 +251,8 @@ export default function PotionGameMobile() {
     if (result !== 'idle') return;
     if (brew.length >= 5) { setMessage('Your cauldron is full — brew or reset first.'); return; }
     const item = INGREDIENTS.find((x) => x.id === id)!;
-    setBrew((old) => [...old, { id, name: item.name, color: item.color, emoji: item.emoji }]);
-    setMessage(`${item.name} melts into the potion ✦`);
+    setBrew((old) => [...old, { id, name: item.name, color: item.color, icon: item.icon }]);
+    setMessage(`${item.name} melts into the potion`);
     tone(300 + brew.length * 55);
   };
 
@@ -265,7 +266,7 @@ export default function PotionGameMobile() {
     const ok = exact && heat === RECIPE.heat && stir >= RECIPE.stir;
     setResult(ok ? 'success' : 'fail');
     if (ok) {
-      setMessage('Moonveil Elixir complete! ✨');
+      setMessage('Moonveil Elixir complete!');
       tone(640, 0.16); setTimeout(() => tone(820, 0.2), 130);
     } else {
       const hints = [];
@@ -288,7 +289,7 @@ export default function PotionGameMobile() {
             <div className={styles.eyebrow}>MAGICAL BREWERY</div>
             <h1>Lunar Alchemy</h1>
           </div>
-          <button className={styles.recipeButton} onClick={() => setShowRecipe((v) => !v)} aria-label="Open recipe">📖</button>
+          <button className={styles.recipeButton} onClick={() => setShowRecipe((v) => !v)} aria-label="Open recipe"><UiIcon name="book" size={20}/></button>
         </header>
 
         {showRecipe && (
@@ -301,7 +302,7 @@ export default function PotionGameMobile() {
         )}
 
         <div className={styles.questPill}>
-          <span className={styles.questIcon}>✦</span>
+          <span className={styles.questIcon}><UiIcon name="sparkle" size={17}/></span>
           <div><small>Current order</small><strong>{RECIPE.name}</strong></div>
           <span className={styles.progress}>{brew.length}/3</span>
         </div>
@@ -316,7 +317,7 @@ export default function PotionGameMobile() {
           >
             <Scene brew={brew} heat={heat} stir={stir} result={result} addIngredient={addIngredient} setStir={setStir} />
           </Canvas>
-          <div className={styles.stirHint}>↻ drag the potion to stir</div>
+          <div className={styles.stirHint}><UiIcon name="refresh" size={14}/> drag the potion to stir</div>
         </div>
 
         <div className={`${styles.message} ${result === 'success' ? styles.success : result === 'fail' ? styles.fail : ''}`}>
@@ -329,7 +330,7 @@ export default function PotionGameMobile() {
             <div>
               <small>IN YOUR CAULDRON</small>
               <div className={styles.brewSlots}>
-                {[0,1,2,3,4].map((i) => <div key={i} className={`${styles.slot} ${brew[i] ? styles.filled : ''}`}>{brew[i]?.emoji ?? '·'}</div>)}
+                {[0,1,2,3,4].map((i) => <div key={i} className={`${styles.slot} ${brew[i] ? styles.filled : ''}`}>{brew[i] ? <UiIcon name={brew[i].icon} size={20}/> : null}</div>)}
               </div>
             </div>
             <button className={styles.reset} onClick={reset}>Reset</button>
@@ -338,7 +339,7 @@ export default function PotionGameMobile() {
           <div className={styles.ingredientScroller}>
             {INGREDIENTS.map((item) => (
               <button key={item.id} className={styles.ingredientCard} onClick={() => addIngredient(item.id)} style={{ ['--accent' as string]: item.color, ['--soft' as string]: item.soft }}>
-                <span className={styles.ingredientEmoji}>{item.emoji}</span>
+                <span className={styles.ingredientEmoji}><UiIcon name={item.icon} size={23}/></span>
                 <span>{item.name}</span>
               </button>
             ))}
@@ -360,14 +361,14 @@ export default function PotionGameMobile() {
           </div>
 
           <button className={styles.brewButton} onClick={brewPotion} disabled={result !== 'idle'}>
-            <span>✦</span> Brew Potion <span>✦</span>
+            <span><UiIcon name="sparkle" size={17}/></span> Brew Potion <span><UiIcon name="sparkle" size={17}/></span>
           </button>
         </section>
 
         {result !== 'idle' && (
           <div className={styles.resultOverlay} onClick={reset}>
             <div className={styles.resultCard} onClick={(e) => e.stopPropagation()}>
-              <div className={styles.resultOrb}>{result === 'success' ? '✨' : '💨'}</div>
+              <div className={styles.resultOrb}>{result === 'success' ? <UiIcon name="sparkle" size={34}/> : <UiIcon name="wind" size={34}/>}</div>
               <small>{result === 'success' ? 'PERFECT BREW' : 'SPELL FIZZLED'}</small>
               <h2>{result === 'success' ? RECIPE.name : 'Try Again'}</h2>
               <p>{result === 'success' ? 'Moonlight dances inside the bottle.' : message}</p>

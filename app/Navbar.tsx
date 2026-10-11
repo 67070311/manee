@@ -1,4 +1,5 @@
 "use client";
+import UiIcon from "./UiIcon";
 import {useEffect,useRef,useState} from "react";
 import {createPortal} from "react-dom";
 import type {Language} from "./Home";
@@ -76,7 +77,7 @@ export default function Navbar({language,onLanguageChange,mode="home"}:Props){
      <span className="lang-divider">/</span>
      <button type="button" className={language==="en"?"active":""} aria-pressed={language==="en"} onClick={()=>onLanguageChange("en")}>EN</button>
     </div>
-    <a className="site-contact" href={mode==="contact"?"mailto:pimmaneenimitraporn@gmail.com":contactHref}>{mode==="contact"?t.emailMe:t.talk}<span aria-hidden="true">↗</span></a>
+    <a className="site-contact" href={mode==="contact"?"mailto:pimmaneenimitraporn@gmail.com":contactHref}>{mode==="contact"?t.emailMe:t.talk}<UiIcon name="arrow-up-right" size={16}/></a>
     <button ref={triggerRef} className="site-mobile-toggle" type="button" aria-expanded={open} aria-controls="manee-mobile-menu" aria-label={t.navigation} onClick={()=>setOpen(true)}>{t.menu} <span aria-hidden="true">+</span></button>
    </div>
   </header>
@@ -101,7 +102,7 @@ export default function Navbar({language,onLanguageChange,mode="home"}:Props){
        <button type="button" onClick={()=>onLanguageChange("th")} aria-pressed={language==="th"} className={language==="th"?"active":""}>TH</button>
        <button type="button" onClick={()=>onLanguageChange("en")} aria-pressed={language==="en"} className={language==="en"?"active":""}>EN</button>
       </div>
-      <small>MANEE © 2026 <span aria-hidden="true">✳</span></small>
+      <small>MANEE 2026 <UiIcon name="asterisk" size={14}/></small>
      </div>
     </aside>
    </div>,document.body)}

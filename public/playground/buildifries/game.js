@@ -415,7 +415,7 @@ function openNewShopModal() {
   upgradeModalTitle.textContent = nextStore.name;
   upgradeModalText.textContent = `${nextStore.name} is ready to open on Beach Street. Your old shops will stay available anytime.`;
   upgradeModalIncome.textContent = `+${firstStage.income}`;
-  upgradeContinueBtn.textContent = 'OPEN SHOP →';
+  upgradeContinueBtn.textContent = 'OPEN SHOP';
   upgradeModal.classList.add('show');
   upgradeModal.setAttribute('aria-hidden', 'false');
 }
@@ -467,7 +467,8 @@ function gameLoop(now) {
     cleanNPCs();
   }
 
-  requestAnimationFrame(gameLoop);
+  if(state.running&&!state.modalOpen&&!document.hidden)requestAnimationFrame(gameLoop);
+  else window.setTimeout(()=>requestAnimationFrame(gameLoop),150);
 }
 
 startGameBtn.addEventListener('click', startGame);

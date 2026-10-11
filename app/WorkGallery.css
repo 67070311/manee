@@ -140,3 +140,6 @@
 @media(max-width:380px){
  .work-gallery-role{font-size:7px;margin-top:7px}
 }
+
+.work-art-dots{display:inline-flex!important;align-items:center;gap:5px}
+.work-art-dots i{display:block;width:6px;height:6px;flex:0 0 6px;border-radius:50%;background:currentColor;opacity:.65}

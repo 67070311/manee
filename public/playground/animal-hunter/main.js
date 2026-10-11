@@ -762,5 +762,36 @@ function frame(ts){
 }
 
 restartBtn.onclick=()=>{resetGame();lastTime=0};
-startBtn.onclick=()=>{splashScreen.classList.add('hidden');resetGame();lastTime=0};
-Promise.all(Object.entries(src).map(([k,v])=>loadImage(k,v))).then(()=>{resetGame();state.paused=true;requestAnimationFrame(frame)});
+let gameReady=false;
+let startRequested=false;
+const launch=()=>{
+  splashScreen.classList.add('hidden');
+  resetGame();lastTime=0;
+};
+startBtn.onclick=()=>{
+  if(!gameReady){startRequested=true;return;}
+  launch();
+};
+// Get the first playable scene ready before optional bosses and weapons.
+// Downloading all ~30 sprites at once blocks the first tap on mobile.
+const essentials=['bg','playerDown1','playerDown2','rabbit1','playerBullet','exp','coin','heart'];
+const remaining=Object.entries(src).filter(([k])=>!essentials.includes(k));
+Promise.all(essentials.map(key=>loadImage(key,src[key]))).then(()=>{
+  resetGame();state.paused=true;gameReady=true;requestAnimationFrame(frame);
+  if(startRequested)launch();
+  let index=0;
+  const warmBatch=()=>{
+    if(document.hidden){window.setTimeout(warmBatch,400);return;}
+    const chunk=remaining.slice(index,index+3);
+    index+=chunk.length;
+    if(!chunk.length)return;
+    Promise.all(chunk.map(([key,url])=>loadImage(key,url))).then(()=>{
+      if(index<remaining.length){
+        if('requestIdleCallback' in window)window.requestIdleCallback(warmBatch,{timeout:1200});
+        else window.setTimeout(warmBatch,120);
+      }
+    });
+  };
+  if('requestIdleCallback' in window)window.requestIdleCallback(warmBatch,{timeout:1000});
+  else window.setTimeout(warmBatch,150);
+});

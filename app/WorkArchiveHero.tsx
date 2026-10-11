@@ -1,4 +1,5 @@
 "use client";
+import UiIcon from "./UiIcon";
 import {useEffect,useRef} from "react";
 
 type Language="en"|"th";
@@ -10,14 +11,14 @@ const copy={
   overline:"MANEE / WORK & LITTLE EXPERIMENTS",
   mobileOverline:"MANEE / SELECTED WORK",
   footLeft:"UX/UI · FRONTEND · GAME DESIGN · 3D",
-  mobileFootLeft:"MADE WITH CURIOSITY ✳",
+  mobileFootLeft:"MADE WITH CURIOSITY",
   footRight:"SCROLL TO EXPLORE"
  },
  th:{
   overline:"MANEE / ผลงานและไอเดียทดลอง",
   mobileOverline:"MANEE / พื้นที่รวมผลงาน",
   footLeft:"UX/UI · FRONTEND · เกม · 3D",
-  mobileFootLeft:"สร้างด้วยความตั้งใจ ✳",
+  mobileFootLeft:"สร้างด้วยความตั้งใจ",
   footRight:"เลื่อนลงเพื่อชมผลงาน"
  }
 } as const;
@@ -85,7 +86,7 @@ export default function WorkArchiveHero({language="en"}:{language?:Language}){
      <span className="work-cinematic-line">งานที่<em>เราสร้าง</em></span><br className="work-cinematic-break"/><span className="work-cinematic-line">ไอเดียที่<em>ได้ลอง</em></span>
     </>}
    </h1>
-   <div className="work-cinematic-mobile-rule" aria-hidden="true"><span/><span>✳</span></div>
+   <div className="work-cinematic-mobile-rule" aria-hidden="true"><span/><UiIcon name="asterisk" size={17}/></div>
   </div>
   <div className="work-cinematic-bottom">
    <span className="work-cinematic-foot-desktop">{t.footLeft}</span><span className="work-cinematic-foot-mobile">{t.mobileFootLeft}</span>

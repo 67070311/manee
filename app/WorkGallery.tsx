@@ -1,4 +1,5 @@
 "use client";
+import UiIcon from "./UiIcon";
 import {useEffect,useRef,useState} from "react";
 import {createPortal} from "react-dom";
 import Link from "next/link";
@@ -25,8 +26,20 @@ const roleText:Record<WorkProject["role"],{en:string;th:string}>={
 
 function Artwork({type,language="en"}:{type:"garden"|"interactive";language?:Language}){
  return <div className={"work-art work-art-"+type} aria-label="Concept illustration">
- {type==="garden"?<><span className="work-art-sun">☼</span><div className="work-art-forest">✿ <span>✿</span> ✿</div><div className="work-art-garden-title">{language==="th"?"โลกเล็ก ๆ": "a tiny"}<br/><em>{language==="th"?"ที่น่าเล่น":"world to play."}</em></div><div className="work-art-garden-card">🦝 <small>{language==="th"?"เข้าพัก":"CHECK IN"}</small></div></>:<><span className="work-art-asterisk">✳</span><div className="work-art-browser"><div className="work-art-browser-nav"><span>● ● ●</span><span>{language==="th"?"ลองสร้างเว็บ":"creative experiments"}</span></div><div className="work-art-browser-content">{language==="th"?"ลองเล่นดู":"play a little."}<em>{language==="th"?"แล้วจะสนุก":"explore a lot."}</em><span>{language==="th"?"ลองขยับเมาส์":"MOVE YOUR CURSOR"}</span></div></div></>}
+ {type==="garden"?<><span className="work-art-sun"><UiIcon name="sun" size={23}/></span><div className="work-art-forest"><UiIcon name="flower" size={18}/> <span><UiIcon name="flower" size={18}/></span> <UiIcon name="flower" size={18}/></div><div className="work-art-garden-title">{language==="th"?"โลกเล็ก ๆ": "a tiny"}<br/><em>{language==="th"?"ที่น่าเล่น":"world to play."}</em></div><div className="work-art-garden-card"><UiIcon name="paw" size={22}/> <small>{language==="th"?"เข้าพัก":"CHECK IN"}</small></div></>:<><span className="work-art-asterisk"><UiIcon name="asterisk" size={21}/></span><div className="work-art-browser"><div className="work-art-browser-nav"><span className="work-art-dots"><i/><i/><i/></span><span>{language==="th"?"ลองสร้างเว็บ":"creative experiments"}</span></div><div className="work-art-browser-content">{language==="th"?"ลองเล่นดู":"play a little."}<em>{language==="th"?"แล้วจะสนุก":"explore a lot."}</em><span>{language==="th"?"ลองขยับเมาส์":"MOVE YOUR CURSOR"}</span></div></div></>}
  </div>;
+}
+// Warm only the small playable HTML document when a person hovers or
+// keyboard-focuses a demo. Do not download the large game asset sets eagerly.
+const warmedDemos=new Set<string>();
+function warmDemo(path?:string){
+ if(!path||typeof document==="undefined"||warmedDemos.has(path))return;
+ warmedDemos.add(path);
+ const link=document.createElement("link");
+ link.rel="prefetch";
+ link.href=path;
+ link.as="document";
+ document.head.appendChild(link);
 }
 function ProjectCover({project,language}:{project:WorkProject;language:Language}){
  return project.cover?<img src={project.cover} alt={project.title+" project cover"} loading="lazy" decoding="async"/>:<Artwork type={project.artwork??"interactive"} language={language}/>;
@@ -34,7 +47,7 @@ function ProjectCover({project,language}:{project:WorkProject;language:Language}
 function ProjectCard({project,onOpen,language}:{project:WorkProject;onOpen:(project:WorkProject)=>void;language:Language}){
  const t=copy[language];const categoryText=project.experienceType==="internship"?(language==="th"?"ฝึกงาน":"INTERNSHIP"):project.category==="client"?t.clientTag:project.category==="product"?t.productTag:t.playgroundTag;
  return <article className="work-gallery-card" data-category={project.category} data-experience={project.experienceType??undefined}>
-  <button type="button" className="work-gallery-cover" aria-label={(project.demoPath?(language==="th"?"ลองเล่น ":"Play "):t.open+": ")+project.title} onClick={()=>onOpen(project)}>
+  <button type="button" onPointerEnter={()=>warmDemo(project.demoPath)} onFocus={()=>warmDemo(project.demoPath)} onTouchStart={()=>warmDemo(project.demoPath)} className="work-gallery-cover" aria-label={(project.demoPath?(language==="th"?"ลองเล่น ":"Play "):t.open+": ")+project.title} onClick={()=>onOpen(project)}>
    <div className="work-gallery-image-frame"><ProjectCover project={project} language={language}/></div>
    <span className="work-gallery-cover-caption">{project.demoPath?(language==="th"?"ลองเล่นเลย":"Play demo"):t.open} <span aria-hidden="true">+</span></span>
   </button>
@@ -54,7 +67,7 @@ export default function WorkGallery({mode="home",language="en"}:{mode?:"home"|"f
  const closeRef=useRef<HTMLButtonElement>(null);
  const triggerRef=useRef<HTMLElement|null>(null);
  const projects=(full?workProjects.filter(p=>filter==="all"||p.category===filter):featuredProjects).map(p=>localizeProject(p,language));
- const openProject=(project:WorkProject)=>{triggerRef.current=document.activeElement instanceof HTMLElement?document.activeElement:null;setShowProjectInfo(false);setSelected(project)};
+ const openProject=(project:WorkProject)=>{warmDemo(project.demoPath);triggerRef.current=document.activeElement instanceof HTMLElement?document.activeElement:null;setShowProjectInfo(false);setSelected(project)};
  const closeProject=()=>{setShowProjectInfo(false);setSelected(null)};
  useEffect(()=>{
   if(!selected)return;
@@ -70,7 +83,7 @@ export default function WorkGallery({mode="home",language="en"}:{mode?:"home"|"f
  return <section className={"work-gallery-section"+(full?" is-archive":" is-featured")} id={full?"work-archive":"work"}>
   <div className="work-gallery-container">
    {full?<WorkArchiveHero language={language}/>:
-    <div className="work-featured-header"><div><span className="work-header-note">✳ {t.homeLabel}</span><h2>{t.homeTitle}<br/><em>{t.homeItalic}</em></h2></div><p className="work-featured-intro">{t.homeIntro}</p></div>}
+    <div className="work-featured-header"><div><span className="work-header-note"><UiIcon name="asterisk" size={13}/> {t.homeLabel}</span><h2>{t.homeTitle}<br/><em>{t.homeItalic}</em></h2></div><p className="work-featured-intro">{t.homeIntro}</p></div>}
    {full&&<div className="work-filter-bar" id="work-projects">
     <span className="work-filter-label">{t.browse}</span>
     <div className="work-filter-items" role="group" aria-label={language==="th"?"หมวดผลงาน":"Project type"}>
@@ -80,21 +93,21 @@ export default function WorkGallery({mode="home",language="en"}:{mode?:"home"|"f
    <div className="work-gallery-grid" key={filter}>
     {projects.map(project=><ProjectCard key={project.id} project={project} onOpen={openProject} language={language}/>)}
    </div>
-   {!full&&<div className="work-viewmore"><span>{t.more} ✳</span><Link href="/work">{t.viewMore} <span aria-hidden="true">+</span></Link></div>}
-   {full&&<div className="work-archive-footer"><span>{t.footer} ✳</span><Link href="/contact">{t.footerLink}</Link></div>}
+   {!full&&<div className="work-viewmore"><span>{t.more} <UiIcon name="asterisk" size={14}/></span><Link href="/work">{t.viewMore} <span aria-hidden="true">+</span></Link></div>}
+   {full&&<div className="work-archive-footer"><span>{t.footer} <UiIcon name="asterisk" size={14}/></span><Link href="/contact">{t.footerLink}</Link></div>}
   </div>
   {selected&&typeof document!=="undefined"&&createPortal(
    <div className="work-modal-backdrop" onMouseDown={e=>{if(e.target===e.currentTarget)closeProject()}}>
     <div className={"work-modal"+(selected.demoPath?" is-playable":"")+(showProjectInfo?" is-info-open":"")} role="dialog" aria-modal="true" aria-labelledby="work-modal-heading">
      <button type="button" className="work-modal-floating-close" ref={closeRef} onClick={closeProject} aria-label={t.close}>×</button>
      {localizedSelected!.demoPath?<PlaygroundPlayer src={localizedSelected!.demoPath} title={localizedSelected!.title} language={language}/>:<div className="work-modal-cover">{localizedSelected!.cover?<img src={localizedSelected!.cover} alt={localizedSelected!.title+" project cover"}/>:<Artwork type={selected.artwork??"interactive"} language={language}/>}</div>}
-     {localizedSelected!.demoPath&&<button type="button" className="work-modal-mobile-info-toggle" aria-expanded={showProjectInfo} onClick={()=>setShowProjectInfo(value=>!value)}>{showProjectInfo?(language==="th"?"กลับไปเล่นเกม":"Back to game"):(language==="th"?"รายละเอียดโปรเจกต์":"About this project")} <span aria-hidden="true">{showProjectInfo?"−":"+"}</span></button>}
+     {localizedSelected!.demoPath&&<button type="button" className="work-modal-mobile-info-toggle" aria-expanded={showProjectInfo} onClick={()=>setShowProjectInfo(value=>!value)}>{showProjectInfo?(language==="th"?"กลับไปเล่นเกม":"Back to game"):(language==="th"?"รายละเอียดโปรเจกต์":"About this project")} <UiIcon name={showProjectInfo?"chevron-up":"chevron-down"} size={16}/></button>}
      <div className="work-modal-details">
       <span className="work-modal-category">{selectedCategory}</span>
       <h2 id="work-modal-heading">{localizedSelected!.title}</h2>
       <h3>{localizedSelected!.subtitle}</h3>
       <p>{localizedSelected!.description}</p>
-      {localizedSelected!.website&&<a className="work-modal-visit" href={localizedSelected!.website} target="_blank" rel="noopener noreferrer"><span aria-hidden="true">◉</span>{t.visit}</a>}
+      {localizedSelected!.website&&<a className="work-modal-visit" href={localizedSelected!.website} target="_blank" rel="noopener noreferrer"><UiIcon name="arrow-up-right" size={16}/>{t.visit}</a>}
       <div className={"work-modal-contribution"+(localizedSelected!.role==="design-graphics"?" is-design-only":localizedSelected!.role!=="full-cycle"?" is-specialist":"")}><span>{t.roleLabel}</span><strong>{roleText[localizedSelected!.role][language]}</strong></div>
      </div>
     </div>

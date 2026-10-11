@@ -1,4 +1,5 @@
 "use client";
+import UiIcon from "./UiIcon";
 import type {Language} from "./Home";
 import usePortfolioLanguage from "./usePortfolioLanguage";
 import Navbar from "./Navbar";
@@ -22,7 +23,7 @@ export default function HomePageContent({initialLanguage="en"}:{initialLanguage?
   <WorkGallery mode="home" language={language}/>
   <section className="contact wrap" id="contact"><div className="sectionmeta"><span>{t.label}</span><span>{t.note}</span></div>
   <h2>{t.title}<br/><em>{t.italic}</em></h2>
-  <a href="/contact">{t.button} <span aria-hidden="true">↗</span></a></section>
+  <a href="/contact">{t.button} <UiIcon name="arrow-up-right" size={17}/></a></section>
   <PortfolioFooter mode="home" language={language}/>
  </main>;
 }

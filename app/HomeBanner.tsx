@@ -1,3 +1,4 @@
+import UiIcon from "./UiIcon";
 import type {Language} from "./Home";
 const content={
  en:{portfolio:"PORTFOLIO — 2026",role:"CREATIVE DEVELOPER / AI ENGINEER",intro:"HELLO, I'M",lead:"Design meets",italic:"possibility.",description:"I craft expressive digital experiences where thoughtful design, immersive motion, and intelligent technology come together.",mobileDescription:"I design, build and launch digital experiences — from thoughtful websites to playful little worlds.",explore:"EXPLORE MY WORK",location:"BASED IN THAILAND · WORKING EVERYWHERE",scroll:"SCROLL TO EXPLORE",signature:"Turning imagination into interaction.",category:"01 / CREATIVE TECHNOLOGY"},
@@ -17,9 +18,9 @@ export default function HomeBanner({language}:{language:Language}){
    </div>
    <div className="home-banner-bottom">
     <div className="home-banner-description"><span className="banner-label">{t.category}</span><p className="home-banner-desktop-description">{t.description}</p><p className="home-banner-mobile-description">{t.mobileDescription}</p></div>
-    <a className="home-banner-explore" href="#work"><span>{t.explore}</span><span className="home-banner-explore-icon">↗</span></a>
+    <a className="home-banner-explore" href="#work"><span>{t.explore}</span><span className="home-banner-explore-icon"><UiIcon name="arrow-up-right" size={22}/></span></a>
    </div>
   </div>
-  <div className="home-banner-bottomline"><span>{t.location}</span><span className="banner-signature">{t.signature}</span><a href="#work">{t.scroll}<b>↓</b></a></div>
+  <div className="home-banner-bottomline"><span>{t.location}</span><span className="banner-signature">{t.signature}</span><a href="#work">{t.scroll}<b><UiIcon name="arrow-right" size={16}/></b></a></div>
  </section>;
 }

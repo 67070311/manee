@@ -135,10 +135,23 @@
   // The rabbit is the resident painter: it never walks away.
   // Its 10 supplied frames are played in place as a gentle painting/idle loop.
   const rabbitPainter = $('#rabbitPainter');
-  [...customerFrameSets.monkey, ...customerFrameSets.frog, ...rabbitFrames].forEach(src => {
-    const img = new Image();
-    img.src = src;
-  });
+  const warmQueue=[...customerFrameSets.monkey,...rabbitFrames.slice(1),...customerFrameSets.frog];
+  let warmIndex=0;
+  function warmNext(){
+    let count=0;
+    while(warmIndex<warmQueue.length&&count<2){
+      const img=new Image();
+      img.decoding="async";
+      img.src=warmQueue[warmIndex++];
+      count++;
+    }
+    if(warmIndex<warmQueue.length){
+      if("requestIdleCallback" in window)window.requestIdleCallback(warmNext,{timeout:1200});
+      else window.setTimeout(warmNext,210);
+    }
+  }
+  if("requestIdleCallback" in window)window.requestIdleCallback(warmNext,{timeout:1600});
+  else window.setTimeout(warmNext,500);
   let rabbitFrame = 0;
   let rabbitTimer = 0;
   let rabbitLastTime = 0;
@@ -152,7 +165,7 @@
       rabbitFrame = (rabbitFrame + 1) % rabbitFrames.length;
       rabbitPainter.src = rabbitFrames[rabbitFrame];
     }
-    requestAnimationFrame(animateRabbitPainter);
+    window.setTimeout(()=>requestAnimationFrame(animateRabbitPainter),66);
   }
 
   function initPalette() {
@@ -439,7 +452,9 @@
         spawnCustomer(900);
       }
     }
-    requestAnimationFrame(animateCustomer);
+    const active=state.customerState==='entering'||state.customerState==='leaving';
+    if(active)requestAnimationFrame(animateCustomer);
+    else window.setTimeout(()=>requestAnimationFrame(animateCustomer),110);
   }
 
   function showRequestBubble() {
@@ -674,9 +689,14 @@
     }, 2600);
   }
 
+  let gameStarted=false;
   els.start.addEventListener('click', () => {
+    if(gameStarted)return;
+    gameStarted=true;
     els.intro.classList.add('hidden');
     spawnCustomer();
+    requestAnimationFrame(animateCustomer);
+    requestAnimationFrame(animateRabbitPainter);
   });
 
   els.station.addEventListener('click', () => {
@@ -746,6 +766,4 @@
   setPaintTool('brush');
   els.brushSizeValue.textContent = `${state.brushSize} px`;
   updateHud();
-  requestAnimationFrame(animateCustomer);
-  requestAnimationFrame(animateRabbitPainter);
 })();

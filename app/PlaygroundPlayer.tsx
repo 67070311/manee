@@ -1,4 +1,5 @@
 "use client";
+import UiIcon from "./UiIcon";
 import {useEffect,useLayoutEffect,useRef,useState} from "react";
 import type {CSSProperties} from "react";
 
@@ -44,6 +45,23 @@ export default function PlaygroundPlayer({src,title,language}:Props){
   return()=>document.removeEventListener("fullscreenchange",update);
  },[]);
 
+ // A frame's load event can fire before client-rendered games paint anything.
+ // Wait briefly for a real game root (especially the exported Potion Lab).
+ const readyFrame=(frame:HTMLIFrameElement)=>{
+  const started=performance.now();
+  const check=()=>{
+   if(!frame.isConnected)return;
+   let ready=true;
+   try{
+    const doc=frame.contentDocument;
+    if(doc&&src.includes("/potion-lab/"))ready=Boolean(doc.querySelector("main"));
+   }catch{}
+   if(ready||performance.now()-started>4200){
+    window.setTimeout(()=>{if(frame.isConnected)setLoading(false)},110);
+   }else window.setTimeout(check,90);
+  };
+  window.requestAnimationFrame(check);
+ };
  const reload=()=>{setLoading(true);setRevision(value=>value+1)};
  const exitFullscreen=()=>{
   if(document.fullscreenElement){
@@ -64,7 +82,7 @@ export default function PlaygroundPlayer({src,title,language}:Props){
    loading="eager"
    allow="autoplay; fullscreen; gamepad"
    allowFullScreen
-   onLoad={()=>setLoading(false)}
+   onLoad={(event)=>readyFrame(event.currentTarget)}
   />
  );
 
@@ -76,12 +94,12 @@ export default function PlaygroundPlayer({src,title,language}:Props){
     <strong>{title}</strong>
    </div>
    <div className="playground-player-controls">
-    <button type="button" onClick={reload} aria-label={th?"เริ่มเล่นใหม่":"Restart demo"}><span className="playground-control-label">{th?"เริ่มใหม่":"Restart"}</span> <span aria-hidden="true">↻</span></button>
-    <button type="button" onClick={toggleFullscreen} aria-label={th?"ขยายเกมเต็มจอ":"Fullscreen demo"}><span className="playground-control-label">{th?"เต็มจอ":"Fullscreen"}</span> <span aria-hidden="true">⛶</span></button>
+    <button type="button" onClick={reload} aria-label={th?"เริ่มเล่นใหม่":"Restart demo"}><span className="playground-control-label">{th?"เริ่มใหม่":"Restart"}</span> <UiIcon name="refresh" size={16}/></button>
+    <button type="button" onClick={toggleFullscreen} aria-label={th?"ขยายเกมเต็มจอ":"Fullscreen demo"}><span className="playground-control-label">{th?"เต็มจอ":"Fullscreen"}</span> <UiIcon name="expand" size={16}/></button>
    </div>
   </div>
   <div className={"playground-player-stage"+(showPhone?" has-phone":"")} ref={stage}>
-   {loading&&<div className="playground-player-loading" role="status">{th?"กำลังเปิดโปรเจกต์…":"Loading interactive project…"}<span>✳</span></div>}
+   {loading&&<div className="playground-player-loading" role="status" aria-live="polite">{th?"กำลังเปิดโปรเจกต์…":"Loading interactive project…"}<UiIcon name="sparkle" size={24}/></div>}
    {showPhone?
     <div className="playground-device-shell" style={{"--device-scale":deviceScale} as CSSProperties}>
      {playableFrame}

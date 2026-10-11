@@ -143,3 +143,19 @@
 }
 
 .playground-player-stage.has-phone:fullscreen{width:100vw;height:100dvh;min-height:0;max-height:none}
+
+/* Loading state must layer ABOVE the iframe: previously z-index:0 was
+   entirely obscured by the empty frame, producing a dark, frozen screen. */
+.playground-player-stage .playground-player-loading{
+ z-index:8;
+ background:linear-gradient(135deg,#132c3b 0%,#1a3648 50%,#152c3e 100%);
+ background-size:180% 180%;
+ animation:game-loading-breathe 1.5s ease-in-out infinite;
+}
+.playground-player-loading svg{animation:game-loading-spin 1.8s linear infinite}
+@keyframes game-loading-breathe{50%{background-position:100% 100%}}
+@keyframes game-loading-spin{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){
+ .playground-player-stage .playground-player-loading,
+ .playground-player-loading svg{animation:none}
+}

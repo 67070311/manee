@@ -1,4 +1,5 @@
 "use client";
+import UiIcon from "./UiIcon";
 import type {Language} from "./Home";
 import {useState,type FormEvent} from "react";
 import Navbar from "./Navbar";
@@ -15,7 +16,7 @@ const content={
   titleFirst:"Let’s make",
   titleLast:"it happen.",
   intro:"Whether it's a website, a digital product, a playful game, or an idea that hasn't found its shape yet — I'd love to hear about it.",
-  tiny:"GOOD IDEAS START WITH A CONVERSATION ✳",
+  tiny:"GOOD IDEAS START WITH A CONVERSATION",
   infoTitle:"Find me here",
   infoHint:"Reach out whichever way feels easiest.",
   email:"EMAIL",phone:"PHONE",
@@ -37,7 +38,7 @@ const content={
   titleFirst:"มาทำให้",
   titleLast:"เป็นจริงกัน",
   intro:"ไม่ว่าจะเป็นเว็บไซต์ โปรดักต์ เกม หรือไอเดียที่ยังไม่รู้จะเริ่มตรงไหน เล่าให้เราฟังได้เลย เราอยากช่วยทำให้มันเป็นจริง",
-  tiny:"ไอเดียดี ๆ เริ่มต้นจากการพูดคุย ✳",
+  tiny:"ไอเดียดี ๆ เริ่มต้นจากการพูดคุย",
   infoTitle:"ช่องทางติดต่อ",
   infoHint:"สะดวกช่องทางไหน ทักมาได้เลย",
   email:"อีเมล",phone:"โทรศัพท์",
@@ -92,7 +93,7 @@ export default function ContactPage({initialLanguage="en"}:{initialLanguage?:Lan
       </div>
      </div>
      <div className="contact-page-form-card">
-      <div className="contact-page-form-top"><span aria-hidden="true">✳</span><span>01 / SAY HELLO</span></div>
+      <div className="contact-page-form-top"><UiIcon name="asterisk" size={18}/><span>01 / SAY HELLO</span></div>
       <h2>{t.formTitle}</h2>
       <p className="contact-page-form-note">{t.formNote}</p>
       <form onSubmit={submit} className="contact-page-form">

@@ -135,10 +135,30 @@
   // The rabbit is the resident painter: it never walks away.
   // Its 10 supplied frames are played in place as a gentle painting/idle loop.
   const rabbitPainter = $('#rabbitPainter');
-  [...customerFrameSets.monkey, ...customerFrameSets.frog, ...rabbitFrames].forEach(src => {
-    const img = new Image();
-    img.src = src;
-  });
+  // Do not compete with first paint by fetching all 22 animation sprites
+  // at once. Warm a couple of frames during idle time, then the rest in small
+  // batches. The first visible rabbit frame is already in the HTML.
+  const warmQueue=[...customerFrameSets.monkey,...rabbitFrames.slice(1),...customerFrameSets.frog];
+  const warmed=new Set();
+  let warmIndex=0;
+  function warmNext(){
+    let n=0;
+    while(warmIndex<warmQueue.length&&n<2){
+      const url=warmQueue[warmIndex++];
+      if(warmed.has(url))continue;
+      warmed.add(url);
+      const img=new Image();
+      img.decoding="async";
+      img.src=url;
+      n++;
+    }
+    if(warmIndex<warmQueue.length){
+      if("requestIdleCallback" in window)window.requestIdleCallback(warmNext,{timeout:1200});
+      else window.setTimeout(warmNext,210);
+    }
+  }
+  if("requestIdleCallback" in window)window.requestIdleCallback(warmNext,{timeout:1600});
+  else window.setTimeout(warmNext,500);
   let rabbitFrame = 0;
   let rabbitTimer = 0;
   let rabbitLastTime = 0;
@@ -152,7 +172,8 @@
       rabbitFrame = (rabbitFrame + 1) % rabbitFrames.length;
       rabbitPainter.src = rabbitFrames[rabbitFrame];
     }
-    requestAnimationFrame(animateRabbitPainter);
+    // An animation frame changes every 180 ms; no need to tick at 60 FPS.
+    window.setTimeout(()=>requestAnimationFrame(animateRabbitPainter),66);
   }
 
   function initPalette() {
@@ -450,7 +471,10 @@
         spawnCustomer(900);
       }
     }
-    requestAnimationFrame(animateCustomer);
+    // Slow polling while the visitor is talking/idle, 60 FPS only walking.
+    const active=state.customerState==='entering'||state.customerState==='leaving';
+    if(active)requestAnimationFrame(animateCustomer);
+    else window.setTimeout(()=>requestAnimationFrame(animateCustomer),110);
   }
 
   function showRequestBubble() {
@@ -685,9 +709,14 @@
     }, 2600);
   }
 
+  let gameStarted=false;
   els.start.addEventListener('click', () => {
+    if(gameStarted)return;
+    gameStarted=true;
     els.intro.classList.add('hidden');
     spawnCustomer();
+    requestAnimationFrame(animateCustomer);
+    requestAnimationFrame(animateRabbitPainter);
   });
 
   const paintingZone = $('#paintingZone');
@@ -770,6 +799,5 @@
   setPaintTool('brush');
   els.brushSizeValue.textContent = `${state.brushSize} px`;
   updateHud();
-  requestAnimationFrame(animateCustomer);
-  requestAnimationFrame(animateRabbitPainter);
+  // The game loop starts on the first Play action, not behind the intro card.
 })();

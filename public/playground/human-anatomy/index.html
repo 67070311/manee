@@ -517,7 +517,7 @@
 
 
     </style>
-    <link rel="stylesheet" href="./mobile.css?v=anatomy5" />
+    <link rel="stylesheet" href="./mobile.css?v=anatomy7" />
   </head>
   <body>
     <div class="brand">BUILDIFYX</div>
@@ -709,16 +709,20 @@
           reveal.style.maskImage = mask;
         };
 
+        // Only animate while the desktop cursor is moving; an endless RAF
+        // inside a hidden iframe wastes CPU and competes with game rendering.
+        let cursorFrame=0;
         const animateCursor = () => {
-          if (cursor) {
-            renderX += (cursorX - renderX) * 0.2;
-            renderY += (cursorY - renderY) * 0.2;
-            cursor.style.left = `${renderX}px`;
-            cursor.style.top = `${renderY}px`;
+          cursorFrame=0;
+          if(!cursor||document.hidden||window.matchMedia("(max-width: 900px)").matches)return;
+          renderX+=(cursorX-renderX)*.3;
+          renderY+=(cursorY-renderY)*.3;
+          cursor.style.left=`${renderX}px`;
+          cursor.style.top=`${renderY}px`;
+          if(Math.abs(cursorX-renderX)>.7||Math.abs(cursorY-renderY)>.7){
+            cursorFrame=window.requestAnimationFrame(animateCursor);
           }
-          requestAnimationFrame(animateCursor);
         };
-        animateCursor();
 
         window.addEventListener(
           "mousemove",
@@ -726,6 +730,7 @@
             cursorX = e.clientX;
             cursorY = e.clientY;
             if (cursor) cursor.classList.add("is-visible");
+            if(!cursorFrame)cursorFrame=window.requestAnimationFrame(animateCursor);
             revealLayers.forEach((reveal) => {
               const r = reveal.getBoundingClientRect();
               if (e.clientY >= r.top && e.clientY <= r.bottom)
@@ -737,6 +742,8 @@
 
         document.documentElement.addEventListener("mouseleave", () => {
           if (cursor) cursor.classList.remove("is-visible");
+          window.cancelAnimationFrame(cursorFrame);
+          cursorFrame=0;
         });
 
         // Desktop hover is preserved. On phones, tapping and dragging over
@@ -746,6 +753,7 @@
         let activePageIndex=0;
         const showPage=(index)=>{
           activePageIndex=Math.max(0,Math.min(allPages.length-1,index));
+          if(phoneView.matches)ensureMobileModel(activePageIndex);
           allPages.forEach((page,i)=>{
             const active=i===activePageIndex;
             page.classList.toggle("is-active",active);
@@ -781,8 +789,7 @@
           if(phoneView.matches)showPage(activePageIndex);
           else resetDesktopLayout();
         };
-        refreshMode();
-        phoneView.addEventListener?.("change",refreshMode);
+
         window.addEventListener("keydown",(e)=>{
           if(!phoneView.matches)return;
           if(e.key==="ArrowRight"){e.preventDefault();showPage((activePageIndex+1)%allPages.length)}
@@ -833,112 +840,146 @@
           nav.setAttribute("aria-label","Anatomy chapters");
           const previous=document.createElement("button");
           previous.type="button";
-          previous.textContent="← Previous";
+          previous.innerHTML='<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12H4m7-7-7 7 7 7"/></svg> Previous';
           previous.disabled=index===0;
           previous.addEventListener("click",()=>showPage(index-1));
           const next=document.createElement("button");
           next.type="button";
-          next.textContent=index===allPages.length-1?"Back to start":"Next chapter →";
+          next.innerHTML=(index===allPages.length-1?"Back to start":"Next chapter")+' <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16m-7-7 7 7-7 7"/></svg>';
           next.addEventListener("click",()=>showPage((index+1)%allPages.length));
           nav.append(previous,next);
           page.appendChild(nav);
         });
 
 
-        // Fit the colored anatomical figure in each landscape source image into
-        // the portrait viewport. A fixed background-position percentage causes
-        // the model to disappear on some source assets.
+        // Mobile-only anatomy compositor. Desktop retains the original image
+        // backgrounds and cursor effect without additional work.
         const imageSources=["./banner.png","./1.png","./3.png","./5.png"];
-        const modelBounds=new Map();
+        const imageInfo=new Map();
+        const pendingImages=new Set();
         const modelFocus=[
-          {centerY:.535,height:.47,width:.84},
-          {centerY:.50,height:.43,width:.82},
-          {centerY:.49,height:.44,width:.85},
-          {centerY:.45,height:.47,width:.89}
+          {centerY:.56,height:.48,width:.86},
+          {centerY:.54,height:.48,width:.86},
+          {centerY:.53,height:.48,width:.88},
+          {centerY:.52,height:.48,width:.88}
         ];
-        function calculateMobileFocus(){
+
+        function fitMobileImages(){
           if(!phoneView.matches)return;
-          const vw=window.innerWidth;
-          const vh=window.innerHeight;
+          const vw=window.innerWidth,vh=window.innerHeight;
           allPages.forEach((page,index)=>{
-            const info=modelBounds.get(index);
+            const info=imageInfo.get(index);
             if(!info)return;
             const focus=modelFocus[index];
-            const smallLandscape=vw>vh&&vh<520;
-            const centerX=smallLandscape?vw*.69:vw*.5;
-            const centerY=(smallLandscape?.51:focus.centerY)*vh;
-            const height=(smallLandscape?.80:focus.height)*vh;
-            const width=vw*(smallLandscape?.42:focus.width);
-            const cropW=Math.max(1,info.maxX-info.minX)*1.10;
-            const cropH=Math.max(1,info.maxY-info.minY)*1.10;
-            const scale=Math.min(width/cropW,height/cropH);
-            const cx=(info.maxX+info.minX)/2,cy=(info.maxY+info.minY)/2;
-            const left=centerX-cx*scale,top=centerY-cy*scale;
+            const landscape=vw>vh&&vh<520;
+            const xCenter=landscape?vw*.70:vw*.50;
+            const yCenter=vh*(landscape?.51:focus.centerY);
+            const targetW=vw*(landscape?.53:focus.width);
+            const targetH=vh*(landscape?.76:focus.height);
+            const bboxW=Math.max(1,info.x1-info.x0);
+            const bboxH=Math.max(1,info.y1-info.y0);
+            const scale=Math.min(targetW/(bboxW*1.16),targetH/(bboxH*1.13));
+            const cx=(info.x1+info.x0)*.5;
+            const cy=(info.y1+info.y0)*.5;
+            const left=xCenter-cx*scale,top=yCenter-cy*scale;
             const size=`${info.width*scale}px ${info.height*scale}px`;
-            const position=`${left}px ${top}px`;
-            page.querySelectorAll(".page-image").forEach(el=>{
-              el.style.backgroundSize=size;
-              el.style.backgroundPosition=position;
+            const pos=`${left}px ${top}px`;
+            page.querySelectorAll(".page-image").forEach(layer=>{
+              layer.style.backgroundSize=size;
+              layer.style.backgroundPosition=pos;
             });
             const zone=page.querySelector(".mobile-scan-zone");
             if(zone){
-              const figLeft=left+info.minX*scale,figRight=left+info.maxX*scale;
-              const figTop=top+info.minY*scale,figBottom=top+info.maxY*scale;
-              const pad=20;
-              const zl=Math.max(0,figLeft-pad),zt=Math.max(0,figTop-pad);
-              zone.style.left=`${zl}px`;
-              zone.style.top=`${zt}px`;
-              zone.style.width=`${Math.max(80,Math.min(vw-zl,figRight-zl+pad))}px`;
-              zone.style.height=`${Math.max(120,Math.min(vh-zt,figBottom-zt+pad))}px`;
+              const boxLeft=left+info.x0*scale,boxRight=left+info.x1*scale;
+              const boxTop=top+info.y0*scale,boxBottom=top+info.y1*scale;
+              const pad=22;
+              const zLeft=Math.max(0,boxLeft-pad);
+              const zTop=Math.max(0,boxTop-pad);
+              zone.style.left=`${zLeft}px`;
+              zone.style.top=`${zTop}px`;
+              zone.style.width=`${Math.max(80,Math.min(vw-zLeft,boxRight-zLeft+pad))}px`;
+              zone.style.height=`${Math.max(110,Math.min(vh-zTop,boxBottom-zTop+pad))}px`;
             }
           });
         }
-        imageSources.forEach((source,index)=>{
+
+        function ensureMobileModel(index){
+          if(!phoneView.matches||imageInfo.has(index)||pendingImages.has(index))return;
+          if(index<0||index>=imageSources.length)return;
+          pendingImages.add(index);
           const image=new Image();
           image.onload=()=>{
+            pendingImages.delete(index);
+            if(!phoneView.matches)return;
             const w=image.naturalWidth,h=image.naturalHeight;
-            const cw=Math.min(280,w),ch=Math.max(1,Math.round(cw*h/w));
-            const canvas=document.createElement("canvas");
-            canvas.width=cw;canvas.height=ch;
-            const ctx=canvas.getContext("2d",{willReadFrequently:true});
-            if(!ctx)return;
+            const cw=Math.min(200,w),ch=Math.max(1,Math.round(cw*h/w));
+            // Safe fallback fits the entire source instead of cutting off
+            // an anatomy figure if an asset has no recognizable muscle tones.
+            let bounds={width:w,height:h,x0:0,y0:0,x1:w,y1:h};
             try{
-              ctx.drawImage(image,0,0,cw,ch);
-              const pix=ctx.getImageData(0,0,cw,ch).data;
-              const xs=[],ys=[];
-              for(let y=0;y<ch;y+=1){
-                for(let x=0;x<cw;x+=1){
-                  const k=(y*cw+x)*4;
-                  const red=pix[k],green=pix[k+1],blue=pix[k+2];
-                  // Musculature/skin tones distinguish the model from the
-                  // near-white backdrop even in illustrations with large margins.
-                  if(pix[k+3]>90&&red>90&&red-green>24&&red-blue>20){
-                    xs.push(x);ys.push(y);
+              const canvas=document.createElement("canvas");
+              canvas.width=cw;canvas.height=ch;
+              const ctx=canvas.getContext("2d",{willReadFrequently:true});
+              if(ctx){
+                ctx.drawImage(image,0,0,cw,ch);
+                const data=ctx.getImageData(0,0,cw,ch).data;
+                const xHistogram=new Uint32Array(cw);
+                const yHistogram=new Uint32Array(ch);
+                let count=0;
+                for(let y=0;y<ch;y++){
+                  for(let x=Math.floor(cw*.25);x<cw;x++){
+                    const p=(y*cw+x)*4;
+                    const red=data[p],green=data[p+1],blue=data[p+2];
+                    // Search skin/muscle rather than titles and white canvas.
+                    if(data[p+3]>120&&red>98&&red-green>27&&red-blue>20&&green<218){
+                      xHistogram[x]++;yHistogram[y]++;count++;
+                    }
+                  }
+                }
+                if(count>120){
+                  const quantile=(hist,percentage)=>{
+                    const goal=count*percentage;let total=0;
+                    for(let i=0;i<hist.length;i++){total+=hist[i];if(total>=goal)return i}
+                    return hist.length-1;
+                  };
+                  const x0=quantile(xHistogram,.007),x1=quantile(xHistogram,.993);
+                  const y0=quantile(yHistogram,.007),y1=quantile(yHistogram,.993);
+                  const bw=x1-x0,bh=y1-y0;
+                  if(bw>cw*.065&&bh>ch*.18){
+                    const extraX=bw*.14,extraY=bh*.08;
+                    bounds={
+                      width:w,height:h,
+                      x0:Math.max(0,(x0-extraX)*w/cw),
+                      x1:Math.min(w,(x1+extraX)*w/cw),
+                      y0:Math.max(0,(y0-extraY)*h/ch),
+                      y1:Math.min(h,(y1+extraY)*h/ch)
+                    };
                   }
                 }
               }
-              if(xs.length<45)return;
-              xs.sort((a,b)=>a-b);ys.sort((a,b)=>a-b);
-              const lower=Math.floor(xs.length*.015);
-              const upper=Math.min(xs.length-1,Math.ceil(xs.length*.985));
-              const x0=xs[lower]*w/cw,x1=xs[upper]*w/cw;
-              const y0=ys[lower]*h/ch,y1=ys[upper]*h/ch;
-              if(x1-x0<20||y1-y0<20)return;
-              modelBounds.set(index,{width:w,height:h,minX:x0,maxX:x1,minY:y0,maxY:y1});
-              calculateMobileFocus();
-            }catch(err){
-              // Keep centered contain fallback if pixel inspection fails.
+            }catch(_){/* Entire-image fallback preserves visibility. */}
+            imageInfo.set(index,bounds);
+            fitMobileImages();
+            // Warm just the next chapter when the current one is visible.
+            const next=index+1;
+            if(next<imageSources.length){
+              const prefetch=()=>ensureMobileModel(next);
+              if("requestIdleCallback" in window)window.requestIdleCallback(prefetch,{timeout:2200});
+              else window.setTimeout(prefetch,600);
             }
           };
-          image.src=source;
-        });
-        let resizeRaf=0;
+          image.onerror=()=>pendingImages.delete(index);
+          image.src=imageSources[index];
+        }
+
+        let resizeId=0;
         window.addEventListener("resize",()=>{
-          cancelAnimationFrame(resizeRaf);
-          resizeRaf=requestAnimationFrame(calculateMobileFocus);
+          window.cancelAnimationFrame(resizeId);
+          resizeId=window.requestAnimationFrame(fitMobileImages);
         },{passive:true});
-        calculateMobileFocus();
-        
+        refreshMode();
+        phoneView.addEventListener?.("change",refreshMode);
+
         const pages = document.querySelectorAll(
           ".page-two,.page-three,.page-four",
         );

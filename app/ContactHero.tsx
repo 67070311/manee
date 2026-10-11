@@ -1,4 +1,5 @@
 "use client";
+import UiIcon from "./UiIcon";
 import type {Language} from "./Home";
 
 const videoUrl="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260714_113715_c7e0daa0-8bdd-4486-a2da-040901f8f0ea.mp4";
@@ -38,11 +39,11 @@ export default function ContactHero({language}:{language:Language}){
    <div className="contact-cinematic-content">
     <h1 id="contact-hero-title"><span>{t.headingOne}</span><span>{t.headingTwo}<em>{t.accent}</em></span></h1>
     <p>{t.description}</p>
-    <a href="#contact-form" className="contact-cinematic-cta">{t.action}<span aria-hidden="true">✳</span></a>
+    <a href="#contact-form" className="contact-cinematic-cta">{t.action}<UiIcon name="asterisk" size={17}/></a>
    </div>
    <div className="contact-cinematic-foot">
     <span>{t.footer}</span>
-    <a href="#contact-form">{t.scroll}<span aria-hidden="true">↓</span></a>
+    <a href="#contact-form">{t.scroll}<UiIcon name="arrow-right" size={16} className="contact-scroll-arrow"/></a>
    </div>
  </section>;
 }

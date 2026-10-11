@@ -471,7 +471,7 @@ export default function PotionGameMobileV2() {
             </div>
             <h2>{RECIPE.name}</h2>
             <div className={styles.recipeDetailRow}>
-              <span><FlaskConical size={15} /> Mooncap → Star Crystal → Mandrake</span>
+              <span><FlaskConical size={15} /> Mooncap <RotateCw size={13}/> Star Crystal <RotateCw size={13}/> Mandrake</span>
               <span><Flame size={15} /> Medium flame</span>
               <span><RotateCw size={15} /> Stir to 62% or more</span>
             </div>
