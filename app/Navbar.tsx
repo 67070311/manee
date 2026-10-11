@@ -13,29 +13,17 @@ export default function Navbar({language,onLanguageChange,mode="home"}:Props){
  const [scrolled,setScrolled]=useState(false);
  const [open,setOpen]=useState(false);
  const [mounted,setMounted]=useState(false);
- const [drawerRendered,setDrawerRendered]=useState(false);
- const [drawerEntered,setDrawerEntered]=useState(false);
  const triggerRef=useRef<HTMLButtonElement>(null);
  const closeRef=useRef<HTMLButtonElement>(null);
  useEffect(()=>{setMounted(true)},[]);
  useEffect(()=>{const update=()=>setScrolled(window.scrollY>40);update();window.addEventListener("scroll",update,{passive:true});return()=>window.removeEventListener("scroll",update)},[]);
  useEffect(()=>{document.documentElement.lang=language},[language]);
  useEffect(()=>{
-  if(open){setDrawerRendered(true);return}
-  const id=window.setTimeout(()=>setDrawerRendered(false),480);
-  return()=>window.clearTimeout(id);
- },[open]);
- useEffect(()=>{
-  if(!drawerRendered||!open){setDrawerEntered(false);return}
-  const id=window.requestAnimationFrame(()=>setDrawerEntered(true));
-  return()=>window.cancelAnimationFrame(id);
- },[drawerRendered,open]);
- useEffect(()=>{
   if(!open)return;
   const previous=document.body.style.overflow;
   document.body.style.overflow="hidden";
   const onKeyDown=(e:KeyboardEvent)=>{
-   if(e.key==="Escape"){setOpen(false);triggerRef.current?.focus();return}
+   if(e.key==="Escape"){setOpen(false);triggerRef.current?.focus({preventScroll:true});return}
    if(e.key!=="Tab")return;
    const root=closeRef.current?.closest(".mobile-nav-drawer");
    if(!root)return;
@@ -48,7 +36,9 @@ export default function Navbar({language,onLanguageChange,mode="home"}:Props){
   const onResize=()=>{if(window.innerWidth>840)setOpen(false)};
   document.addEventListener("keydown",onKeyDown);
   window.addEventListener("resize",onResize);
-  const frame=window.requestAnimationFrame(()=>closeRef.current?.focus());
+  // Focusing an offscreen animated drawer can scroll the mobile viewport.
+  // preventScroll keeps the document fixed while the panel enters.
+  const frame=window.requestAnimationFrame(()=>closeRef.current?.focus({preventScroll:true}));
   return()=>{
    document.body.style.overflow=previous;
    document.removeEventListener("keydown",onKeyDown);
@@ -57,7 +47,7 @@ export default function Navbar({language,onLanguageChange,mode="home"}:Props){
   };
  },[open]);
  const t=labels[language];
- const closeMenu=()=>{setOpen(false);triggerRef.current?.focus()};
+ const closeMenu=()=>{setOpen(false);triggerRef.current?.focus({preventScroll:true})};
  const homeHref=mode==="home"?"#top":"/";
  const aboutHref=mode==="home"?"#about":"/#about";
  const contactHref="/contact";
@@ -81,8 +71,8 @@ export default function Navbar({language,onLanguageChange,mode="home"}:Props){
     <button ref={triggerRef} className="site-mobile-toggle" type="button" aria-expanded={open} aria-controls="manee-mobile-menu" aria-label={t.navigation} onClick={()=>setOpen(true)}>{t.menu} <span aria-hidden="true">+</span></button>
    </div>
   </header>
-  {mounted&&drawerRendered&&createPortal(
-   <div className={"mobile-nav-overlay"+(open&&drawerEntered?" is-open":"")} aria-hidden={!open}>
+  {mounted&&createPortal(
+   <div className={"mobile-nav-overlay"+(open?" is-open":"")} aria-hidden={!open}>
     <button className="mobile-nav-backdrop" type="button" tabIndex={open?0:-1} aria-label={t.backdrop} onClick={closeMenu}/>
     <aside id="manee-mobile-menu" className="mobile-nav-drawer" role="dialog" aria-modal={open} aria-label={t.navigation} inert={!open}>
      <div className="mobile-nav-top">
