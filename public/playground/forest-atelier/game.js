@@ -135,22 +135,15 @@
   // The rabbit is the resident painter: it never walks away.
   // Its 10 supplied frames are played in place as a gentle painting/idle loop.
   const rabbitPainter = $('#rabbitPainter');
-  // Do not compete with first paint by fetching all 22 animation sprites
-  // at once. Warm a couple of frames during idle time, then the rest in small
-  // batches. The first visible rabbit frame is already in the HTML.
   const warmQueue=[...customerFrameSets.monkey,...rabbitFrames.slice(1),...customerFrameSets.frog];
-  const warmed=new Set();
   let warmIndex=0;
   function warmNext(){
-    let n=0;
-    while(warmIndex<warmQueue.length&&n<2){
-      const url=warmQueue[warmIndex++];
-      if(warmed.has(url))continue;
-      warmed.add(url);
+    let count=0;
+    while(warmIndex<warmQueue.length&&count<2){
       const img=new Image();
       img.decoding="async";
-      img.src=url;
-      n++;
+      img.src=warmQueue[warmIndex++];
+      count++;
     }
     if(warmIndex<warmQueue.length){
       if("requestIdleCallback" in window)window.requestIdleCallback(warmNext,{timeout:1200});
@@ -172,7 +165,6 @@
       rabbitFrame = (rabbitFrame + 1) % rabbitFrames.length;
       rabbitPainter.src = rabbitFrames[rabbitFrame];
     }
-    // An animation frame changes every 180 ms; no need to tick at 60 FPS.
     window.setTimeout(()=>requestAnimationFrame(animateRabbitPainter),66);
   }
 
@@ -276,13 +268,7 @@
   }
 
   function beginPaint(e) {
-    if (e.pointerType === 'mouse' && e.button !== 0) return;
     e.preventDefault();
-    // Capture touch drags on phones only. Desktop mouse painting keeps its
-    // original leave-to-stop behavior.
-    if (e.pointerType === 'touch') {
-      try { els.paintCanvas.setPointerCapture(e.pointerId); } catch (_) {}
-    }
     const p = getPoint(e);
 
     if (state.tool === 'fill') {
@@ -320,14 +306,9 @@
     state.lastPoint = p;
   }
 
-  function endPaint(e) {
+  function endPaint() {
     state.painting = false;
     state.lastPoint = null;
-    if (e && typeof e.pointerId === 'number') {
-      try {
-        if (els.paintCanvas.hasPointerCapture(e.pointerId)) els.paintCanvas.releasePointerCapture(e.pointerId);
-      } catch (_) {}
-    }
   }
 
   function approximateCoverage() {
@@ -471,7 +452,6 @@
         spawnCustomer(900);
       }
     }
-    // Slow polling while the visitor is talking/idle, 60 FPS only walking.
     const active=state.customerState==='entering'||state.customerState==='leaving';
     if(active)requestAnimationFrame(animateCustomer);
     else window.setTimeout(()=>requestAnimationFrame(animateCustomer),110);
@@ -719,17 +699,9 @@
     requestAnimationFrame(animateRabbitPainter);
   });
 
-  const paintingZone = $('#paintingZone');
-  const activatePaintingZone = () => {
+  els.station.addEventListener('click', () => {
     if (state.currentRequest) openPaint();
     else showToast('Wait for a customer to request a painting');
-  };
-  paintingZone.addEventListener('click', activatePaintingZone);
-  paintingZone.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      activatePaintingZone();
-    }
   });
 
   els.paintNow.addEventListener('click', openPaint);
@@ -773,12 +745,7 @@
   els.paintCanvas.addEventListener('pointerdown', beginPaint);
   els.paintCanvas.addEventListener('pointermove', movePaint);
   window.addEventListener('pointerup', endPaint);
-  els.paintCanvas.addEventListener('pointercancel', endPaint);
-  els.paintCanvas.addEventListener('pointerleave', (e) => {
-    if (e.pointerType === 'mouse') endPaint(e);
-  });
-  // Captured touch strokes may travel outside the canvas; don't end until
-  // pointerup, so the paint gesture stays continuous on narrow screens.
+  els.paintCanvas.addEventListener('pointerleave', endPaint);
 
   els.journalBtn.addEventListener('click', () => els.journal.classList.remove('hidden'));
   els.journalClose.addEventListener('click', () => els.journal.classList.add('hidden'));
@@ -799,5 +766,4 @@
   setPaintTool('brush');
   els.brushSizeValue.textContent = `${state.brushSize} px`;
   updateHud();
-  // The game loop starts on the first Play action, not behind the intro card.
 })();

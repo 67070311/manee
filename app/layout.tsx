@@ -8,6 +8,9 @@ import "./EpochSection.css";
 import "./ScrapbookAbout.css";
 import "./WorkGallery.css";
 import "./PlaygroundPlayer.css";
+import "./PlaygroundPage.css";
+import "./EnglishMenuExperience.css";
+import "./EnglishMenuKitchen.css";
 import "./PortfolioFooter.css";
 import "./WorkDarkResponsive.css";
 import "./ThaiTypography.css";
@@ -18,6 +21,9 @@ import "./MobilePortfolio.css";
 import "./ContactPage.css";
 import "./MobileProjectModal.css";
 import "./ContactHero.css";
+import "./PortfolioPlayful.css";
+import "./HomeCreativeSections.css";
+import "./DesignSystemModal.css";
 
 export const metadata: Metadata = {
   title: "Manee — Creative Developer Portfolio",

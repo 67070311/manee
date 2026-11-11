@@ -11,3 +11,10 @@
 .portfolio-footer-back:hover{background:#fff;transform:translateY(-2px)}
 @media(max-width:720px){.portfolio-footer{padding:32px 16px 20px}.portfolio-footer-intro{font-size:8px}.portfolio-footer-intro span:last-child{display:none}.portfolio-footer-art{border-radius:16px}.portfolio-footer-bottom{padding:21px 0 0;flex-wrap:wrap;font-size:9px}.portfolio-footer-wordmark{font-size:28px}.portfolio-footer-back{padding:10px 13px}.portfolio-footer-bottom>span{order:3;flex-basis:100%}}
 @media(prefers-reduced-motion:reduce){.portfolio-footer-back{transition:none}}
+
+
+@media(max-width:720px){
+ .portfolio-footer-intro{font-size:10px;line-height:1.6}
+ .portfolio-footer-bottom{font-size:11px;line-height:1.6}
+ .portfolio-footer-back{min-height:44px;display:inline-flex;align-items:center}
+}

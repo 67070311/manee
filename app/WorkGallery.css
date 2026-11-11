@@ -143,3 +143,7 @@
 
 .work-art-dots{display:inline-flex!important;align-items:center;gap:5px}
 .work-art-dots i{display:block;width:6px;height:6px;flex:0 0 6px;border-radius:50%;background:currentColor;opacity:.65}
+
+/* Keep an odd final featured project centered without stretching its artwork. */
+.work-gallery-section.is-featured .work-gallery-grid>.work-gallery-card:last-child:nth-child(odd){grid-column:1/-1;justify-self:center;width:calc((100% - 24px)/2)}
+@media(max-width:720px){.work-gallery-section.is-featured .work-gallery-grid>.work-gallery-card:last-child:nth-child(odd){grid-column:auto;width:100%}}

@@ -28,14 +28,14 @@ export default function EpochSection({language="en"}:{language?:Language}){
  },[]);
  return <section ref={ref} id="digital-epoch" className={"epoch-section"+(visible?" epoch-visible":"")}>
   <div className="epoch-shell"><div className="epoch-video-layer" aria-hidden="true"><video loop muted playsInline preload="none" className="epoch-background-video"><source src={VIDEO} type="video/mp4"/></video></div>
-  <div className="epoch-content"><div className="epoch-enter">
+  <div className="epoch-content"><div className="epoch-enter"><span className="epoch-idea-sticker" aria-hidden="true"><UiIcon name="star" size={21}/></span>
    <span className="epoch-eyebrow">{t.eyebrow}</span>
    <h2>{t.lead}<span>{t.accent}</span><br/>{t.second}</h2>
    <p>{t.description}</p>
    <a className="epoch-contact" href="#work">{t.action} <UiIcon name="arrow-up-right" size={16}/></a>
   </div></div>
   <div className="epoch-floating-nav"><nav className="epoch-pill-nav" aria-label={language==="th"?"เมนูส่วนผลงาน":"My creative disciplines"}>
-   <a className="epoch-mark" href="#top" aria-label={language==="th"?"กลับด้านบน":"Return to top"}><UiIcon name="sparkle" size={18}/></a>
+   <a className="epoch-mark" href="#top" aria-label={language==="th"?"กลับด้านบน":"Return to top"}><UiIcon name="cloud" size={18}/></a>
    <a className="epoch-link" href="#work">{t.work}</a>
    <a className="epoch-link" href="#about">{t.about}</a>
    <a className="epoch-getintouch" href="#contact">{t.connect} <UiIcon name="arrow-right" size={14}/></a>

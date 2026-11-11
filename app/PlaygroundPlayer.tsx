@@ -99,7 +99,7 @@ export default function PlaygroundPlayer({src,title,language}:Props){
    </div>
   </div>
   <div className={"playground-player-stage"+(showPhone?" has-phone":"")} ref={stage}>
-   {loading&&<div className="playground-player-loading" role="status" aria-live="polite">{th?"กำลังเปิดโปรเจกต์…":"Loading interactive project…"}<UiIcon name="sparkle" size={24}/></div>}
+   {loading&&<div className="playground-player-loading" role="status" aria-live="polite">{th?"กำลังเปิดโปรเจกต์…":"Loading interactive project…"}<UiIcon name="cloud" size={24}/></div>}
    {showPhone?
     <div className="playground-device-shell" style={{"--device-scale":deviceScale} as CSSProperties}>
      {playableFrame}

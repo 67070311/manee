@@ -79,7 +79,7 @@ export default function ContactPage({initialLanguage="en"}:{initialLanguage?:Lan
    if(result.status==="invalid")setErrorText(language==="th"?"ตรวจสอบข้อมูลในฟอร์มอีกครั้งนะ":"Please check the information in the form.");
   }catch{setStatus("error")}
  }
- return <div className="contact-page" id="top" lang={language}>
+ return <div className="contact-page portfolio-playful" id="top" lang={language}>
   <Navbar language={language} onLanguageChange={setLanguage} mode="contact"/>
   <ContactHero language={language}/>
   <main className="contact-page-main">

@@ -4,10 +4,10 @@ import {useEffect,useRef,useState} from "react";
 import {createPortal} from "react-dom";
 import type {Language} from "./Home";
 
-type Props={language:Language;onLanguageChange:(language:Language)=>void;mode?:"home"|"work"|"contact"};
+type Props={language:Language;onLanguageChange:(language:Language)=>void;mode?:"home"|"work"|"contact"|"playground"|"design"};
 const labels={
- en:{home:"Home",work:"Work",about:"About",contact:"Contact",talk:"Let's talk",emailMe:"Email me",menu:"MENU",close:"Close",navigation:"Navigation",language:"Language",backdrop:"Close navigation",caption:"EXPLORE MANEE'S WORLD"},
- th:{home:"หน้าแรก",work:"ผลงาน",about:"รู้จักเรา",contact:"ติดต่อ",talk:"คุยกัน",emailMe:"ส่งอีเมล",menu:"เมนู",close:"ปิด",navigation:"เมนูนำทาง",language:"ภาษา",backdrop:"ปิดเมนู",caption:"มาสำรวจโลกของ MANEE"}
+ en:{home:"Home",work:"Work",playground:"Playground",contact:"Contact",talk:"Let's talk",emailMe:"Email me",menu:"MENU",close:"Close",navigation:"Navigation",language:"Language",backdrop:"Close navigation",caption:"EXPLORE MANEE'S WORLD"},
+ th:{home:"หน้าแรก",work:"ผลงาน",playground:"สนามเด็กเล่น",contact:"ติดต่อ",talk:"คุยกัน",emailMe:"ส่งอีเมล",menu:"เมนู",close:"ปิด",navigation:"เมนูนำทาง",language:"ภาษา",backdrop:"ปิดเมนู",caption:"มาสำรวจโลกของ MANEE"}
 };
 export default function Navbar({language,onLanguageChange,mode="home"}:Props){
  const [scrolled,setScrolled]=useState(false);
@@ -49,12 +49,11 @@ export default function Navbar({language,onLanguageChange,mode="home"}:Props){
  const t=labels[language];
  const closeMenu=()=>{setOpen(false);triggerRef.current?.focus({preventScroll:true})};
  const homeHref=mode==="home"?"#top":"/";
- const aboutHref=mode==="home"?"#about":"/#about";
  const contactHref="/contact";
  const navigation=<>
   <a onClick={()=>setOpen(false)} href={homeHref}>{t.home}</a>
   <a onClick={()=>setOpen(false)} href="/work" aria-current={mode==="work"?"page":undefined}>{t.work}</a>
-  <a onClick={()=>setOpen(false)} href={aboutHref}>{t.about}</a>
+  <a onClick={()=>setOpen(false)} href="/playground" aria-current={mode==="playground"?"page":undefined}>{t.playground}</a>
   <a onClick={()=>setOpen(false)} href={contactHref} aria-current={mode==="contact"?"page":undefined}>{t.contact}</a>
  </>;
  return <>
@@ -83,7 +82,7 @@ export default function Navbar({language,onLanguageChange,mode="home"}:Props){
      <nav className="mobile-nav-links" aria-label={t.navigation}>
       <a href={homeHref} onClick={closeMenu}><span>01</span>{t.home}</a>
       <a href="/work" aria-current={mode==="work"?"page":undefined} onClick={closeMenu}><span>02</span>{t.work}</a>
-      <a href={aboutHref} onClick={closeMenu}><span>03</span>{t.about}</a>
+      <a href="/playground" aria-current={mode==="playground"?"page":undefined} onClick={closeMenu}><span>03</span>{t.playground}</a>
       <a href={contactHref} aria-current={mode==="contact"?"page":undefined} onClick={closeMenu}><span>04</span>{t.contact}</a>
      </nav>
      <div className="mobile-nav-bottom">

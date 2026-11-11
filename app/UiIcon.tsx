@@ -1,11 +1,11 @@
 import type {SVGProps,ReactNode} from "react";
 
 /** Hand-drawn line icons. Never rendered as platform-dependent emoji glyphs. */
-export type UiIconName="sparkle"|"asterisk"|"flower"|"sun"|"heart"|"arrow-up-right"|"arrow-right"|"arrow-left"|"arrow-up"|"chevron-up"|"chevron-down"|"expand"|"refresh"|"book"|"wind"|"check"|"menu"|"brush"|"moon"|"leaf"|"gem"|"flame"|"mushroom"|"bubble"|"paw"|"star"|"close"|"grid"|"settings"|"clock";
+export type UiIconName="cloud"|"asterisk"|"flower"|"sun"|"heart"|"arrow-up-right"|"arrow-right"|"arrow-left"|"arrow-up"|"arrow-down"|"chevron-up"|"chevron-down"|"expand"|"refresh"|"book"|"wind"|"volume-2"|"check"|"menu"|"brush"|"moon"|"leaf"|"gem"|"flame"|"mushroom"|"bubble"|"paw"|"star"|"close"|"grid"|"settings"|"clock"|"search"|"send";
 export default function UiIcon({name,size=18,...props}:SVGProps<SVGSVGElement>&{name:UiIconName;size?:number}){
  const common={stroke:"currentColor",strokeWidth:1.7,strokeLinecap:"round" as const,strokeLinejoin:"round" as const,fill:"none"};
  const paths:Record<UiIconName,ReactNode>={
-  sparkle:<><path d="M12 2 14.2 9.8 22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2Z"/></>,
+  cloud:<><path d="M6.2 18.6h11.4a4.3 4.3 0 0 0 .4-8.6 6.2 6.2 0 0 0-11.8-.4 4.6 4.6 0 0 0 0 9Z"/><path d="M7.2 18.6c-1.9-.1-3.6-1.5-3.6-3.6 0-1.7 1-3.1 2.5-3.8"/></>,
   asterisk:<><path d="M12 2v20M2 12h20M4.93 4.93l14.14 14.14M19.07 4.93 4.93 19.07"/></>,
   flower:<><circle cx="12" cy="12" r="2"/><path d="M12 10c-5-7 5-10 5-3m-3 5c8-5 10 5 3 5m-5-3c5 8-5 10-5 3m3-5c-8 5-10-5-3-5"/></>,
   sun:<><circle cx="12" cy="12" r="4"/><path d="M12 1.5v2.5M12 20v2.5M1.5 12H4M20 12h2.5M4.6 4.6l1.8 1.8m11.2 11.2 1.8 1.8M19.4 4.6l-1.8 1.8M6.4 17.6l-1.8 1.8"/></>,
@@ -14,12 +14,16 @@ export default function UiIcon({name,size=18,...props}:SVGProps<SVGSVGElement>&{
   "arrow-right":<><path d="M4 12h16m-7-7 7 7-7 7"/></>,
   "arrow-left":<><path d="M20 12H4m7-7-7 7 7 7"/></>,
   "arrow-up":<><path d="M12 20V4m-7 7 7-7 7 7"/></>,
+  "arrow-down":<><path d="M12 4v16m-7-7 7 7 7-7"/></>,
   "chevron-up":<path d="m6 15 6-6 6 6"/>,
   "chevron-down":<path d="m6 9 6 6 6-6"/>,
   expand:<><path d="M9 3H3v6m12-6h6v6M9 21H3v-6m12 6h6v-6"/></>,
   refresh:<><path d="M20 11a8 8 0 0 0-14.7-4.4L3 9m0-6v6h6m-5 4a8 8 0 0 0 14.7 4.4L21 15m0 6v-6h-6"/></>,
   book:<><path d="M12 6C9 4 6 4 3 5v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></>,
   wind:<><path d="M3 8h11a3 3 0 1 0-3-3M2 12h17a2 2 0 1 1-2 2M4 17h8a3 3 0 1 1-3 3"/></>,
+  "volume-2":<><path d="M11 5 6 9H3v6h3l5 4V5Z"/><path d="M15.5 8.5a5 5 0 0 1 0 7m3-10a9 9 0 0 1 0 13"/></>,
+  send:<><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></>,
+  search:<><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></>,
   check:<path d="m4 12 5 5L20 6"/>,
   menu:<><path d="M4 7h16M4 12h16M4 17h16"/></>,
   brush:<><path d="m14 5 5-3 3 3-4 6-7 7m-1-3c-3-2-5 0-5 3 0 2-1 3-3 4 5 1 10 0 10-5 0-1-.3-2-2-2Z"/></>,

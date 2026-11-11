@@ -141,3 +141,8 @@
 .work-cinematic-eyebrow-mobile,.work-cinematic-mobile-rule{display:none}
 .work-cinematic-foot-mobile{display:none}
 .work-cinematic-line{display:inline}
+
+
+@media(max-width:840px){
+ .work-cinematic-foot a{min-height:44px;display:inline-flex;align-items:center}
+}

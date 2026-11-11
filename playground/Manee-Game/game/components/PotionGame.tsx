@@ -581,7 +581,7 @@ export default function PotionGame() {
       <section className="hud">
         <div className="topbar">
           <div className="brand">
-            <div className="brand-mark"><UiIcon name="sparkle" size={24}/></div>
+            <div className="brand-mark"><UiIcon name="cloud" size={24}/></div>
             <div>
               <h1>Arcane Apothecary</h1>
               <p>Apprentice alchemy chamber</p>

@@ -37,6 +37,7 @@ export default function ContactHero({language}:{language:Language}){
    <div className="contact-cinematic-veil" aria-hidden="true"/>
    <div className="contact-cinematic-grain" aria-hidden="true"/>
    <div className="contact-cinematic-content">
+    <span className="contact-playful-label"><UiIcon name="star" size={18}/>{t.label}</span>
     <h1 id="contact-hero-title"><span>{t.headingOne}</span><span>{t.headingTwo}<em>{t.accent}</em></span></h1>
     <p>{t.description}</p>
     <a href="#contact-form" className="contact-cinematic-cta">{t.action}<UiIcon name="asterisk" size={17}/></a>

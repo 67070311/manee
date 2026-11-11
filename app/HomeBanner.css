@@ -24,3 +24,9 @@
 
 /* Alternate compact copy only appears in the mobile composition. */
 .home-banner-mobile-description{display:none}
+
+
+@media(max-width:600px){
+ .home-banner-bottomline a{min-height:44px;display:inline-flex;align-items:center;gap:7px}
+ .home-banner-explore{min-height:48px}
+}

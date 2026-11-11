@@ -9,12 +9,12 @@ import {localizeProject} from "./WorkTranslations";
 import {featuredProjects,workProjects,type WorkProject,type WorkCategory} from "./WorkProjects";
 
 type Language="en"|"th";
-type Filter="all"|WorkCategory;
+type Filter="all"|Exclude<WorkCategory,"playground">;
 const copy={
  en:{homeLabel:"A FEW THINGS I MADE",homeTitle:"Made with",homeItalic:"intention.",homeIntro:"From full-cycle builds to thoughtful design and graphic work — a collection of things I’ve brought to life.",viewMore:"Explore all projects",all:"All work",client:"Client work",product:"My products",playground:"Web playground",browse:"FIND SOMETHING INTERESTING",focus:"MY FOCUS",roleLabel:"MY CONTRIBUTION",fullRole:"FULLSTACK",designRole:"UX/UI & Graphic Design only",fullRoleShort:"FULLSTACK",designRoleShort:"DESIGN + GRAPHICS",close:"Close",open:"View project",visit:"Visit Website",more:"KEEP EXPLORING",footer:"MORE IDEAS ARE ALWAYS IN THE MAKING",footerLink:"LET'S MAKE SOMETHING",clientTag:"CLIENT WORK",productTag:"MY PRODUCT",playgroundTag:"PLAYGROUND"},
  th:{homeLabel:"จากไอเดียสู่ผลงานจริง",homeTitle:"จากไอเดีย",homeItalic:"สู่ของจริง",homeIntro:"รวมงานที่ออกแบบและพัฒนาเองครบทุกขั้นตอน ไปจนถึงงาน UX/UI และกราฟิกที่ตั้งใจทำให้แต่ละแบรนด์",viewMore:"ดูผลงานเพิ่มเติม",all:"ทั้งหมด",client:"งานลูกค้า",product:"โปรดักต์ของเรา",playground:"งานทดลองสนุก ๆ",browse:"เลือกหมวดที่สนใจ",focus:"เราทำอะไรบ้าง",roleLabel:"บทบาทของเรา",fullRole:"FULLSTACK",designRole:"ออกแบบ UX/UI และทำกราฟิกเท่านั้น",fullRoleShort:"FULLSTACK",designRoleShort:"UX/UI + กราฟิก",close:"ปิดหน้าต่าง",open:"ดูผลงาน",visit:"เข้าเว็บไซต์",more:"ยังมีผลงานอีกนะ",footer:"ไอเดียใหม่ ๆ ยังรอให้เราได้ลอง",footerLink:"มาสร้างอะไรสนุก ๆ กัน",clientTag:"งานลูกค้า",productTag:"โปรดักต์ของเรา",playgroundTag:"งานทดลอง"}
 } as const;
-const categoryFilters:Filter[]=["all","client","product","playground"];
+const categoryFilters:Filter[]=["all","client","product"];
 // Show actual contributions, not an assumed Design-to-Deploy role.
 const roleText:Record<WorkProject["role"],{en:string;th:string}>={
  "full-cycle":{en:"FULLSTACK",th:"FULLSTACK"},
@@ -49,13 +49,16 @@ function ProjectCard({project,onOpen,language}:{project:WorkProject;onOpen:(proj
  return <article className="work-gallery-card" data-category={project.category} data-experience={project.experienceType??undefined}>
   <button type="button" onPointerEnter={()=>warmDemo(project.demoPath)} onFocus={()=>warmDemo(project.demoPath)} onTouchStart={()=>warmDemo(project.demoPath)} className="work-gallery-cover" aria-label={(project.demoPath?(language==="th"?"ลองเล่น ":"Play "):t.open+": ")+project.title} onClick={()=>onOpen(project)}>
    <div className="work-gallery-image-frame"><ProjectCover project={project} language={language}/></div>
-   <span className="work-gallery-cover-caption">{project.demoPath?(language==="th"?"ลองเล่นเลย":"Play demo"):t.open} <span aria-hidden="true">+</span></span>
+
   </button>
   <div className="work-gallery-meta">
    <span className="work-gallery-category">{categoryText}</span>
    <h3>{project.title}</h3>
    <p>{project.subtitle}</p>
    <span className={"work-gallery-role"+(project.role==="design-graphics"?" is-design-only":project.role!=="full-cycle"?" is-specialist":"")}>{roleText[project.role][language]}</span>
+   <button type="button" className="work-gallery-card-action" onClick={()=>onOpen(project)} aria-label={(project.demoPath?(language==="th"?"ลองเล่น ":"Play "):t.open+": ")+project.title}>
+    {project.demoPath?(language==="th"?"ลองเล่น":"Play demo"):t.open}<UiIcon name="arrow-up-right" size={17}/>
+   </button>
   </div>
  </article>;
 }
@@ -66,7 +69,7 @@ export default function WorkGallery({mode="home",language="en"}:{mode?:"home"|"f
  const [showProjectInfo,setShowProjectInfo]=useState(false);
  const closeRef=useRef<HTMLButtonElement>(null);
  const triggerRef=useRef<HTMLElement|null>(null);
- const projects=(full?workProjects.filter(p=>filter==="all"||p.category===filter):featuredProjects).map(p=>localizeProject(p,language));
+ const projects=(full?workProjects.filter(p=>p.category!=="playground"&&(filter==="all"||p.category===filter)):featuredProjects).map(p=>localizeProject(p,language));
  const openProject=(project:WorkProject)=>{warmDemo(project.demoPath);triggerRef.current=document.activeElement instanceof HTMLElement?document.activeElement:null;setShowProjectInfo(false);setSelected(project)};
  const closeProject=()=>{setShowProjectInfo(false);setSelected(null)};
  useEffect(()=>{

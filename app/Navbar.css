@@ -65,3 +65,17 @@
  .work-page-footer span:nth-child(2){display:none}
 }
 @media(prefers-reduced-motion:reduce){.site-nav,.site-menu a,.site-contact,.site-logo{transition:none}}
+
+
+/* Responsive QA: generous touch targets at the widths where the drawer is used. */
+@media (max-width:840px){
+ .site-nav .site-logo{display:inline-flex;align-items:center;min-height:44px}
+ .site-nav .site-mobile-toggle{min-height:44px;min-width:88px}
+ .site-nav .site-actions{min-width:0}
+ .mobile-nav-close{min-width:44px;min-height:44px}
+}
+@media(max-width:360px){
+ .site-nav{width:calc(100% - 16px);padding-inline:13px}
+ .site-nav .site-logo{font-size:19px}
+ .site-nav .site-mobile-toggle{padding-inline:11px}
+}

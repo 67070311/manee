@@ -513,11 +513,160 @@
           font-size: 9px;
         }
       }
-
-
-
+      @media (max-width: 900px) {
+        .page-image {
+          background-position: 58% center;
+        }
+        .copy {
+          left: 34px;
+          width: min(430px, 48vw);
+        }
+        .copy h1 {
+          font-size: clamp(46px, 7vw, 72px);
+        }
+        .detail-meta {
+          width: 280px;
+        }
+        .page-three .page-image {
+          background-size: 72% auto;
+          background-position: center 49%;
+        }
+        .chapter-title h1 {
+          font-size: clamp(38px, 5.8vw, 60px);
+        }
+        .chapter-meta .description {
+          max-width: 560px;
+        }
+        .label-liver,
+        .label-gallbladder,
+        .label-colon {
+          left: 3%;
+        }
+        .label-spleen,
+        .label-stomach,
+        .label-pancreas,
+        .label-small-intestine {
+          right: 3%;
+        }
+      }
+      @media (max-width: 720px) {
+        .page-image {
+          background-position: 65% center;
+        }
+        .brand {
+          top: 20px;
+          left: 20px;
+          font-size: 10px;
+        }
+        .copy {
+          left: 20px;
+          top: 24%;
+          width: calc(100% - 40px);
+          transform: none;
+        }
+        .copy h1 {
+          max-width: 340px;
+          font-size: clamp(40px, 12vw, 62px);
+        }
+        .copy .subtitle {
+          margin-top: 14px;
+          font-size: 10px;
+        }
+        .copy .description {
+          max-width: 320px;
+          margin-top: 14px;
+          font-size: 13px;
+        }
+        .detail-title {
+          left: 20px;
+          top: 19%;
+          width: calc(100% - 40px);
+          transform: translateY(20px);
+        }
+        .detail-meta {
+          left: 20px;
+          right: auto;
+          top: auto;
+          bottom: 58px;
+          width: min(330px, calc(100% - 40px));
+          transform: translateY(20px);
+        }
+        .page-two.is-visible .detail-title,
+        .page-two.is-visible .detail-meta {
+          transform: translateY(0);
+        }
+        .detail-title h1 {
+          max-width: 340px;
+          font-size: clamp(40px, 12vw, 62px);
+        }
+        .detail-meta .subtitle {
+          font-size: 10px;
+        }
+        .detail-meta .description {
+          max-width: 320px;
+          margin-top: 14px;
+          font-size: 13px;
+        }
+        .page-three .page-image {
+          background-size: 100% auto;
+          background-position: center 48%;
+        }
+        .chapter-title {
+          top: 10%;
+          width: calc(100% - 40px);
+        }
+        .chapter-title h1 {
+          font-size: clamp(34px, 10vw, 52px);
+        }
+        .chapter-meta {
+          bottom: 4%;
+          width: calc(100% - 40px);
+        }
+        .chapter-meta .eyebrow {
+          font-size: 9px;
+        }
+        .chapter-meta .subtitle {
+          font-size: 10px;
+        }
+        .chapter-meta .description {
+          max-width: 380px;
+          margin-top: 10px;
+          font-size: 12px;
+        }
+        .chapter-meta .interaction-note {
+          margin-top: 12px;
+          font-size: 9px;
+        }
+        .scroll-cue {
+          bottom: 18px;
+        }
+        .organ-lines {
+          display: none;
+        }
+        .organ-overlay {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          align-content: space-between;
+          padding: 90px 18px 36px;
+          gap: 8px;
+        }
+        .organ-label {
+          position: static;
+          min-width: 0;
+          max-width: none;
+        }
+        .organ-label:nth-of-type(even) {
+          text-align: right;
+          align-items: flex-end;
+        }
+        .organ-label strong {
+          font-size: 9px;
+        }
+        .organ-label span {
+          font-size: 8px;
+        }
+      }
     </style>
-    <link rel="stylesheet" href="./mobile.css?v=anatomy7" />
   </head>
   <body>
     <div class="brand">BUILDIFYX</div>
@@ -709,20 +858,16 @@
           reveal.style.maskImage = mask;
         };
 
-        // Only animate while the desktop cursor is moving; an endless RAF
-        // inside a hidden iframe wastes CPU and competes with game rendering.
-        let cursorFrame=0;
         const animateCursor = () => {
-          cursorFrame=0;
-          if(!cursor||document.hidden||window.matchMedia("(max-width: 900px)").matches)return;
-          renderX+=(cursorX-renderX)*.3;
-          renderY+=(cursorY-renderY)*.3;
-          cursor.style.left=`${renderX}px`;
-          cursor.style.top=`${renderY}px`;
-          if(Math.abs(cursorX-renderX)>.7||Math.abs(cursorY-renderY)>.7){
-            cursorFrame=window.requestAnimationFrame(animateCursor);
+          if (cursor) {
+            renderX += (cursorX - renderX) * 0.2;
+            renderY += (cursorY - renderY) * 0.2;
+            cursor.style.left = `${renderX}px`;
+            cursor.style.top = `${renderY}px`;
           }
+          requestAnimationFrame(animateCursor);
         };
+        animateCursor();
 
         window.addEventListener(
           "mousemove",
@@ -730,7 +875,6 @@
             cursorX = e.clientX;
             cursorY = e.clientY;
             if (cursor) cursor.classList.add("is-visible");
-            if(!cursorFrame)cursorFrame=window.requestAnimationFrame(animateCursor);
             revealLayers.forEach((reveal) => {
               const r = reveal.getBoundingClientRect();
               if (e.clientY >= r.top && e.clientY <= r.bottom)
@@ -742,243 +886,7 @@
 
         document.documentElement.addEventListener("mouseleave", () => {
           if (cursor) cursor.classList.remove("is-visible");
-          window.cancelAnimationFrame(cursorFrame);
-          cursorFrame=0;
         });
-
-        // Desktop hover is preserved. On phones, tapping and dragging over
-        // the figure moves the X-ray lens. Scroll normally outside that zone.
-        const allPages = [...document.querySelectorAll(".page")];
-        const phoneView=window.matchMedia("(max-width: 900px)");
-        let activePageIndex=0;
-        const showPage=(index)=>{
-          activePageIndex=Math.max(0,Math.min(allPages.length-1,index));
-          if(phoneView.matches)ensureMobileModel(activePageIndex);
-          allPages.forEach((page,i)=>{
-            const active=i===activePageIndex;
-            page.classList.toggle("is-active",active);
-            page.classList.toggle("is-visible",active);
-            if(phoneView.matches)page.setAttribute("aria-hidden",active?"false":"true");
-            else page.removeAttribute("aria-hidden");
-          });
-          if(!phoneView.matches){
-            allPages[activePageIndex]?.scrollIntoView({
-              behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"instant":"smooth"
-            });
-          }
-        };
-        const resetDesktopLayout=()=>{
-          allPages.forEach(page=>{
-            page.classList.remove("is-active");
-            page.removeAttribute("aria-hidden");
-            page.querySelectorAll(".page-image").forEach(layer=>{
-              layer.style.removeProperty("background-size");
-              layer.style.removeProperty("background-position");
-            });
-            const zone=page.querySelector(".mobile-scan-zone");
-            if(zone){
-              zone.style.removeProperty("left");
-              zone.style.removeProperty("top");
-              zone.style.removeProperty("width");
-              zone.style.removeProperty("height");
-            }
-          });
-        };
-        const refreshMode=()=>{
-          document.body.classList.toggle("anatomy-touch-layout",phoneView.matches);
-          if(phoneView.matches)showPage(activePageIndex);
-          else resetDesktopLayout();
-        };
-
-        window.addEventListener("keydown",(e)=>{
-          if(!phoneView.matches)return;
-          if(e.key==="ArrowRight"){e.preventDefault();showPage((activePageIndex+1)%allPages.length)}
-          if(e.key==="ArrowLeft"){e.preventDefault();showPage(Math.max(0,activePageIndex-1))}
-        });
-        allPages.forEach((page,index)=>{
-          const zone=document.createElement("div");
-          zone.className="mobile-scan-zone";
-          zone.setAttribute("role","group");
-          zone.setAttribute("aria-label","Drag a finger here to X-ray the anatomy image");
-          const reveal=page.querySelector(".page-reveal");
-          if(reveal){
-            let activePointer=null;
-            const lens=document.createElement("div");
-            lens.className="mobile-scan-lens";
-            lens.setAttribute("aria-hidden","true");
-            zone.appendChild(lens);
-            const paint=(e)=>{
-              update(reveal,e.clientX,e.clientY);
-              const r=zone.getBoundingClientRect();
-              lens.style.left=`${Math.max(16,Math.min(r.width-16,e.clientX-r.left))}px`;
-              lens.style.top=`${Math.max(16,Math.min(r.height-16,e.clientY-r.top))}px`;
-              zone.classList.add("is-scanning");
-            };
-            zone.addEventListener("pointerdown",(e)=>{
-              if(e.pointerType==="mouse"&&e.button!==0)return;
-              activePointer=e.pointerId;
-              try{zone.setPointerCapture(e.pointerId)}catch(_){}
-              paint(e);
-              e.preventDefault();
-            });
-            zone.addEventListener("pointermove",(e)=>{
-              if(e.pointerId!==activePointer)return;
-              paint(e);
-              if(e.cancelable)e.preventDefault();
-            });
-            const finish=(e)=>{
-              if(activePointer!==e.pointerId)return;
-              activePointer=null;
-              try{zone.releasePointerCapture(e.pointerId)}catch(_){}
-            };
-            zone.addEventListener("pointerup",finish);
-            zone.addEventListener("pointercancel",finish);
-            page.appendChild(zone);
-          }
-          const nav=document.createElement("nav");
-          nav.className="mobile-anatomy-nav";
-          nav.setAttribute("aria-label","Anatomy chapters");
-          const previous=document.createElement("button");
-          previous.type="button";
-          previous.innerHTML='<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12H4m7-7-7 7 7 7"/></svg> Previous';
-          previous.disabled=index===0;
-          previous.addEventListener("click",()=>showPage(index-1));
-          const next=document.createElement("button");
-          next.type="button";
-          next.innerHTML=(index===allPages.length-1?"Back to start":"Next chapter")+' <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16m-7-7 7 7-7 7"/></svg>';
-          next.addEventListener("click",()=>showPage((index+1)%allPages.length));
-          nav.append(previous,next);
-          page.appendChild(nav);
-        });
-
-
-        // Mobile-only anatomy compositor. Desktop retains the original image
-        // backgrounds and cursor effect without additional work.
-        const imageSources=["./banner.png","./1.png","./3.png","./5.png"];
-        const imageInfo=new Map();
-        const pendingImages=new Set();
-        const modelFocus=[
-          {centerY:.56,height:.48,width:.86},
-          {centerY:.54,height:.48,width:.86},
-          {centerY:.53,height:.48,width:.88},
-          {centerY:.52,height:.48,width:.88}
-        ];
-
-        function fitMobileImages(){
-          if(!phoneView.matches)return;
-          const vw=window.innerWidth,vh=window.innerHeight;
-          allPages.forEach((page,index)=>{
-            const info=imageInfo.get(index);
-            if(!info)return;
-            const focus=modelFocus[index];
-            const landscape=vw>vh&&vh<520;
-            const xCenter=landscape?vw*.70:vw*.50;
-            const yCenter=vh*(landscape?.51:focus.centerY);
-            const targetW=vw*(landscape?.53:focus.width);
-            const targetH=vh*(landscape?.76:focus.height);
-            const bboxW=Math.max(1,info.x1-info.x0);
-            const bboxH=Math.max(1,info.y1-info.y0);
-            const scale=Math.min(targetW/(bboxW*1.16),targetH/(bboxH*1.13));
-            const cx=(info.x1+info.x0)*.5;
-            const cy=(info.y1+info.y0)*.5;
-            const left=xCenter-cx*scale,top=yCenter-cy*scale;
-            const size=`${info.width*scale}px ${info.height*scale}px`;
-            const pos=`${left}px ${top}px`;
-            page.querySelectorAll(".page-image").forEach(layer=>{
-              layer.style.backgroundSize=size;
-              layer.style.backgroundPosition=pos;
-            });
-            const zone=page.querySelector(".mobile-scan-zone");
-            if(zone){
-              const boxLeft=left+info.x0*scale,boxRight=left+info.x1*scale;
-              const boxTop=top+info.y0*scale,boxBottom=top+info.y1*scale;
-              const pad=22;
-              const zLeft=Math.max(0,boxLeft-pad);
-              const zTop=Math.max(0,boxTop-pad);
-              zone.style.left=`${zLeft}px`;
-              zone.style.top=`${zTop}px`;
-              zone.style.width=`${Math.max(80,Math.min(vw-zLeft,boxRight-zLeft+pad))}px`;
-              zone.style.height=`${Math.max(110,Math.min(vh-zTop,boxBottom-zTop+pad))}px`;
-            }
-          });
-        }
-
-        function ensureMobileModel(index){
-          if(!phoneView.matches||imageInfo.has(index)||pendingImages.has(index))return;
-          if(index<0||index>=imageSources.length)return;
-          pendingImages.add(index);
-          const image=new Image();
-          image.onload=()=>{
-            pendingImages.delete(index);
-            if(!phoneView.matches)return;
-            const w=image.naturalWidth,h=image.naturalHeight;
-            const cw=Math.min(200,w),ch=Math.max(1,Math.round(cw*h/w));
-            // Safe fallback fits the entire source instead of cutting off
-            // an anatomy figure if an asset has no recognizable muscle tones.
-            let bounds={width:w,height:h,x0:0,y0:0,x1:w,y1:h};
-            try{
-              const canvas=document.createElement("canvas");
-              canvas.width=cw;canvas.height=ch;
-              const ctx=canvas.getContext("2d",{willReadFrequently:true});
-              if(ctx){
-                ctx.drawImage(image,0,0,cw,ch);
-                const data=ctx.getImageData(0,0,cw,ch).data;
-                const xHistogram=new Uint32Array(cw);
-                const yHistogram=new Uint32Array(ch);
-                let count=0;
-                for(let y=0;y<ch;y++){
-                  for(let x=Math.floor(cw*.25);x<cw;x++){
-                    const p=(y*cw+x)*4;
-                    const red=data[p],green=data[p+1],blue=data[p+2];
-                    // Search skin/muscle rather than titles and white canvas.
-                    if(data[p+3]>120&&red>98&&red-green>27&&red-blue>20&&green<218){
-                      xHistogram[x]++;yHistogram[y]++;count++;
-                    }
-                  }
-                }
-                if(count>120){
-                  const quantile=(hist,percentage)=>{
-                    const goal=count*percentage;let total=0;
-                    for(let i=0;i<hist.length;i++){total+=hist[i];if(total>=goal)return i}
-                    return hist.length-1;
-                  };
-                  const x0=quantile(xHistogram,.007),x1=quantile(xHistogram,.993);
-                  const y0=quantile(yHistogram,.007),y1=quantile(yHistogram,.993);
-                  const bw=x1-x0,bh=y1-y0;
-                  if(bw>cw*.065&&bh>ch*.18){
-                    const extraX=bw*.14,extraY=bh*.08;
-                    bounds={
-                      width:w,height:h,
-                      x0:Math.max(0,(x0-extraX)*w/cw),
-                      x1:Math.min(w,(x1+extraX)*w/cw),
-                      y0:Math.max(0,(y0-extraY)*h/ch),
-                      y1:Math.min(h,(y1+extraY)*h/ch)
-                    };
-                  }
-                }
-              }
-            }catch(_){/* Entire-image fallback preserves visibility. */}
-            imageInfo.set(index,bounds);
-            fitMobileImages();
-            // Warm just the next chapter when the current one is visible.
-            const next=index+1;
-            if(next<imageSources.length){
-              const prefetch=()=>ensureMobileModel(next);
-              if("requestIdleCallback" in window)window.requestIdleCallback(prefetch,{timeout:2200});
-              else window.setTimeout(prefetch,600);
-            }
-          };
-          image.onerror=()=>pendingImages.delete(index);
-          image.src=imageSources[index];
-        }
-
-        let resizeId=0;
-        window.addEventListener("resize",()=>{
-          window.cancelAnimationFrame(resizeId);
-          resizeId=window.requestAnimationFrame(fitMobileImages);
-        },{passive:true});
-        refreshMode();
-        phoneView.addEventListener?.("change",refreshMode);
 
         const pages = document.querySelectorAll(
           ".page-two,.page-three,.page-four",

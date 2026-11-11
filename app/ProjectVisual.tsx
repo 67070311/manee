@@ -15,7 +15,7 @@ export default function ProjectVisual({kind}:{kind:VisualKind}):ReactNode{
   <div className="sw-pos-sun"/><div className="sw-pos-window">
    <div className="sw-pos-top"><strong>buildify<span>x</span></strong><span>Store overview</span><span>Open</span></div>
    <div className="sw-pos-layout"><div className="sw-pos-sidebar"><span><UiIcon name="grid" size={13}/></span><span><UiIcon name="grid" size={13}/></span><span><UiIcon name="clock" size={13}/></span><span><UiIcon name="settings" size={13}/></span></div><div className="sw-pos-main"><div className="sw-pos-greeting"><div><small>GOOD MORNING, MANEE</small><strong>Let's get to work.</strong></div><span><UiIcon name="arrow-up-right" size={13}/></span></div><div className="sw-pos-stats"><div><small>Today's sales</small><b>฿12,450</b><span>12.8%</span></div><div><small>Orders</small><b>84</b><span>In progress</span></div></div><div className="sw-pos-table-title">Your tables <span>View all</span></div><div className="sw-pos-tables">{["01","02","03","04"].map((n,i)=><div key={n} className={i===2?"is-reserved":""}>T{n}<small>{i===2?"Occupied":"Available"}</small></div>)}</div></div></div>
-  </div><div className="sw-pos-sticker">made for<br/>real people! <span><UiIcon name="sparkle" size={14}/></span></div>
+  </div><div className="sw-pos-sticker">made for<br/>real people! <span><UiIcon name="cloud" size={14}/></span></div>
  </div>;
  if(kind==="client")return <div className="sw-visual sw-visual-client" aria-hidden="true">
   <div className="sw-client-orbit"/><div className="sw-client-caption">THOUGHTFUL DESIGN <span><UiIcon name="arrow-up-right" size={13}/></span></div>

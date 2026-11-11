@@ -6,7 +6,7 @@ const words={
  en:{eyebrow:"a little about me",left:"CREATIVE",left2:"MIND",leftCaption:"always curious · 2026",right:"WHAT'S",right2:"NEXT?",rightCaption:"ideas in progress",stamp:"hello, there!",before:"Hey, I'm",name:"Manee!",start:"I’m a ",strong:"design-minded Full-Stack Developer.",end:" I build ideas into real products, from UX/UI and frontend to the backend behind it all. I also love games and 3D — because great technology should be ",italic:"beautiful, intuitive, and fun to use.",labels:["Full-Stack Dev","UX/UI Design","Game Design","3D Modeling"]},
  th:{eyebrow:"เรื่องเล็ก ๆ เกี่ยวกับเรา",left:"คิด · วาด",left2:"สร้าง",leftCaption:"ชอบลองอะไรใหม่ ๆ · 2026",right:"มุมของ",right2:"ไอเดีย",rightCaption:"กำลังสร้างอะไรใหม่ ๆ",stamp:"ยินดีที่รู้จัก!",before:"สวัสดี เรา",name:"Manee!",start:"เราเป็น ",strong:"Full-Stack Developer ที่คิดแบบ Designer",end:" ชอบเปลี่ยนไอเดียให้เป็นโปรดักต์จริง ตั้งแต่ UX/UI และ Frontend ไปจนถึง Backend แถมยังสนุกกับการทำเกมและงาน 3D เพราะเราเชื่อว่า ",italic:"โค้ดที่ดีควรมาพร้อมประสบการณ์ที่ดี",labels:["Full-Stack Dev","ออกแบบ UX/UI","ออกแบบเกม","โมเดล 3D"]}
 };
-const colors=["yellow","green","sage","blue"];const marks=["sparkle","asterisk","flower","sun"] as const;
+const colors=["yellow","green","sage","blue"];const marks=["cloud","asterisk","flower","sun"] as const;
 export default function ScrapbookAbout({language="en"}:{language?:Language}){
  const t=words[language];
  const ref=useRef<HTMLElement>(null);const [seen,setSeen]=useState(false);
@@ -21,7 +21,7 @@ export default function ScrapbookAbout({language="en"}:{language?:Language}){
     <p>{t.start}<strong>{t.strong}</strong>{t.end}<em>{t.italic}</em> <span className="scrapbook-ending-mark" aria-hidden="true"><UiIcon name="asterisk" size={20}/></span></p>
     <div className="scrapbook-stickers">{t.labels.map((name,i)=><span className={"scrapbook-sticker "+colors[i]} key={name}>{name}<b><UiIcon name={marks[i]} size={17}/></b></span>)}</div>
    </div>
-   <div className="scrapbook-doodle scrapbook-doodle-a"></div><div className="scrapbook-doodle scrapbook-doodle-b"><UiIcon name="sparkle" size={24}/></div>
+   <div className="scrapbook-doodle scrapbook-doodle-a"></div><div className="scrapbook-doodle scrapbook-doodle-b"><UiIcon name="cloud" size={24}/></div>
   </div>
  </section>;
 }

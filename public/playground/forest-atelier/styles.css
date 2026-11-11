@@ -864,7 +864,45 @@ button:focus-visible,input:focus-visible{outline:3px solid rgba(119,91,48,.3);ou
   .tools{width:205px}
   .paint-board-stage{height:min(65vh,620px)}
 }
-
+@media(max-width:760px){
+  .hud{padding:12px}
+  .brand-sub,.stat span{display:none}
+  .stat{min-width:60px}
+  .task-card{left:12px;top:77px;width:55vw}
+  .shop-sign{display:none}
+  .painting-zone{left:53%;bottom:18%;width:27vw}
+  .rabbit-wrap{left:32%;bottom:18%;width:20vw;height:31vh}
+  .customer-wrap{bottom:18%;width:20vw;height:29vh}
+  .speech{left:68%;bottom:42%;width:50vw}
+  .paint-now{left:53%;bottom:10%}
+  .intro-overlay{padding-left:7vw}
+  .intro-card{width:84vw}
+  .paint-panel{width:96vw;height:94vh}
+  .paint-layout{
+    grid-template-columns:1fr;
+    overflow:auto;
+    padding-bottom:8px;
+  }
+  .paint-board-stage{height:min(55vh,500px)}
+  .tools{
+    width:min(420px,92vw);
+    min-height:auto;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+  }
+  .brief-card{margin-top:0}
+  .finish-btn{grid-column:1/-1}
+  .result-card{
+    grid-template-columns:1fr;
+    width:94vw;
+    max-height:92vh;
+    overflow:auto;
+  }
+  .result-art-wrap{min-height:auto}
+  .sale-preview-board{height:min(43vh,410px)}
+  .result-info{padding:0 5px 5px}
+}
 
 
 /* CLEAN9 critical fixes */
@@ -1346,7 +1384,18 @@ button:focus-visible,input:focus-visible{outline:3px solid rgba(119,91,48,.3);ou
   .palette-board{min-height:166px}
   .color-swatch{width:31px!important;height:31px!important}
 }
-
+@media(max-width:760px){
+  .paint-topbar{margin:0 7px 12px!important}
+  .paint-layout{grid-template-columns:1fr!important}
+  .tools{
+    width:min(430px,94vw)!important;
+    min-height:auto!important;
+    display:grid!important;
+    grid-template-columns:1fr 1fr!important;
+  }
+  .palette-board{min-height:150px}
+  .finish-btn{grid-column:1/-1}
+}
 
 
 /* FROG13 client positioning + bubble alignment */
@@ -1380,4 +1429,13 @@ button:focus-visible,input:focus-visible{outline:3px solid rgba(119,91,48,.3);ou
     width:min(13vw,156px) !important;
   }
 }
-
+@media(max-width:760px){
+  .speech{
+    left:48% !important;
+    bottom:40.5% !important;
+    width:50vw !important;
+  }
+  .customer-wrap[data-kind="frog"]{
+    width:22vw !important;
+  }
+}

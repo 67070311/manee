@@ -220,3 +220,22 @@
 @media(prefers-reduced-motion:reduce){
  .work-modal.is-playable.is-info-open .work-modal-details{animation:none}
 }
+
+
+/* Mobile playable details: reachable close/controls with enough toolbar space. */
+@media(max-width:720px){
+ .work-modal.is-playable .work-modal-floating-close{
+  width:44px;height:44px;min-width:44px;min-height:44px;
+  top:8px;right:8px;margin:0;
+ }
+ .work-modal.is-playable .playground-player-toolbar{padding-right:60px}
+ .work-modal.is-playable .playground-player-controls button{
+  min-width:40px;min-height:40px;width:40px;height:40px;
+  display:inline-flex;align-items:center;justify-content:center;
+ }
+}
+@media(max-width:370px){
+ .work-modal.is-playable .playground-player-toolbar{padding-right:58px}
+ .work-modal.is-playable .work-modal-floating-close{right:8px;width:44px;height:44px}
+ .work-modal.is-playable .playground-player-controls button{width:40px;height:40px}
+}

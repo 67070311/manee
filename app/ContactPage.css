@@ -165,3 +165,18 @@
 @media(prefers-reduced-motion:reduce){
  .contact-page-link,.contact-page-submit{transition:none}
 }
+
+
+/* Contact content: no truncated addresses or cramped touch/form controls. */
+@media(max-width:600px){
+ .contact-page-link{overflow-wrap:anywhere;min-height:56px}
+ .contact-page-link :is(a,strong){overflow-wrap:anywhere;word-break:normal}
+ .contact-page-form :is(input,select,textarea){font-size:16px;max-width:100%}
+ .contact-page-submit{min-height:48px}
+ .contact-page-form-card{max-width:100%;min-width:0}
+ .contact-page-form{min-width:0}
+}
+@media(max-width:360px){
+ .contact-page-form-card{padding:21px 15px}
+ .contact-page-main{padding-inline:12px}
+}

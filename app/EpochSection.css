@@ -81,3 +81,10 @@
 .epoch-contact{border:1px solid rgba(30,76,129,.25);box-shadow:0 9px 22px rgba(29,73,118,.14)}
 .epoch-pill-nav{border:1px solid rgba(89,120,149,.19)}
 .epoch-logo-card{border:1px solid rgba(103,137,164,.18)}
+
+
+@media(max-width:840px){
+ .epoch-mark{width:44px;height:44px;min-width:44px;min-height:44px}
+ .epoch-link{min-height:44px;display:inline-flex;align-items:center}
+ .epoch-getintouch{min-height:44px}
+}

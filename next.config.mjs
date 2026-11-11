@@ -13,6 +13,9 @@ const nextConfig = {
     return [
       { source: "/work", destination: "/?view=work" },
       { source: "/contact", destination: "/?view=contact" },
+      { source: "/playground", destination: "/?view=playground" },
+      { source: "/playground/cooking-english", destination: "/?view=cooking-english" },
+      { source: "/playground/english-menu", destination: "/?view=cooking-english" },
     ];
   },
 };

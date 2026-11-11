@@ -7,6 +7,7 @@ import HomeBanner from "./HomeBanner";
 import ScrapbookAbout from "./ScrapbookAbout";
 import EpochSection from "./EpochSection";
 import WorkGallery from "./WorkGallery";
+import HomeCreativeSections from "./HomeCreativeSections";
 import PortfolioFooter from "./PortfolioFooter";
 const words={
  en:{label:"(03) / CONTACT",note:"HAVE AN IDEA?",title:"LET'S MAKE",italic:"IT REAL.",button:"LET'S CONNECT"},
@@ -15,13 +16,14 @@ const words={
 export default function HomePageContent({initialLanguage="en"}:{initialLanguage?:Language}){
  const {language,setLanguage}=usePortfolioLanguage(initialLanguage);
  const t=words[language];
- return <main id="top" lang={language}>
+ return <main id="top" className="portfolio-playful" lang={language}>
   <Navbar language={language} onLanguageChange={setLanguage}/>
   <HomeBanner language={language}/>
   <ScrapbookAbout language={language}/>
   <EpochSection language={language}/>
   <WorkGallery mode="home" language={language}/>
-  <section className="contact wrap" id="contact"><div className="sectionmeta"><span>{t.label}</span><span>{t.note}</span></div>
+  <HomeCreativeSections language={language}/>
+  <section className="contact wrap" id="contact"><span className="home-contact-doodle" aria-hidden="true"><UiIcon name="star" size={30}/><UiIcon name="cloud" size={19}/></span><div className="sectionmeta"><span>{t.label}</span><span>{t.note}</span></div>
   <h2>{t.title}<br/><em>{t.italic}</em></h2>
   <a href="/contact">{t.button} <UiIcon name="arrow-up-right" size={17}/></a></section>
   <PortfolioFooter mode="home" language={language}/>

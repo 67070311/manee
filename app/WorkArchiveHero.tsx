@@ -77,7 +77,7 @@ export default function WorkArchiveHero({language="en"}:{language?:Language}){
   <div className="work-cinematic-video-gradient" aria-hidden="true"/>
   <div className="work-cinematic-bottom-fade" aria-hidden="true"/>
 
-  <div className="work-cinematic-copy">
+  <div className="work-cinematic-copy"><span className="work-cinematic-spark" aria-hidden="true"><UiIcon name="cloud" size={44}/></span>
    <span className="work-cinematic-eyebrow"><span className="work-cinematic-eyebrow-line"/><span className="work-cinematic-eyebrow-desktop">{t.overline}</span><span className="work-cinematic-eyebrow-mobile">{t.mobileOverline}</span><span className="work-cinematic-eyebrow-line"/></span>
    <h1 id="work-cinematic-title" className="work-cinematic-heading work-fade-rise">
     {language==="en"?<>

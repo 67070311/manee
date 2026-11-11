@@ -302,7 +302,7 @@ export default function PotionGameMobile() {
         )}
 
         <div className={styles.questPill}>
-          <span className={styles.questIcon}><UiIcon name="sparkle" size={17}/></span>
+          <span className={styles.questIcon}><UiIcon name="cloud" size={17}/></span>
           <div><small>Current order</small><strong>{RECIPE.name}</strong></div>
           <span className={styles.progress}>{brew.length}/3</span>
         </div>
@@ -361,14 +361,14 @@ export default function PotionGameMobile() {
           </div>
 
           <button className={styles.brewButton} onClick={brewPotion} disabled={result !== 'idle'}>
-            <span><UiIcon name="sparkle" size={17}/></span> Brew Potion <span><UiIcon name="sparkle" size={17}/></span>
+            <span><UiIcon name="cloud" size={17}/></span> Brew Potion <span><UiIcon name="cloud" size={17}/></span>
           </button>
         </section>
 
         {result !== 'idle' && (
           <div className={styles.resultOverlay} onClick={reset}>
             <div className={styles.resultCard} onClick={(e) => e.stopPropagation()}>
-              <div className={styles.resultOrb}>{result === 'success' ? <UiIcon name="sparkle" size={34}/> : <UiIcon name="wind" size={34}/>}</div>
+              <div className={styles.resultOrb}>{result === 'success' ? <UiIcon name="cloud" size={34}/> : <UiIcon name="wind" size={34}/>}</div>
               <small>{result === 'success' ? 'PERFECT BREW' : 'SPELL FIZZLED'}</small>
               <h2>{result === 'success' ? RECIPE.name : 'Try Again'}</h2>
               <p>{result === 'success' ? 'Moonlight dances inside the bottle.' : message}</p>

@@ -1,0 +1,263 @@
+/* Hand-built editorial showcase. Purposeful interaction, gentle motion, existing palette. */
+.studio-story{--ss-ink:#203e52;--ss-blue:#3468a3;--ss-sage:#538a70;--ss-mint:#abd5c1;--ss-yellow:#f3d57a;--ss-paper:#fbfaf4;overflow:hidden}
+.studio-story *{box-sizing:border-box}
+.studio-shell{width:min(1160px,calc(100% - 56px));margin-inline:auto}
+.studio-eyebrow{display:inline-flex;align-items:center;gap:9px;font:700 13px/1.4 "DM Sans","Noto Sans Thai",sans-serif;letter-spacing:.17em}
+.studio-eyebrow svg{color:var(--ss-yellow)}
+.studio-reveal{opacity:0;transform:translateY(34px);transition:opacity .85s cubic-bezier(.2,.7,.25,1),transform .9s cubic-bezier(.17,.85,.28,1)}
+.studio-reveal.is-visible{opacity:1;transform:translateY(0)}
+.studio-design{position:relative;background:#183b51;color:#fdf9ec;padding:112px 0 132px;isolation:isolate}
+.studio-design:before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse at 88% 56%,#416c7352,transparent 43%),radial-gradient(ellipse at 4% 5%,#437d6e3f,transparent 49%)}
+.studio-design:after{content:"";position:absolute;bottom:0;left:0;right:0;height:32px;background:#fbfaf4;clip-path:polygon(0 61%,4% 45%,10% 62%,17% 40%,26% 68%,34% 48%,43% 64%,52% 40%,62% 64%,72% 40%,82% 65%,92% 48%,100% 65%,100% 100%,0 100%);pointer-events:none}
+.studio-design-grid{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:64px;align-items:center}
+.studio-design-copy{min-width:0}
+.studio-design-copy h2,.studio-case-heading h2,.studio-process-top h2{font:400 clamp(62px,6vw,88px)/.95 "Patrick Hand","Mali",cursive;letter-spacing:-.035em;margin:23px 0 29px;text-wrap:balance}
+.studio-design-copy h2 em,.studio-case-heading h2 em,.studio-process-top h2 em{font:700 1.32em/.83 "Caveat","Mali",cursive;font-style:normal;display:inline-block;letter-spacing:-.025em}
+.studio-design-copy h2 em{color:#f6d67c;transform:rotate(-2deg);position:relative}
+.studio-design-copy h2 em:after{content:"";position:absolute;left:2%;right:3%;bottom:-9px;height:8px;border-bottom:4px solid #aacfbf;border-radius:50%;transform:rotate(1deg)}
+.studio-design-copy>p{font:400 clamp(16px,1.4vw,18px)/1.7 "DM Sans","Noto Sans Thai",sans-serif;color:#cfdfdf;max-width:430px;margin:0 0 30px}
+.studio-primary-link{display:inline-flex;align-items:center;justify-content:space-between;gap:28px;text-decoration:none;background:#f3d57a;border:2px solid #fbebbc;color:#23475a;border-radius:12px 17px 10px 14px;padding:14px 16px 14px 21px;box-shadow:5px 6px 0 #0a2936;font:600 21px/1.2 "Patrick Hand","Mali",cursive;transition:transform .3s,background .3s,box-shadow .3s}
+.studio-primary-link:hover{background:#ffe8a1;transform:translateY(-5px) rotate(-1deg);box-shadow:6px 9px 0 #0a2936}
+.studio-primary-link svg{flex:none}
+.studio-hand-note{display:flex;align-items:center;gap:9px;margin:34px 0 0 24px;color:#b8d3c6;font:600 21px/1.2 "Caveat","Mali",cursive;transform:rotate(-3deg)}
+.studio-hand-note svg{transform:rotate(140deg)}
+.studio-system-board{display:block;color:#243a4c;text-decoration:none;background:#fffdf5;padding:13px 16px 11px;position:relative;border:2px solid #dfe6d5;border-radius:13px 19px 14px 17px;box-shadow:9px 11px 0 #aac9bb,0 20px 36px #071d2b35;transform:translateY(34px) rotate(1deg);transition:opacity .85s,transform .8s,box-shadow .3s}
+.studio-system-board.is-visible{transform:translateY(0) rotate(1deg)}
+.studio-system-board:hover{transform:translateY(-6px) rotate(-.4deg);box-shadow:10px 15px 0 #accbbc,0 27px 42px #071d2b35}
+.studio-system-board:before{content:"";position:absolute;top:-18px;left:40%;width:92px;height:27px;transform:rotate(-8deg);background:#e8ce85b8;clip-path:polygon(3% 0,100% 5%,96% 100%,0 90%)}
+.studio-board-top,.studio-board-bottom{display:flex;align-items:center;gap:12px;justify-content:space-between;font:700 10px/1.3 "DM Sans",sans-serif;letter-spacing:.12em;color:#51737c}
+.studio-board-top{padding:2px 3px 14px;border-bottom:1px dashed #c5cfc3}
+.studio-board-top svg{color:#437a76}
+.studio-board-dots{display:flex;gap:4px}
+.studio-board-dots i{width:7px;height:7px;border-radius:50%;background:#dfb383}
+.studio-board-dots i:nth-child(2){background:#a6c9c0}.studio-board-dots i:nth-child(3){background:#6994b0}
+.studio-board-inside{display:grid;grid-template-columns:.88fr 1.12fr;gap:17px;padding:18px 1px}
+.studio-board-left{display:flex;flex-direction:column;justify-content:space-between;gap:14px;min-width:0;border-right:1px dashed #c6d2c8;padding-right:16px}
+.studio-board-small{display:flex;gap:6px;align-items:center;color:#648783;font:600 10px "DM Sans",sans-serif;letter-spacing:.15em}
+.studio-swatches{display:flex;align-items:center;gap:8px;min-height:63px}
+.studio-swatch{width:19%;max-width:48px;aspect-ratio:1;border:2px solid #fff;outline:1px solid #d6ddd6;border-radius:50%;transition:transform .25s}
+.studio-system-board:hover .studio-swatch:nth-child(2){transform:translateY(-8px)}
+.studio-system-board:hover .studio-swatch:nth-child(4){transform:translateY(5px)}
+.studio-board-type{font:400 clamp(55px,6vw,93px)/.85 "Patrick Hand",cursive;color:#244e65;letter-spacing:-.055em}
+.studio-board-type span{font:700 clamp(33px,4vw,57px)/1 "Caveat",cursive;color:#5a9978;margin-left:10px}
+.studio-type-caption{font:600 12px/1.4 "DM Sans",sans-serif;color:#708781}
+.studio-type-caption span{color:#bd9a61;margin:0 4px}
+.studio-board-right{display:flex;flex-direction:column;gap:12px;min-width:0}
+.studio-board-note{display:flex;align-items:center;justify-content:space-between;color:#56786b;font:600 20px "Caveat","Mali",cursive}
+.studio-board-note>span{color:#daaa53;font-size:23px}
+.studio-board-ui{position:relative;min-height:233px;background:#eff5ec;border:2px solid #bad4c7;border-radius:12px 18px 13px 15px;padding:20px;display:flex;align-items:flex-start;flex-direction:column;justify-content:center;gap:11px}
+.studio-ui-pill{display:inline-flex;align-items:center;gap:7px;background:#d2e7da;color:#477f6b;border:1px solid #a0c7b3;border-radius:99px;padding:5px 10px;font:600 10px "DM Sans","Noto Sans Thai",sans-serif;letter-spacing:.08em}
+.studio-board-ui strong{color:#224c61;font:400 clamp(27px,2.7vw,38px)/1.03 "Patrick Hand","Mali",cursive}
+.studio-board-ui>p{font:400 13px/1.3 "DM Sans","Noto Sans Thai",sans-serif;color:#618080;margin:0}
+.studio-board-button{display:inline-flex;align-items:center;gap:12px;background:#3468a3;color:#fff;border-radius:9px;padding:10px 14px;font:600 17px "Patrick Hand","Mali",cursive;box-shadow:2px 3px 0 #aec9c2}
+.studio-ui-ornament{position:absolute;right:17px;bottom:22px;color:#dfb861;transform:rotate(13deg)}
+.studio-board-bottom{padding:13px 3px 2px;border-top:1px dashed #c5cfc3;color:#8a9284}
+.studio-board-bottom span:last-child{font-family:"Caveat",cursive;font-size:16px;letter-spacing:.04em;color:#598479}
+
+/* Case study: open editorial grid, one single interactive exhibit. */
+.studio-case{position:relative;background:#fbfaf4;color:#244558;padding:111px 0 105px;background-image:repeating-linear-gradient(to bottom,transparent 0,transparent 33px,#acc4cd24 34px,transparent 35px)}
+.studio-case-heading,.studio-process-top{display:flex;align-items:end;justify-content:space-between;gap:60px;margin-bottom:38px}
+.studio-case-heading>div,.studio-process-top>div{flex:1;min-width:0}
+.studio-case .studio-eyebrow{color:#628579}
+.studio-case .studio-eyebrow svg{color:#d5a04d}
+.studio-case-heading h2,.studio-process-top h2{margin-bottom:0}
+.studio-case-heading h2 em{color:#34769a;position:relative;transform:rotate(-2deg)}
+.studio-case-heading h2 em:after{content:"";position:absolute;bottom:-8px;left:3%;right:4%;height:5px;border-bottom:4px solid #e4c777;border-radius:50%}
+.studio-case-heading>p,.studio-process-top>p{max-width:350px;flex:0 1 350px;color:#647982;font:400 17px/1.72 "DM Sans","Noto Sans Thai",sans-serif;margin:0 0 5px}
+.studio-case-card{background:#fffef9;border:2px solid #b8d0c8;border-radius:19px 23px 15px 21px;box-shadow:9px 11px 0 #d8e5df,0 17px 40px #223e4b10;overflow:hidden}
+.studio-case-control{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;padding:18px 22px;border-bottom:2px solid #dce9e3}
+.studio-case-id{display:flex;align-items:center;gap:9px;font:700 12px "DM Sans","Noto Sans Thai",sans-serif;letter-spacing:.09em;color:#537578}
+.studio-case-symbol{width:30px;height:30px;display:grid;place-items:center;background:#cfe5d9;border-radius:9px;color:#3e8069}
+.studio-stage-tabs{display:flex;align-items:center;gap:5px;border-radius:12px;padding:4px;background:#eff4ed;border:1px solid #dbe5d9}
+.studio-stage-tabs button{display:flex;gap:9px;align-items:center;justify-content:center;border:0;background:transparent;border-radius:8px;color:#69847c;font:600 14px "DM Sans","Noto Sans Thai",sans-serif;padding:11px 13px;cursor:pointer;transition:background .25s,transform .25s,color .25s}
+.studio-stage-tabs button span{font:600 16px "Patrick Hand",cursive;color:inherit}
+.studio-stage-tabs button:hover{color:#305f66}
+.studio-stage-tabs button.is-active{background:#346c82;color:white;box-shadow:0 3px 9px #2b595923}
+.studio-case-body{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(260px,.5fr);min-height:395px}
+.studio-case-art{position:relative;display:grid;place-items:center;overflow:hidden;min-height:390px;background:linear-gradient(145deg,#dcece7,#ecf2e8)}
+.studio-case-art:before{content:"";position:absolute;inset:0;background:radial-gradient(#8db3aa40 1px,transparent 1px);background-size:16px 16px;opacity:.45}
+.studio-wireframe,.studio-case-image{position:relative;z-index:1;width:min(86%,610px);margin:33px auto;background:#fff;border:2px solid #bad0c9;border-radius:12px;box-shadow:7px 9px 0 #b3cbc0,0 18px 27px #3d615b18;animation:studio-frame .45s cubic-bezier(.2,.7,.2,1) both}
+@keyframes studio-frame{from{opacity:.1;transform:translateY(14px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+.studio-wireframe{padding:10px 13px 15px;transform:rotate(-1deg)}
+.studio-wire-head{display:flex;align-items:center;justify-content:space-between;gap:10px;border-bottom:2px solid #e5ebe5;padding:7px 3px 12px;color:#738d88}
+.studio-wire-head b{font:700 19px "DM Sans",sans-serif;color:#4c6f73}
+.studio-wire-head span{font:700 clamp(7px,1vw,10px) "DM Sans",sans-serif;letter-spacing:.09em}
+.studio-wire-head i{width:28px;height:12px;background:#a4cfc5;border-radius:4px}
+.studio-wire-hero{display:grid;grid-template-columns:1.2fr 1fr;gap:14px;padding:17px 0}
+.studio-wire-hero>div:first-child{display:flex;flex-direction:column;gap:9px;justify-content:center}
+.wire-line{height:11px;width:80%;background:#e1e7e0;border-radius:4px}
+.wire-line.wide{width:100%;height:26px;background:#96b9bc}
+.wire-line.short{width:56%}
+.wire-button{width:74px;height:22px;border-radius:6px;background:#a7c9b7;margin-top:7px}
+.wire-photo{height:145px;background:#d6e2de;display:grid;place-items:center;color:#a4beb5;border:2px dashed #acc5bb;border-radius:8px}
+.studio-wire-columns{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.studio-wire-columns>div{padding:9px;border:2px solid #e3ece6;border-radius:8px;display:flex;gap:7px;flex-direction:column;min-height:94px}
+.studio-wire-columns>div span:first-child{height:32px;background:#d4e2d9;border-radius:4px}
+.studio-wire-columns>div span{height:9px;background:#e8eee9;border-radius:3px}
+.studio-wire-columns>div span:last-child{width:65%}
+.studio-wire-badge{display:block;color:#69948b;text-align:center;font:600 11px "DM Sans","Noto Sans Thai",sans-serif;letter-spacing:.06em;margin-top:13px}
+.studio-case-image{overflow:hidden;background:#fbfbfa;border-color:#b6c8ce}
+.studio-browser-bar{height:28px;background:#f4f5f3;border-bottom:1px solid #d6e0df;display:flex;align-items:center;justify-content:space-between;padding:0 13px;color:#788d8e}
+.studio-browser-bar span{display:flex;gap:5px}.studio-browser-bar span i{width:7px;height:7px;border-radius:50%;background:#d9ac9d}.studio-browser-bar span i:nth-child(2){background:#ead19b}.studio-browser-bar span i:nth-child(3){background:#a6c8ad}
+.studio-browser-bar small{font:600 8px "DM Sans",sans-serif;letter-spacing:.13em}
+.studio-case-image img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:contain}
+.studio-case-image.is-built{transform:rotate(.7deg)}
+.studio-built-badge{position:absolute;right:13px;bottom:12px;display:flex;gap:6px;align-items:center;border-radius:8px;background:#eff9f0;color:#43776c;padding:6px 9px;font:600 12px "DM Sans","Noto Sans Thai",sans-serif;box-shadow:0 2px 10px #213c4524}
+.studio-case-caption{display:flex;flex-direction:column;justify-content:center;gap:25px;padding:38px 28px 28px;background:#f9f6ea;border-left:2px dashed #d4dfd4}
+.studio-case-caption>div:first-child>span{color:#648e7e;font:700 12px "DM Sans",sans-serif;letter-spacing:.15em}
+.studio-case-caption h3{font:400 clamp(27px,3vw,40px)/1.05 "Patrick Hand","Mali",cursive;margin:13px 0 14px;color:#224d64}
+.studio-case-caption p{font:400 15px/1.7 "DM Sans","Noto Sans Thai",sans-serif;color:#617c7d;margin:0}
+.studio-case-next{display:flex;align-items:center;gap:9px}
+.studio-case-next button{width:42px;height:42px;display:grid;place-items:center;background:#fffdf7;border:2px solid #c1d9ca;border-radius:50%;color:#3d806d;cursor:pointer;transition:transform .25s,background .25s}
+.studio-case-next button:hover{transform:translateY(-3px);background:#e0f1e5}
+.studio-case-disclaimer{margin:20px 6px 0;color:#84948e;font:400 13px/1.5 "DM Sans","Noto Sans Thai",sans-serif}
+
+/* Process: explore one step at a time, rather than four inert slogans. */
+.studio-process{background:#e7f1ea;color:#24485a;padding:100px 0 98px;position:relative}
+.studio-process:before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 82% 16%,#fdf6d3a9,transparent 44%);pointer-events:none}
+.studio-process>.studio-shell{position:relative}
+.studio-process .studio-eyebrow{color:#628a7e}
+.studio-process .studio-eyebrow svg{color:#d2aa60}
+.studio-process-top h2 em{color:#44846c;transform:rotate(-2deg)}
+.studio-process-top>p{color:#57787b}
+.studio-process-track{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-top:32px}
+.studio-process-step{position:relative;min-height:196px;display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;gap:9px;padding:20px 20px 18px;text-align:left;color:#365c61;background:#fbfaf4;border:2px solid #b6d0bf;border-radius:13px 18px 14px 17px;cursor:pointer;box-shadow:4px 5px 0 #ccdacf;transition:transform .27s,background .27s,box-shadow .27s}
+.studio-process-step:nth-child(2){border-color:#b6d0d9}.studio-process-step:nth-child(3){border-color:#e3cb9d}.studio-process-step:nth-child(4){border-color:#bec5de}
+.studio-process-step:hover{transform:translateY(-5px);box-shadow:5px 9px 0 #ccdacf}
+.studio-process-step.is-active{background:#2f7180;color:#fff;border-color:#205769;transform:translateY(-7px);box-shadow:6px 9px 0 #bad1c4}
+.studio-process-number{font:700 14px "DM Sans",sans-serif;letter-spacing:.07em;color:inherit;opacity:.72}
+.studio-process-icon{display:grid;place-items:center;width:58px;height:58px;border:2px solid #b9d6c9;border-radius:15px 20px 15px 18px;background:#e4efe7;color:#53866e;transform:rotate(-5deg)}
+.studio-process-step:nth-child(2) .studio-process-icon{background:#e8f1f4;color:#5081a0}
+.studio-process-step:nth-child(3) .studio-process-icon{background:#fff0d0;color:#b48a42}
+.studio-process-step:nth-child(4) .studio-process-icon{background:#eeecf5;color:#727dba}
+.studio-process-step.is-active .studio-process-icon{background:#f3d57a;color:#285a60;border-color:#f7e9c2}
+.studio-process-step strong{font:400 clamp(25px,2.7vw,34px) "Patrick Hand","Mali",cursive;line-height:1.05}
+.studio-process-arrow{position:absolute;right:18px;bottom:18px;opacity:.55}
+.studio-process-description{display:flex;justify-content:space-between;align-items:center;gap:25px;margin-top:22px;padding:24px 28px;background:#fffefa;border:2px solid #c4d9cf;border-radius:12px 17px 13px 18px;box-shadow:5px 6px 0 #d0e3d5}
+.studio-process-progress{flex:0 0 74px;height:6px;border-radius:99px;background:#dce9e3;overflow:hidden}
+.studio-process-progress>span{display:block;height:100%;background:#4d9278;border-radius:inherit;transition:width .4s ease}
+.studio-process-description>div{display:flex;align-items:center;gap:13px;flex:1;min-width:0;flex-wrap:wrap}
+.studio-process-description>div>span{color:#659585;font:700 12px "DM Sans",sans-serif;white-space:nowrap}
+.studio-process-description strong{color:#285c68;font:400 28px "Patrick Hand","Mali",cursive}
+.studio-process-description p{font:400 14px/1.6 "DM Sans","Noto Sans Thai",sans-serif;color:#617976;margin:0;flex-basis:100%}
+.studio-process-description small{align-self:flex-end;white-space:nowrap;color:#829b91;font:600 18px "Caveat","Mali",cursive}
+.studio-end-note{margin-top:74px;padding:24px 30px;display:flex;align-items:center;gap:24px;border:2px dashed #8fb5a4;background:#d8e9df;border-radius:16px 19px 14px 18px}
+.studio-end-icon{flex:none;display:grid;place-items:center;width:61px;height:61px;background:#f5d87c;border-radius:15px 19px 17px 12px;color:#35677c;transform:rotate(8deg)}
+.studio-end-note>div{flex:1}
+.studio-end-note strong{font:400 31px "Patrick Hand","Mali",cursive;color:#285a67}
+.studio-end-note p{font:400 15px/1.6 "DM Sans","Noto Sans Thai",sans-serif;color:#5e7c79;margin:2px 0 0}
+.studio-end-note a{display:flex;align-items:center;gap:12px;padding:13px 18px;background:#2d7080;color:white;border-radius:10px 14px 11px 15px;font:600 19px "Patrick Hand","Mali",cursive;white-space:nowrap;text-decoration:none;box-shadow:3px 5px 0 #bbd3c2;transition:transform .2s}
+.studio-end-note a:hover{transform:translateY(-4px)}
+.studio-story :is(a,button):focus-visible{outline:3px solid #d4a451;outline-offset:4px}
+.studio-story[lang="th"] :is(.studio-design-copy h2,.studio-case-heading h2,.studio-process-top h2,.studio-design-copy h2 em,.studio-case-heading h2 em,.studio-process-top h2 em,.studio-board-ui strong,.studio-case-caption h3,.studio-process-step strong,.studio-process-description strong,.studio-end-note strong,.studio-board-note,.studio-hand-note,.studio-primary-link,.studio-board-button,.studio-end-note a){font-family:"Mali","Noto Sans Thai",sans-serif;line-height:1.45;letter-spacing:-.02em}
+.studio-story[lang="th"] :is(.studio-design-copy h2,.studio-case-heading h2,.studio-process-top h2){font-size:clamp(40px,4.9vw,66px)}
+.studio-story[lang="th"] :is(.studio-design-copy h2 em,.studio-case-heading h2 em,.studio-process-top h2 em){font-size:1.06em}
+.studio-story[lang="th"] .studio-board-ui strong{font-size:24px}
+.studio-story[lang="th"] .studio-process-description small{font-family:"Mali",sans-serif;font-size:12px}
+@media(max-width:1020px){
+ .studio-design-grid{gap:32px}
+ .studio-board-inside{gap:10px}
+ .studio-design-copy h2,.studio-case-heading h2,.studio-process-top h2{font-size:clamp(57px,7vw,77px)}
+ .studio-board-ui{padding:15px;min-height:215px}
+ .studio-board-ui strong{font-size:29px}
+ .studio-case-control{align-items:flex-start;flex-direction:column}
+}
+@media(max-width:760px){
+ .studio-shell{width:min(640px,calc(100% - 36px))}
+ .studio-design{padding:80px 0 105px}
+ .studio-design-grid{grid-template-columns:1fr;gap:45px}
+ .studio-design-copy h2{font-size:clamp(64px,11vw,84px)}
+ .studio-design-copy>p{max-width:550px}
+ .studio-hand-note{margin-top:21px}
+ .studio-system-board{max-width:600px;justify-self:stretch}
+ .studio-case,.studio-process{padding:80px 0}
+ .studio-case-heading,.studio-process-top{display:block;margin-bottom:28px}
+ .studio-case-heading h2,.studio-process-top h2{font-size:clamp(61px,10vw,81px);margin-bottom:20px}
+ .studio-case-heading>p,.studio-process-top>p{max-width:540px}
+ .studio-case-control{padding:14px}
+ .studio-stage-tabs{width:100%;justify-content:space-between}
+ .studio-stage-tabs button{flex:1;padding:10px 6px;font-size:12px;gap:5px}
+ .studio-case-body{grid-template-columns:1fr}
+ .studio-case-art{min-height:340px}
+ .studio-case-caption{border-left:none;border-top:1px dashed #d4dfd4;flex-direction:row;align-items:center;justify-content:space-between;padding:19px 21px;gap:14px}
+ .studio-case-caption h3{font-size:30px;margin:6px 0}
+ .studio-case-caption p{font-size:14px}
+ .studio-case-next{flex:none}
+ .studio-process-track{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+ .studio-process-step{min-height:157px}
+ .studio-process-description{gap:12px;flex-wrap:wrap}
+ .studio-process-description small{margin-left:auto}
+ .studio-end-note{margin-top:45px;flex-wrap:wrap}
+ .studio-end-note a{margin-left:auto}
+}
+@media(max-width:460px){
+ .studio-shell{width:calc(100% - 28px)}
+ .studio-design{padding:64px 0 93px}
+ .studio-eyebrow{font-size:11px;letter-spacing:.1em}
+ .studio-design-copy h2{font-size:clamp(55px,13vw,70px)}
+ .studio-design-copy>p{font-size:15px}
+ .studio-primary-link{font-size:17px;padding:12px 14px;gap:12px}
+ .studio-system-board{padding:10px}
+ .studio-board-top,.studio-board-bottom{font-size:8px}
+ .studio-board-inside{grid-template-columns:1fr;gap:13px}
+ .studio-board-left{border-right:none;border-bottom:1px dashed #c6d2c8;padding-right:0;padding-bottom:14px;display:grid;grid-template-columns:1fr 1fr;align-items:center}
+ .studio-board-small{grid-column:1/-1}
+ .studio-swatches{min-height:33px}
+ .studio-swatch{width:31px}
+ .studio-board-type{font-size:54px}
+ .studio-board-type span{font-size:30px}
+ .studio-type-caption{grid-column:1/-1}
+ .studio-board-ui{min-height:194px;padding:14px}
+ .studio-case,.studio-process{padding:67px 0}
+ .studio-case-heading h2,.studio-process-top h2{font-size:clamp(48px,12vw,64px)}
+ .studio-case-heading>p,.studio-process-top>p{font-size:15px}
+ .studio-case-control{gap:10px}
+ .studio-case-id{font-size:10px}
+ .studio-stage-tabs button{font-size:10px;flex-wrap:wrap;gap:1px;line-height:1.2}
+ .studio-stage-tabs button span{width:100%}
+ .studio-case-art{min-height:274px}
+ .studio-wireframe,.studio-case-image{width:94%;margin:20px auto}
+ .studio-wireframe{padding:8px}
+ .studio-wire-hero{gap:8px;padding:10px 0}
+ .wire-photo{height:88px}
+ .studio-wire-columns>div{min-height:62px;padding:5px;gap:4px}
+ .studio-wire-columns>div span:first-child{height:24px}
+ .studio-wire-columns>div span{height:6px}
+ .studio-case-caption{padding:15px;align-items:end}
+ .studio-case-caption h3{font-size:25px}
+ .studio-case-caption p{font-size:12px;line-height:1.5}
+ .studio-case-next button{width:34px;height:34px}
+ .studio-case-next{gap:4px}
+ .studio-process-step{padding:14px;min-height:146px}
+ .studio-process-step strong{font-size:25px}
+ .studio-process-icon{width:45px;height:45px}
+ .studio-process-icon svg{width:25px;height:25px}
+ .studio-process-description{padding:16px}
+ .studio-process-progress{flex:0 0 45px}
+ .studio-process-description strong{font-size:23px}
+ .studio-end-note{padding:20px;gap:14px}
+ .studio-end-icon{width:48px;height:48px}
+ .studio-end-note strong{font-size:24px}
+ .studio-end-note p{font-size:13px}
+ .studio-end-note a{margin:6px 0 0;width:100%;justify-content:center;font-size:18px}
+ .studio-story[lang="th"] :is(.studio-design-copy h2,.studio-case-heading h2,.studio-process-top h2){font-size:clamp(34px,9vw,46px)}
+}
+@media(prefers-reduced-motion:reduce){
+ .studio-reveal{opacity:1;transform:none;transition:none}
+ .studio-system-board.is-visible{transform:none}
+ .studio-story *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+}
+
+
+/* Small screens: meaningful component touch targets and safe text wrapping. */
+@media(max-width:760px){
+ .studio-design-copy,.studio-case-heading,.studio-process-top{min-width:0}
+ .studio-design-copy h2,.studio-case-heading h2,.studio-process-top h2{overflow-wrap:break-word}
+ .studio-stage-tabs button{min-height:44px}
+ .studio-primary-link{min-height:48px}
+}
+@media(max-width:360px){
+ .studio-shell{width:calc(100% - 24px)}
+ .studio-stage-tabs{flex-wrap:wrap}
+ .studio-stage-tabs button{flex:1 1 30%;min-width:0}
+}

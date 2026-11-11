@@ -261,3 +261,14 @@
 @media(prefers-reduced-motion:reduce){
  .contact-cinematic-content,.contact-cinematic-cta{animation:none;transition:none}
 }
+
+
+@media(max-width:600px){
+ .contact-cinematic-foot a{min-height:44px;display:inline-flex;align-items:center}
+ .contact-cinematic-label{font-size:10px;line-height:1.3}
+ .contact-cinematic-content p{font-size:14px;line-height:1.7}
+}
+@media(max-width:360px){
+ .contact-cinematic-content h1{font-size:clamp(46px,14vw,52px)}
+ .contact-cinematic{min-width:0}
+}
