@@ -426,7 +426,7 @@ export default function DesignSystemModal({open,onClose,language}:Props){
        <div className="dsm-cover-meta"><span>FOUNDATIONS & INTERACTION</span><span>VOL. 01 / 2026</span></div>
        <div className="dsm-overview-grid">
         <div><span className="dsm-kicker">DESIGN / THINK / MAKE</span><h1 id="dsm-title">{t.title}<span>.</span></h1><p id="dsm-desc">{t.sub}</p></div>
-        <div className="dsm-cover-art" aria-hidden="true"><span className="dsm-art-caption">VISUAL IDENTITY</span><div className="dsm-art-letter">Aa<em>✳</em></div><div className="dsm-art-chips">{colors.slice(0,5).map(c=><span style={{background:c.hex}} key={c.hex}/>)}</div><span className="dsm-art-bottom">COLORS — TYPOGRAPHY — INTERACTIONS</span></div>
+        <div className="dsm-cover-art" aria-hidden="true"><span className="dsm-art-caption">VISUAL IDENTITY</span><div className="dsm-art-letter">Aa<em><UiIcon name="asterisk" size={46}/></em></div><div className="dsm-art-chips">{colors.slice(0,5).map(c=><span style={{background:c.hex}} key={c.hex}/>)}</div><span className="dsm-art-bottom">COLORS — TYPOGRAPHY — INTERACTIONS</span></div>
        </div>
       </section>
       <nav className="dsm-chapter-nav" aria-label={t.browse}><span className="dsm-chapter-title">{t.browse}</span>{tabs.map((tab,i)=><button type="button" key={tab[0]} onClick={()=>goTo(tab[0])} className={active===tab[0]?"is-active":""}><small>{String(i+1).padStart(2,"0")}</small>{language==="th"?tab[2]:tab[1]}</button>)}</nav>

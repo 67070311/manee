@@ -11,7 +11,7 @@ export default function HomeBanner({language}:{language:Language}){
   <div className="home-banner-shade" aria-hidden="true"/><div className="banner-grain" aria-hidden="true"/>
   <div className="home-banner-content">
    <div className="home-banner-overline"><span className="home-banner-spark"/><span>{t.portfolio}</span><span className="home-banner-overline-right">{t.role}</span></div>
-   <div className="home-banner-headline"><span className="home-banner-sketch-tag" aria-hidden="true">{language==="th"?"ออกแบบ ✳ โค้ด ✳ เล่น":"DESIGN ✳ CODE ✳ PLAY"}</span>
+   <div className="home-banner-headline"><span className="home-banner-sketch-tag" aria-hidden="true"><span>{language==="th"?"ออกแบบ":"DESIGN"}</span><UiIcon name="asterisk" size={17} className="home-banner-sketch-divider"/><span>{language==="th"?"โค้ด":"CODE"}</span><UiIcon name="asterisk" size={17} className="home-banner-sketch-divider"/><span>{language==="th"?"เล่น":"PLAY"}</span></span>
     <span className="home-banner-intro">{t.intro}</span>
     <h1><span className="home-banner-name">Manee<span className="home-banner-period">.</span></span></h1>
     <div className="home-banner-subline"><span>{t.lead}</span> <em>{t.italic}</em></div>

@@ -216,7 +216,7 @@
 .ck-progress-track{height:12px;flex:1;background:#f6d39c;border:2px solid #bd8148;border-radius:99px;overflow:hidden;box-shadow:none}
 .ck-progress-track i{display:block;height:100%;background:repeating-linear-gradient(100deg,#80b492 0 12px,#a9ce94 12px 24px);border-radius:99px;transition:width .3s}
 .ck-command{display:flex;align-items:center;gap:15px;min-height:80px;padding:10px 17px;border-radius:17px;border:3px solid #ae7a4c;background:#fff9e7;box-shadow:0 3px 0 #d8b98d;position:relative;overflow:hidden}
-.ck-command:after{content:"✿";position:absolute;right:65px;bottom:-17px;color:#ecd6a3;font-size:70px;pointer-events:none}
+.ck-command:after{content:"";width:46px;height:46px;border:2px dashed currentColor;border-radius:50%;position:absolute;right:65px;bottom:-17px;color:#ecd6a3;font-size:70px;pointer-events:none}
 .ck-command-number{flex:none;display:grid;place-items:center;width:49px;height:49px;border-radius:13px;background:#f3be69;border:3px solid #b47736;transform:rotate(-5deg);color:#fffdf0;font-size:21px;font-weight:900;text-shadow:1px 2px #94602e}
 .ck-command-copy{flex:1;min-width:0;position:relative;z-index:1}
 .ck-command-kicker{color:#aa855c;font-size:10px;font-weight:900;letter-spacing:.02em;line-height:1.2}
@@ -235,7 +235,7 @@
 .ck-stage-milestones small{font-size:9px;opacity:.82}
 .ck-stage-world{position:relative;flex:1;min-height:0;overflow:hidden;display:grid;place-items:center;border:3px solid #d9aa75;border-radius:13px;background:repeating-linear-gradient(2deg,#edd2a2 0 9px,#f2dcb6 9px 20px,#f5dfa9 20px 34px);isolation:isolate}
 .ck-stage-world:before{content:"";position:absolute;inset:10px;border:2px solid #fff8e472;border-radius:10px;pointer-events:none}
-.ck-stage-world:after{content:"✦";position:absolute;left:4%;top:10%;color:#e6b87b;font-size:36px;opacity:.6;pointer-events:none}
+.ck-stage-world:after{content:"";width:23px;height:23px;border:2px solid currentColor;border-radius:6px;transform:rotate(45deg);position:absolute;left:4%;top:10%;color:#e6b87b;font-size:36px;opacity:.6;pointer-events:none}
 .ck-stage-counterline{position:absolute;left:0;right:0;top:64%;height:3px;background:#e2b77f;box-shadow:0 4px #f8eac44f}
 .ck-prep-station{position:relative;display:grid;place-items:center;width:min(61%,390px);height:94%;max-height:390px}
 .ck-board-icon{display:block;width:100%;height:96%;object-fit:contain;filter:drop-shadow(0 11px 4px #84604445);transform:rotate(-6deg)}
@@ -397,7 +397,7 @@
 .menu-howtoplay{display:flex;align-items:center;justify-content:space-between;gap:23px;margin-bottom:15px;
  padding:16px 20px;border:3px solid #e5b76e;border-radius:22px;background:#fff1ca;
  box-shadow:0 4px 0 #e1c393;position:relative;overflow:hidden}
-.menu-howtoplay:before{content:"✿";position:absolute;right:27%;top:-30px;font-size:97px;color:#f3dba5;opacity:.6;pointer-events:none}
+.menu-howtoplay:before{content:"";width:80px;height:80px;border:3px dashed currentColor;border-radius:50%;position:absolute;right:27%;top:-30px;font-size:97px;color:#f3dba5;opacity:.6;pointer-events:none}
 .menu-howto-copy{position:relative;z-index:1;flex:1;min-width:0}
 .menu-howto-eyebrow{color:#b5834a;font-size:10px;font-weight:900;letter-spacing:.08em}
 .menu-howto-copy h1{font:900 clamp(19px,2.2vw,27px)/1.3 "Mali","Noto Sans Thai",sans-serif;color:#82532d;letter-spacing:-.025em;margin:3px 0 5px}
@@ -852,7 +852,7 @@
   background:linear-gradient(123deg,#ffe6b3,#fff1cc 75%);
   border:3px solid #dfbc89;border-radius:25px;box-shadow:0 5px 0 #ead7ac;
   overflow:hidden}
-.menu-vocab-hero:before,.menu-vocab-hero:after{content:"✿";position:absolute;right:10%;top:-41px;
+.menu-vocab-hero:before,.menu-vocab-hero:after{content:"";width:90px;height:90px;border:3px dashed currentColor;border-radius:50%;position:absolute;right:10%;top:-41px;
   font-size:105px;opacity:.19;color:#ce9a56;pointer-events:none}
 .menu-vocab-hero:after{top:auto;right:36%;bottom:-45px;font-size:80px}
 .menu-vocab-hero-text{position:relative;z-index:1;max-width:620px;min-width:0}
@@ -1012,7 +1012,7 @@
 .menu-fresh-showcase:before{position:absolute;z-index:-1;content:"";width:310px;height:310px;
   border:3px dashed #a8c6b25e;border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%);
   pointer-events:none}
-.menu-fresh-showcase:after{content:"✿";position:absolute;z-index:-1;top:44px;right:19px;
+.menu-fresh-showcase:after{content:"";width:48px;height:48px;border:2px dashed currentColor;border-radius:50%;position:absolute;z-index:-1;top:44px;right:19px;
   font-size:57px;color:#a1c3a459;transform:rotate(-16deg);pointer-events:none}
 .menu-fresh-sticker{position:relative;z-index:2;align-self:flex-start;
   display:flex;align-items:center;gap:10px;
@@ -1919,3 +1919,345 @@
  .ck-bottom-tray .ck-tray-list{grid-auto-rows:minmax(60px,auto)}
  .ck-bottom-tray .ck-tray-card{min-height:60px}
 }
+
+/* Decorative visuals and instruction marks are SVG or CSS outlines, not font pictographs. */
+.ck-command-kicker>span,.ck-stage-topline>span,.ck-ready-label{display:inline-flex;align-items:center;gap:5px}
+.ck-command-kicker>span svg{flex:none}
+.ck-stage-topline>span svg{flex:none;vertical-align:middle}
+.ck-ready-label{justify-content:center;color:#af7b38;font-weight:850}
+.ck-stage-foot>span:first-child svg{vertical-align:middle;margin-right:4px;flex:none}
+.menu-vocab-hero:after{width:75px;height:75px}
+
+/* Cooking gestures V3: each action has its own physical response. */
+.ck-stage-world.ck-interactive{touch-action:none;overscroll-behavior:contain}
+.ck-stage-world.ck-holding-heat{cursor:progress}
+.ck-stage-foot .ck-gesture-instruction{color:#846041;font-size:11px;font-weight:650}
+.ck-stage-foot .ck-action-progress-track{position:relative;display:inline-block;flex:0 0 70px;height:7px;background:#ffeed1;border:1px solid #d9b78b;border-radius:99px;overflow:hidden}
+.ck-action-progress-track>i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#80b795,#3b927b);transition:width .12s ease}
+.ck-stage-foot .ck-action-heat~.ck-action-progress-track>i{background:linear-gradient(90deg,#e3c169,#e68642)}
+.ck-stage-world .ck-gesture-trail{position:absolute;inset:0;width:100%;height:100%;z-index:16;overflow:visible;pointer-events:none;filter:drop-shadow(0 1px 1px #86644c44)}
+.ck-gesture-trail polyline{fill:none;stroke:#fffaf3;stroke-width:1.1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1.5 1.6;vector-effect:non-scaling-stroke;opacity:.86}
+.ck-stage-world .ck-gesture-cursor{position:absolute;z-index:25;pointer-events:none;will-change:left,top;filter:drop-shadow(0 9px 5px #704a3470);transition:none}
+.ck-gesture-cursor.ck-cursor-slice{transform:translate(-51%,-62%) rotate(-31deg)}
+.ck-gesture-cursor.ck-cursor-stir{transform:translate(-49%,-70%) rotate(17deg)}
+.ck-gesture-cursor.ck-cursor-toss,.ck-gesture-cursor.ck-cursor-drain{transform:translate(-50%,-50%) rotate(-16deg)}
+.ck-gesture-cursor.ck-cursor-dip,.ck-gesture-cursor.ck-cursor-serve{transform:translate(-50%,-60%) rotate(-13deg)}
+.ck-stage-world.ck-gesture-active.ck-action-slice .ck-board-knife,
+.ck-stage-world.ck-gesture-active.ck-action-stir .ck-bowl-active-action>img,
+.ck-stage-world.ck-gesture-active.ck-action-stir .ck-cooking-utensil,
+.ck-stage-world.ck-gesture-active.ck-action-toss .ck-cooking-utensil,
+.ck-stage-world.ck-gesture-active.ck-action-drain .ck-cooking-utensil,
+.ck-stage-world.ck-gesture-active.ck-action-serve .ck-serving-utensil{opacity:.25}
+.ck-stage-world.ck-action-toss.ck-gesture-active .ck-cook-workspace .ck-burner{animation:ck-wok-responsive .34s ease-in-out infinite alternate}
+.ck-stage-world.ck-action-toss.ck-gesture-active .ck-cook-workspace .ck-food-in-pot{animation:ck-food-toss-v3 .34s ease-in-out infinite alternate!important}
+.ck-stage-world.ck-action-stir.ck-gesture-active .ck-cook-workspace .ck-food-in-pot{animation:ck-food-orbit-v3 .56s ease-in-out infinite alternate!important}
+.ck-stage-world.ck-action-stir.ck-gesture-active .ck-bowl-sauce-surface{animation:ck-sauce-swirl-v3 .6s ease-in-out infinite alternate}
+.ck-stage-world.ck-action-dip.ck-gesture-active .ck-inside-bowl{animation:ck-dip-batter-v3 .45s ease-in-out infinite alternate}
+.ck-stage-world.ck-action-drain.ck-gesture-active .ck-prop-strainer{animation:ck-tilt-drain-v3 .45s ease-in-out infinite alternate}
+.ck-stage-world.ck-action-serve.ck-gesture-active .ck-plating-dish{animation:ck-plate-settle-v3 .45s ease-in-out infinite alternate}
+.ck-stage-world.ck-action-heat.ck-gesture-active .ck-pot-liquid{animation:ck-heat-bloom-v3 .8s ease-in-out infinite alternate}
+.ck-stage-world.ck-action-heat.ck-gesture-active .ck-burner-knob:after{animation:ck-heat-knob-v3 .75s ease-in-out both;transform-origin:50% 75%}
+@keyframes ck-wok-responsive{from{transform:translate(-50%,-50%) rotate(-8deg)}to{transform:translate(-50%,-50%) rotate(6deg)}}
+@keyframes ck-food-toss-v3{0%{transform:translate(-6px,1px) rotate(-12deg)}48%{transform:translate(9px,-18px) rotate(16deg) scale(1.05)}100%{transform:translate(-4px,3px) rotate(-7deg)}}
+@keyframes ck-food-orbit-v3{from{transform:translate(-8px,-5px) rotate(-16deg) scale(.98)}to{transform:translate(7px,7px) rotate(17deg) scale(1.04)}}
+@keyframes ck-sauce-swirl-v3{from{transform:rotate(-8deg) scale(.98)}to{transform:rotate(9deg) scale(1.05)}}
+@keyframes ck-dip-batter-v3{from{transform:translateY(-4px) scale(.93)}to{transform:translateY(7px) scale(1.02)}}
+@keyframes ck-tilt-drain-v3{from{transform:translate(-50%,-50%) rotate(-11deg)}to{transform:translate(-50%,-50%) rotate(10deg)}}
+@keyframes ck-plate-settle-v3{from{transform:rotate(-2deg)}to{transform:rotate(2deg)}}
+@keyframes ck-heat-bloom-v3{from{filter:brightness(1);transform:scale(.98)}to{filter:brightness(1.1) saturate(1.18);transform:scale(1.025)}}
+@keyframes ck-heat-knob-v3{from{transform:rotate(-32deg)}to{transform:rotate(38deg)}}
+.ck-cut-chunk.ck-chunk-carrot{background:#f2a04f;border-color:#bb702c}
+.ck-cut-chunk.ck-chunk-scallion,.ck-cut-chunk.ck-chunk-lemongrass{background:#a5c97f;border-color:#729554}
+.ck-cut-chunk.ck-chunk-galangal,.ck-cut-chunk.ck-chunk-mushroom{background:#d6b28b;border-color:#967451}
+.ck-cut-chunk.ck-chunk-tofu{background:#fff1ca;border-color:#c8a873}
+.ck-cut-chunk.ck-chunk-sweetpotato{background:#e3a352;border-color:#b87843}
+.ck-cut-chunk.ck-chunk-0{left:36%;top:47%}.ck-cut-chunk.ck-chunk-1{left:43%;top:53%}
+.ck-cut-chunk.ck-chunk-2{left:57%;top:52%}.ck-cut-chunk.ck-chunk-3{left:63%;top:43%}
+.ck-cut-chunk.ck-chunk-4{left:50%;top:45%}.ck-cut-chunk.ck-chunk-5{left:56%;top:61%}
+/* Liquids remain linked to the inside of the selected vessel. */
+.ck-vessel-pour{isolation:isolate}
+.ck-vessel-stream{z-index:12;transform-origin:center top}
+.ck-pour-droplets{position:absolute;z-index:14;left:34%;top:28%;width:38%;height:20%;border-radius:50%;overflow:hidden;pointer-events:none}
+.ck-pour-droplets i{position:absolute;left:48%;top:0;width:5px;height:7px;background:#ad7449;border-radius:40% 40% 55% 55%;opacity:0;animation:ck-contained-drop-v3 1.75s ease-in both}
+.ck-pour-droplets i:nth-child(2){left:41%;animation-delay:.10s;width:4px;height:6px}
+.ck-pour-droplets i:nth-child(3){left:56%;animation-delay:.18s;width:7px;height:6px}
+.ck-pour-droplets i:nth-child(4){left:50%;animation-delay:.28s}
+.ck-pour-droplets i:nth-child(5){left:37%;animation-delay:.39s;width:4px;height:5px}
+.ck-vessel-rings{overflow:hidden;clip-path:ellipse(50% 50% at 50% 50%)}
+.ck-vessel-rings i{position:absolute;width:24%;height:18%;top:26%;left:24%;border-radius:50%;border:2px solid #fff4d68a;opacity:0;animation:ck-splash-v3 1.75s ease-out both}
+.ck-vessel-rings i:nth-child(2){left:51%;top:53%;animation-delay:.11s}
+.ck-vessel-rings i:nth-child(3){left:39%;top:15%;width:15%;height:25%;animation-delay:.22s}
+.ck-prep-workspace .ck-pour-droplets{left:25%;top:29%;width:50%;height:16%}
+.ck-cook-workspace .ck-pour-droplets{left:30%;top:30%;width:45%;height:18%}
+.ck-serve-workspace .ck-plating-dish .ck-vessel-pour{z-index:9}
+.ck-serve-workspace .ck-plating-dish .ck-vessel-pour>img{left:54%;top:-21%;width:40%;height:62%;max-height:116px}
+.ck-serve-workspace .ck-plating-dish .ck-vessel-stream{left:48%;top:8%;height:34%}
+.ck-serve-workspace .ck-plating-dish .ck-pour-droplets{left:26%;top:24%;width:50%;height:20%}
+.ck-serve-workspace .ck-plating-dish .ck-vessel-rings{left:25%;top:28%;width:49%;height:15%}
+.ck-vessel-pour.ck-pour-water .ck-pour-droplets i,
+.ck-vessel-pour.ck-pour-broth .ck-pour-droplets i,
+.ck-vessel-pour.ck-pour-dashi .ck-pour-droplets i{background:#b9d9d7}
+.ck-vessel-pour.ck-pour-oil .ck-pour-droplets i{background:#eab74a}
+.ck-vessel-pour.ck-pour-fishsauce .ck-pour-droplets i{background:#b77848}
+.ck-vessel-pour.ck-paste-pour>img{animation:ck-paste-spoon-v3 1.85s cubic-bezier(.2,.75,.28,1) both}
+.ck-vessel-pour.ck-paste-pour .ck-vessel-stream{width:14px;height:24px;border-radius:50% 40% 65% 60%;background:linear-gradient(#9a643e,#7b4528);animation:ck-paste-fall-v3 1.8s ease-in-out both}
+.ck-vessel-pour.ck-paste-pour.ck-pour-miso .ck-vessel-stream{background:linear-gradient(#edce93,#bf995d)}
+.ck-vessel-pour.ck-paste-pour.ck-pour-gochujang .ck-vessel-stream{background:linear-gradient(#d25439,#982e28)}
+.ck-vessel-pour.ck-paste-pour .ck-pour-droplets i{background:#ad6247}
+@keyframes ck-contained-drop-v3{0%,35%{opacity:0;transform:translateY(-7px) scale(.5)}45%{opacity:.8}70%{opacity:.92;transform:translateY(18px) scale(.88)}85%,100%{opacity:0;transform:translateY(22px) scale(.6)}}
+@keyframes ck-splash-v3{0%,37%{opacity:0;transform:scale(.25)}56%{opacity:.85;transform:scale(.8)}82%,100%{opacity:0;transform:scale(1.65)}}
+@keyframes ck-paste-spoon-v3{0%{opacity:0;transform:translate(24px,-25px) rotate(0) scale(.7)}16%{opacity:1}32%,66%{opacity:1;transform:translate(-4px,-11px) rotate(-38deg)}82%{opacity:.9;transform:translate(4px,-17px) rotate(-10deg)}100%{opacity:0;transform:translate(28px,-23px) scale(.8)}}
+@keyframes ck-paste-fall-v3{0%,35%{opacity:0;transform:translateY(-10px) scale(.5)}43%{opacity:1;transform:translateY(1px) scale(.7)}63%{opacity:.95;transform:translateY(25px) scale(1)}79%,100%{opacity:0;transform:translateY(32px) scale(.3)}}
+@media(max-width:850px){.ck-stage-foot .ck-gesture-instruction{font-size:10px}.ck-stage-foot .ck-action-progress-track{flex-basis:48px}}
+@media(max-width:580px){.ck-stage-foot .ck-gesture-instruction{font-size:9px}.ck-stage-foot .ck-action-progress-track{flex-basis:38px;height:6px}.ck-stage-world .ck-gesture-cursor{width:54px;height:54px}}
+@media(max-width:370px){.ck-stage-foot .ck-gesture-instruction{max-width:130px}.ck-stage-foot .ck-action-progress-track{display:none}}
+@media(prefers-reduced-motion:reduce){
+ .ck-stage-world.ck-gesture-active .ck-pot-liquid,.ck-stage-world.ck-gesture-active .ck-food-in-pot,
+ .ck-stage-world.ck-gesture-active .ck-burner,.ck-stage-world.ck-gesture-active .ck-plating-dish,
+ .ck-stage-world.ck-gesture-active .ck-prop-strainer,.ck-pour-droplets i,.ck-vessel-rings i,
+ .ck-vessel-pour.ck-paste-pour>img,.ck-vessel-pour.ck-paste-pour .ck-vessel-stream{animation:none!important}
+ .ck-gesture-trail{display:none}
+}
+
+/* Learning feedback: identify the incorrect picture without moving the layout. */
+.ck-tray-card.is-wrong{border-color:#d57f64!important;background:#fff0e3!important;box-shadow:inset 0 0 0 2px #e3a18b!important;animation:ck-card-try-again .34s ease-in-out 1}
+.ck-tray-card.is-wrong img{filter:saturate(.8)}
+@keyframes ck-card-try-again{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px) rotate(-1deg)}75%{transform:translateX(4px) rotate(1deg)}}
+.ck-cut-chunk.ck-cut-chunk-0{left:36%;top:47%}.ck-cut-chunk.ck-cut-chunk-1{left:43%;top:53%}
+.ck-cut-chunk.ck-cut-chunk-2{left:57%;top:52%}.ck-cut-chunk.ck-cut-chunk-3{left:63%;top:43%}
+.ck-cut-chunk.ck-cut-chunk-4{left:50%;top:45%}.ck-cut-chunk.ck-cut-chunk-5{left:56%;top:61%}
+.ck-stage-world.ck-action-heat + .ck-stage-foot .ck-action-progress-track>i{background:linear-gradient(90deg,#e4c063,#e77e39)}
+@media(max-width:580px){
+ .ck-stage-foot>span:last-child{display:none}
+ .ck-stage-foot>span:first-child{flex-wrap:nowrap;overflow:hidden;min-width:0;width:100%}
+ .ck-stage-foot .ck-gesture-instruction{flex:1 1 auto;min-width:0;max-width:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+ .ck-stage-foot .ck-action-progress-track{flex:0 0 39px}
+ .ck-stage-foot b{flex:none}
+}
+@media(prefers-reduced-motion:reduce){.ck-tray-card.is-wrong{animation:none!important}}
+
+/* Finishing motions are visible in the serving dish, not only in the pan. */
+.ck-stage-world.ck-action-stir.ck-gesture-active .ck-plating-item{animation:ck-plate-mix-food .48s ease-in-out infinite alternate!important}
+.ck-stage-world.ck-action-stir.ck-gesture-active .ck-plating-item:nth-child(2){animation-delay:-.16s!important}
+.ck-stage-world.ck-action-stir.ck-gesture-active .ck-plating-item:nth-child(3){animation-delay:-.32s!important}
+.ck-plating-mix-rings{position:absolute;z-index:7;inset:25%;pointer-events:none}
+.ck-plating-mix-rings i{position:absolute;inset:13%;border:3px dashed #dfad70a3;border-radius:50%;animation:ck-plate-whirl .7s linear infinite}
+.ck-plating-mix-rings i:nth-child(2){inset:28%;animation-direction:reverse;animation-duration:.53s;border-color:#f5d8a1}
+.ck-serving-drips{position:absolute;z-index:8;top:27%;left:34%;width:38%;height:48%;overflow:hidden;pointer-events:none}
+.ck-serving-drips i{position:absolute;left:30%;top:5%;width:6px;height:11px;border-radius:45% 45% 60% 60%;background:#e7b45b;opacity:0;animation:ck-oil-drain-fall .66s ease-in infinite}
+.ck-serving-drips i:nth-child(2){left:53%;animation-delay:.15s;width:4px;height:9px}
+.ck-serving-drips i:nth-child(3){left:72%;animation-delay:.29s}
+.ck-serving-drips i:nth-child(4){left:43%;animation-delay:.41s;width:5px;height:7px}
+@keyframes ck-plate-whirl{to{transform:rotate(360deg)}}
+@keyframes ck-plate-mix-food{from{transform:translate(-8px,-4px) rotate(-12deg)}to{transform:translate(9px,5px) rotate(12deg)}}
+@keyframes ck-oil-drain-fall{0%{opacity:0;transform:translateY(-6px) scale(.6)}25%{opacity:.85}80%{opacity:.8;transform:translateY(28px) scale(.9)}100%{opacity:0;transform:translateY(37px) scale(.6)}}
+@media(prefers-reduced-motion:reduce){.ck-plating-mix-rings i,.ck-serving-drips i,.ck-stage-world.ck-action-stir.ck-gesture-active .ck-plating-item{animation:none!important}}
+
+/* Short completion beat without blocking the next narrated instruction. */
+.ck-stage-world.ck-stage-success.ck-action-toss .ck-food-in-pot,
+.ck-stage-world.ck-stage-success.ck-action-stir .ck-food-in-pot{animation:ck-dish-settle .52s cubic-bezier(.21,.8,.28,1) both!important}
+.ck-stage-world.ck-stage-success.ck-action-slice .ck-cut-chunk{animation:ck-chunk-split .46s cubic-bezier(.15,.8,.28,1.1) both}
+.ck-stage-world.ck-stage-success.ck-action-heat .ck-pot-liquid{animation:ck-heat-finish .62s ease-out both}
+@keyframes ck-dish-settle{0%{transform:translateY(-9px) rotate(-7deg)}55%{transform:translateY(3px) rotate(4deg)}100%{transform:translateY(0) rotate(0)}}
+@keyframes ck-heat-finish{0%{filter:brightness(1.13) saturate(1.18)}100%{filter:brightness(1) saturate(1)}}
+@media(prefers-reduced-motion:reduce){.ck-stage-world.ck-stage-success .ck-food-in-pot,.ck-stage-world.ck-stage-success .ck-cut-chunk,.ck-stage-world.ck-stage-success .ck-pot-liquid{animation:none!important}}
+
+/* V4 Illustrated food + next-action wayfinding. No modal, no extra Next button. */
+.ck-stage-world .ck-step-visual-guide{
+  position:absolute;z-index:28;top:10px;left:11px;
+  display:flex;align-items:center;gap:9px;max-width:min(238px,34%);
+  padding:8px 10px 8px 8px;border:2px solid #c99b66;
+  background:#fff9e6f5;border-radius:12px 15px 13px 10px;
+  box-shadow:0 3px 0 #c99a6b80,0 7px 13px #7d563d18;
+  transform:rotate(-1.2deg);pointer-events:none;
+  color:#82583d;animation:ck-guide-entrance .36s ease-out both;
+}
+.ck-step-visual-guide .ck-step-visual-icon{
+  display:grid;place-items:center;flex:none;width:35px;height:35px;
+  background:#f3d88f;border:2px solid #bd8d52;border-radius:11px;
+  color:#9a6a3e;transform:rotate(-6deg);
+}
+.ck-step-visual-guide .ck-step-visual-copy{
+  display:flex;flex-direction:column;justify-content:center;gap:2px;min-width:0;
+}
+.ck-step-visual-copy strong{
+  font-size:clamp(12px,1.15vw,15px);line-height:1.1;letter-spacing:-.01em;
+  font-weight:900;color:#785031;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;
+}
+.ck-step-visual-copy small{
+  font-family:"Mali","Noto Sans Thai",sans-serif;
+  font-size:clamp(9px,.85vw,11px);line-height:1.35;font-weight:700;
+  color:#907153;
+}
+.ck-step-visual-guide>svg:last-child{flex:none;color:#af8551}
+.ck-step-visual-guide.is-done{
+  border-color:#9cb894;background:#eff9e6f6;color:#507b62;
+}
+.ck-step-visual-guide.is-done .ck-step-visual-icon{background:#d4eac5;border-color:#95b58f;color:#4b8066}
+.ck-step-visual-guide.is-done .ck-step-visual-copy strong{color:#4f7c62}
+@keyframes ck-guide-entrance{
+  from{opacity:0;translate:0 -12px;scale:.95}
+  to{opacity:1;translate:0 0;scale:1}
+}
+.ck-bottom-tray.ck-tray-active .ck-tray-title strong{
+  color:#9d5c29;
+}
+.ck-bottom-tray.ck-tray-tools.ck-tray-active .ck-tray-title strong{color:#3e785a}
+.ck-bottom-tray.ck-tray-active .ck-tray-title{position:relative}
+.ck-bottom-tray .ck-tray-card.is-next{
+  opacity:1!important;border-color:#d38b3f!important;background:#fff4d8!important;
+  box-shadow:0 0 0 2px #f4d493 inset,0 3px 0 #c58b55,0 0 0 3px #ffd88d57!important;
+  transform:translateY(-1px);animation:ck-next-picture-nudge 1.6s ease-in-out infinite;
+}
+.ck-tray-tools .ck-tray-card.is-next{
+  border-color:#5f9a76!important;background:#eef8e5!important;
+  box-shadow:0 0 0 2px #c0dfb4 inset,0 3px 0 #7fa68b,0 0 0 3px #b8d5b46b!important;
+}
+.ck-bottom-tray .ck-tray-card.is-next:before{
+  content:"";position:absolute;z-index:3;top:4px;left:5px;
+  width:8px;height:8px;border-radius:50%;
+  background:#eda747;box-shadow:0 0 0 3px #fff2c5;
+}
+.ck-tray-tools .ck-tray-card.is-next:before{background:#5caa83}
+@keyframes ck-next-picture-nudge{
+  0%,100%{transform:translateY(-1px)}
+  50%{transform:translateY(-4px)}
+}
+/* In-pan food is illustrated as small cooked pieces, not whole ingredient icons. */
+.ck-cook-workspace .ck-food-in-pot.ck-illustrated-food{
+  display:block;position:relative;flex:0 0 auto;width:42%;height:43%;
+  max-width:110px;max-height:102px;overflow:visible;
+  filter:drop-shadow(0 3px 1px #80563840);
+  animation:ck-illustrated-food-enter .58s cubic-bezier(.17,.87,.3,1.12) both;
+}
+.ck-cook-workspace .ck-food-in-pot.ck-illustrated-food.ck-food-shrimp{width:52%;height:50%;max-width:135px}
+.ck-cook-workspace .ck-food-in-pot.ck-illustrated-food.ck-food-egg{width:44%;height:44%}
+.ck-cook-workspace .ck-food-in-pot.ck-illustrated-food.ck-food-tofu,
+.ck-cook-workspace .ck-food-in-pot.ck-illustrated-food.ck-food-mushroom{width:40%;height:39%}
+.ck-cook-workspace .ck-food-in-pot.ck-illustrated-food.ck-food-noodles,
+.ck-cook-workspace .ck-food-in-pot.ck-illustrated-food.ck-food-pasta{width:51%;height:47%}
+.ck-cook-workspace .ck-food-in-pot.ck-illustrated-food.ck-food-kimchi,
+.ck-cook-workspace .ck-food-in-pot.ck-illustrated-food.ck-food-spinach,
+.ck-cook-workspace .ck-food-in-pot.ck-illustrated-food.ck-food-wakame{width:36%;height:36%}
+.ck-cook-workspace .ck-food-in-pot.ck-food-cooked{
+  filter:drop-shadow(0 3px 2px #8056384a) saturate(1.17);
+}
+.ck-ingredient-entry .ck-illustrated-food{
+  display:block;width:100%;height:100%;max-width:100%;max-height:100%;
+  object-fit:contain;filter:drop-shadow(0 4px 3px #936b4680);
+}
+.ck-serve-workspace .ck-plating-item.ck-illustrated-food{
+  overflow:visible;filter:drop-shadow(0 3px 2px #76523c30);
+}
+.ck-cook-workspace .ck-pot-liquid:has(.ck-illustrated-food){
+  gap:0;align-content:center;justify-content:space-evenly;
+  padding:6% 5%;box-sizing:border-box;
+}
+.ck-cook-workspace .ck-pot-liquid.ck-pot-empty{padding:0}
+.ck-stage-world.ck-gesture-active.ck-action-toss .ck-cook-workspace .ck-illustrated-food{
+  animation:ck-food-toss-v3 .34s ease-in-out infinite alternate!important;
+}
+.ck-stage-world.ck-gesture-active.ck-action-stir .ck-cook-workspace .ck-illustrated-food{
+  animation:ck-food-orbit-v3 .56s ease-in-out infinite alternate!important;
+}
+.ck-stage-world.ck-stage-success.ck-action-toss .ck-cook-workspace .ck-illustrated-food,
+.ck-stage-world.ck-stage-success.ck-action-stir .ck-cook-workspace .ck-illustrated-food{
+  animation:ck-dish-settle .52s ease-out both!important;
+}
+@keyframes ck-illustrated-food-enter{
+  0%{opacity:0;transform:translateY(-28px) scale(.58) rotate(-15deg)}
+  60%{opacity:1;transform:translateY(4px) scale(1.07) rotate(6deg)}
+  100%{opacity:1;transform:translateY(0) scale(1) rotate(0deg)}
+}
+/* Keep visual cues clear but small on phones; the playable food stays central. */
+@media(max-width:850px){
+ .ck-stage-world .ck-step-visual-guide{
+  max-width:min(190px,38%);top:7px;left:7px;
+  padding:5px 6px;gap:5px;border-width:1.5px;border-radius:10px;
+ }
+ .ck-step-visual-guide .ck-step-visual-icon{width:26px;height:26px;border-width:1.5px;border-radius:8px}
+ .ck-step-visual-copy strong{font-size:11px}
+ .ck-step-visual-copy small{font-size:9px}
+}
+@media(max-width:580px){
+ .ck-stage-world .ck-step-visual-guide{max-width:44%;top:4px;left:4px;padding:3px 5px;gap:4px}
+ .ck-step-visual-guide .ck-step-visual-icon{width:20px;height:20px;border-radius:6px}
+ .ck-step-visual-guide .ck-step-visual-icon svg{width:13px;height:13px}
+ .ck-step-visual-copy strong{font-size:10px}
+ .ck-step-visual-copy small{font-size:8px;line-height:1.18}
+ .ck-step-visual-guide>svg:last-child{width:12px;height:12px}
+ .ck-cook-workspace .ck-food-in-pot.ck-illustrated-food{max-width:75px;max-height:66px}
+ .ck-cook-workspace .ck-food-in-pot.ck-illustrated-food.ck-food-shrimp{max-width:85px;max-height:80px}
+}
+@media(max-width:375px){
+ .ck-stage-world .ck-step-visual-guide{max-width:47%}
+ .ck-step-visual-guide .ck-step-visual-icon{display:none}
+ .ck-step-visual-copy small{font-size:8px}
+}
+@media(prefers-reduced-motion:reduce){
+ .ck-step-visual-guide,.ck-tray-card.is-next,.ck-illustrated-food{animation:none!important}
+}
+
+/* Focus the eye on the cooking, not on repetitive high-contrast stripes. */
+.ck-stage-world{
+ background:
+  radial-gradient(circle at 49% 37%,#fff0d1 0%,#f8dfb6 49%,#efcca0 100%),
+  #f8dfb6;
+}
+.ck-stage-world:before{
+ inset:7px;border:1.5px dashed #fff9e19c;border-radius:11px;
+}
+.ck-stage-world:after{opacity:.18}
+.ck-stage{border-width:3px;background:#f0cca0;box-shadow:0 3px 0 #cf9d66}
+.ck-stage-world .ck-pot{
+ box-shadow:0 7px 0 #47664d,inset 0 0 0 5px #fbf4db,0 12px 17px #704d2f2c;
+}
+.ck-stage-world .ck-cook-workspace .ck-pot-liquid{
+ background-image:radial-gradient(ellipse at 35% 23%,#fff4c7 0%,#f5d49b 53%,#dcae75 100%);
+}
+.ck-stage-world .ck-pot-liquid.ck-soup-surface{
+ background-image:radial-gradient(ellipse at 35% 23%,#ffe7bf 0%,#eac28d 53%,#ca966b 100%);
+}
+.ck-stage-world .ck-pot-liquid.ck-oil-surface{
+ background-image:radial-gradient(ellipse at 35% 23%,#fff4bf 0%,#f4cd79 58%,#d9a355 100%);
+}
+/* Heat flecks rise when the player actually stirs or cooks. */
+.ck-pan-sizzle{position:absolute;z-index:3;inset:0;overflow:hidden;border-radius:50%;pointer-events:none}
+.ck-pan-sizzle i{
+ position:absolute;left:29%;top:42%;width:4px;height:9px;
+ border-radius:50%;background:#fff7d7;opacity:0;
+ animation:ck-sizzle-pop .8s ease-out infinite;
+}
+.ck-pan-sizzle i:nth-child(2){left:58%;top:59%;animation-delay:-.3s;width:6px;height:6px}
+.ck-pan-sizzle i:nth-child(3){left:42%;top:29%;animation-delay:-.5s;width:3px;height:9px}
+.ck-pan-sizzle i:nth-child(4){left:74%;top:39%;animation-delay:-.18s}
+.ck-pan-sizzle i:nth-child(5){left:19%;top:61%;animation-delay:-.43s;width:5px;height:5px}
+.ck-pan-sizzle i:nth-child(6){left:51%;top:68%;animation-delay:-.62s;width:3px;height:8px}
+@keyframes ck-sizzle-pop{
+ 0%{opacity:0;transform:translateY(6px) scale(.4)}
+ 35%{opacity:1;transform:translateY(-3px) scale(1)}
+ 100%{opacity:0;transform:translateY(-17px) scale(.7)}
+}
+@media(max-width:580px){
+ .ck-stage-world .ck-pot{box-shadow:0 4px 0 #47664d,inset 0 0 0 4px #fbf4db,0 7px 9px #704d2f20}
+ .ck-stage{border-width:2px}
+}
+@media(prefers-reduced-motion:reduce){.ck-pan-sizzle i{animation:none!important}}
+
+/* The upcoming object is recognizable before it is placed in the scene. */
+.ck-step-visual-guide .ck-step-visual-thumb{
+ display:block;width:29px;height:29px;max-height:none;
+ object-fit:contain;filter:drop-shadow(0 2px 1px #97745135);
+}
+.ck-cook-workspace .ck-food-in-pot.ck-illustrated-food{transition:filter .5s ease-out}
+.ck-cook-workspace .ck-food-in-pot.ck-food-shrimp:not(.ck-food-cooked){
+ filter:drop-shadow(0 3px 2px #80563831) saturate(.73) brightness(1.12);
+}
+.ck-cook-workspace .ck-food-in-pot.ck-food-shrimp.ck-food-cooked{
+ filter:drop-shadow(0 3px 2px #80563854) saturate(1.2) brightness(1.03);
+}
+.ck-food-in-pot.ck-food-fried{
+ filter:drop-shadow(0 4px 2px #94652d47) saturate(1.1);
+}
+@media(max-width:850px){.ck-step-visual-guide .ck-step-visual-thumb{width:22px;height:22px}}
+@media(max-width:580px){.ck-step-visual-guide .ck-step-visual-thumb{width:17px;height:17px}}

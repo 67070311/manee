@@ -768,3 +768,8 @@
 @media(prefers-reduced-motion:reduce){
  .portfolio-playful .home-banner .home-banner-sketch-tag{transition:none}
 }
+
+/* All decorative separators are hand-drawn SVG outlines, never emoji glyphs. */
+.portfolio-playful .home-banner-sketch-tag{display:inline-flex;align-items:center;gap:7px}
+.portfolio-playful .home-banner-sketch-divider{flex:none;display:inline-block;color:#24475a;stroke-width:1.7}
+@media(max-width:380px){.portfolio-playful .home-banner .home-banner-sketch-tag{gap:5px}.portfolio-playful .home-banner-sketch-divider{width:14px;height:14px}}

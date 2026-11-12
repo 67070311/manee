@@ -60,7 +60,7 @@ export default function HomeCreativeSections({language}:{language:Language}){
         <div className="studio-type-caption">Patrick Hand <span>＋</span> Caveat</div>
        </div>
        <div className="studio-board-right">
-        <div className="studio-board-note">{t.sCorner}<span aria-hidden="true">✳</span></div>
+        <div className="studio-board-note">{t.sCorner}<span aria-hidden="true"><UiIcon name="asterisk" size={19}/></span></div>
         <div className="studio-board-ui">
          <span className="studio-ui-pill"><UiIcon name="flower" size={15}/>{t.sTag}</span>
          <strong>{t.sSample}</strong><p>{t.sBody}</p>

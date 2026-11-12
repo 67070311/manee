@@ -211,3 +211,14 @@
 @media(max-width:620px){
  .menu-game-footer a{min-height:44px;display:inline-flex;align-items:center;gap:8px}
 }
+
+/* Country identifiers use typeset abbreviations rather than platform flag emojis. */
+.menu-country-block h2 .menu-country-code{display:inline-grid;place-items:center;flex:none;min-width:35px;height:27px;border:1.5px solid #a7c9c0;border-radius:7px;background:#eaf5ef;color:#356d5d;font-size:12px;font-weight:850;letter-spacing:.05em}
+.menu-recipe-nav .menu-country-inline-code{display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;min-width:28px;min-height:23px;padding:2px 5px;margin-right:4px;background:#e8f2e6;color:#35776c;border-radius:6px;border:1px solid #b6d1c7;font-size:11px;letter-spacing:.03em}
+.menu-brand-symbol{display:inline-flex;align-items:center;justify-content:center;flex:none}
+.menu-vocab-title-icon{display:inline-flex;align-items:center;gap:6px}
+.menu-vocab-title-icon svg{flex:none}
+.menu-recipe-count{display:inline-flex;align-items:center;gap:5px}
+.menu-recipe-count svg{flex:none}
+.menu-complete-star{display:flex;align-items:center;justify-content:center;gap:10px}
+.menu-complete-star svg{flex:none;stroke-width:1.65}

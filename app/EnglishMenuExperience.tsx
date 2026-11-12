@@ -9,7 +9,7 @@ import type {Language} from "./Home";
 import {countries,dishes,vocabulary,illustration,vocabImage,type EnglishMenuDish,type CountryId} from "./EnglishMenuData";
 
 type Screen="catalog"|"vocabulary"|"recipe"|"cook"|"complete";
-const countryFlags:Record<CountryId,string>={thailand:"🇹🇭",korea:"🇰🇷",japan:"🇯🇵",italy:"🇮🇹"};
+const countryCodes:Record<CountryId,string>={thailand:"TH",korea:"KR",japan:"JP",italy:"IT"};
 const tx={
  th:{
   return:"กลับ Playground",welcome:"WELCOME TO OUR KITCHEN",daily:"เมนูพิเศษประจำวัน",view:"ดูสูตรอาหาร",allMenu:"เมนูอาหารทั้งหมด",ingredients:"วัตถุดิบ",kitchenware:"เครื่องครัว",discover:"เลือกเมนูอาหารจากทั่วโลก",hint:"เลือกประเทศและเมนูที่สนใจเพื่อเรียนภาษาอังกฤษผ่านอาหาร",dishCount:"เมนู",wordCount:"คำ",items:"รายการ",tapDish:"ดูสูตรและคำศัพท์",learn:"เรียนศัพท์ผ่านภาพและสูตรอาหาร",stepTitle:"COOKING STEPS",listen:"ฟังเสียง",recipeBack:"เลือกเมนูอาหาร",english:"คำศัพท์ภาษาอังกฤษ",meaning:"คำแปลไทย",clickListen:"แตะภาพหรือชื่อศัพท์เพื่อฟังการออกเสียง",goCook:"ลองทำอาหารกัน!",miniDesc:"อ่านคำสั่งภาษาอังกฤษ เลือกวัตถุดิบ และใช้เครื่องครัวให้ครบทุกขั้นตอน",ingredientsIn:"INGREDIENTS",toolsIn:"KITCHENWARE",wordHint:"คำศัพท์ที่ควรรู้",step:"ขั้นที่",of:"จาก",choose:"ลากหรือแตะวัตถุดิบให้ตรงกับคำสั่ง",act:"แตะเพื่อทำขั้นตอนนี้",wrong:"ยังไม่ถูกนะ ลองอีกครั้ง",right:"ถูกต้องแล้ว เก่งมาก!",showThai:"ดูคำแปลภาษาไทย",hideThai:"ซ่อนคำแปล",next:"ขั้นตอนต่อไป",serve:"เสิร์ฟอาหาร",completed:"ทำอาหารสำเร็จ!",completeDesc:"ทำตามคำสั่งภาษาอังกฤษครบแล้ว เยี่ยมเลย!",again:"เล่นอีกครั้ง",chooseOther:"เลือกเมนูอื่น",finishWords:"คำศัพท์ที่ได้ใช้",backToRecipe:"กลับไปดูสูตร",photoNote:"illustrated recipe",audioUnsupported:"เบราว์เซอร์นี้ไม่รองรับเสียงอ่าน",total:"เรียนรู้ได้ทุกเมนู",min:"นาที"
@@ -71,7 +71,7 @@ export default function EnglishMenuExperience({initialLanguage="th"}:{initialLan
  return <div className="menu-game" lang={language}>
   <header className="menu-greenbar"><div className="menu-greenbar-inner">
    <Link href="/playground" className="menu-green-back" aria-label={t.return}><UiIcon name="arrow-left" size={23}/></Link>
-   <div className="menu-brand"><span className="menu-brand-symbol">✿</span><span><b>English</b><small>Menu</small></span></div>
+   <div className="menu-brand"><span className="menu-brand-symbol"><UiIcon name="flower" size={31}/></span><span><b>English</b><small>Menu</small></span></div>
    <span className="menu-green-subtitle">{t.welcome}</span>
    <div className="menu-language" role="group" aria-label="Language"><button type="button" className={language==="th"?"active":""} onClick={()=>setLanguage("th")}>TH</button><button type="button" className={language==="en"?"active":""} onClick={()=>setLanguage("en")}>EN</button></div>
   </div></header>
@@ -79,7 +79,7 @@ export default function EnglishMenuExperience({initialLanguage="th"}:{initialLan
    {screen==="catalog"&&<div className="menu-paper menu-fresh-home">
     <section className="menu-fresh-hero" aria-label={language==="th"?"เริ่มเล่นเกม English Menu":"Start English Menu"}>
       <div className="menu-fresh-copy">
-        <div className="menu-fresh-mark"><span className="menu-fresh-logo">✿</span><span>ENGLISH MENU <small>THE LITTLE COOKBOOK GAME</small></span></div>
+        <div className="menu-fresh-mark"><span className="menu-fresh-logo"><UiIcon name="flower" size={28}/></span><span>ENGLISH MENU <small>THE LITTLE COOKBOOK GAME</small></span></div>
         <span className="menu-fresh-kicker">PICK A DISH · LEARN WORDS · COOK!</span>
         <h1>{language==="th"?<>เล่นทำอาหาร<br/><em>ฝึกภาษาอังกฤษ</em></>:<>Cook something.<br/><em>Learn English!</em></>}</h1>
         <p>{language==="th"?"เลือกเมนูที่ชอบ ฟังคำสั่งภาษาอังกฤษ แล้วแตะวัตถุดิบหรือขยับเครื่องครัวเพื่อทำอาหารทีละขั้น ทำถูกแล้วเกมจะไปต่อเอง":"Choose your favorite dish, listen to English instructions and prepare the food by tapping ingredients or moving kitchen tools. Each step advances automatically."}</p>
@@ -124,7 +124,7 @@ export default function EnglishMenuExperience({initialLanguage="th"}:{initialLan
     <section className="menu-countries" id="menu-country-list" ref={catalogRef}>
      <div className="menu-section-intro"><span>OUR FOOD JOURNEY</span><h1>{t.discover}</h1><p>{t.hint}</p></div>
      {countries.map((country,index)=><div className="menu-country-block" key={country.id}>
-      <h2><span>{countryFlags[country.id]}</span>{countryName(country.id,language)}</h2>
+      <h2><span className="menu-country-code" aria-hidden="true">{countryCodes[country.id]}</span>{countryName(country.id,language)}</h2>
       <div className="menu-dishes">{dishes.filter(d=>d.country===country.id).map(dish=><button type="button" className="menu-dish-card" key={dish.id} onClick={()=>openRecipe(dish)} aria-label={(language==="th"?dish.thaiName:dish.name)+": "+t.tapDish}>
        <span className="menu-dish-card-art"><img src={illustration(dish.id)} alt="" loading="lazy" decoding="async"/></span>
        <span className="menu-dish-card-label">{language==="th"?dish.thaiName:dish.name}</span>
@@ -134,7 +134,7 @@ export default function EnglishMenuExperience({initialLanguage="th"}:{initialLan
     </section>
    </div>}
    {screen==="vocabulary"&&<div className="menu-paper menu-standalone-vocab">
-     <div className="menu-vocab-top"><button type="button" className="menu-vocab-back" onClick={backCatalog}><UiIcon name="arrow-left" size={18}/>{language==="th"?"กลับหน้าแรก":"Back to English Menu"}</button><span>✿ ENGLISH MENU · LITTLE DICTIONARY</span></div>
+     <div className="menu-vocab-top"><button type="button" className="menu-vocab-back" onClick={backCatalog}><UiIcon name="arrow-left" size={18}/>{language==="th"?"กลับหน้าแรก":"Back to English Menu"}</button><span className="menu-vocab-title-icon"><UiIcon name="flower" size={14}/> ENGLISH MENU · LITTLE DICTIONARY</span></div>
      <div className="menu-vocab-hero">
       <div className="menu-vocab-hero-text"><span className="menu-vocab-eyebrow">LOOK · LISTEN · LEARN</span>
        <h1>{vocabKind==="ingredient"?t.ingredients:t.kitchenware}<span>!</span></h1>
@@ -157,9 +157,9 @@ export default function EnglishMenuExperience({initialLanguage="th"}:{initialLan
      <div className="menu-vocab-bottom"><span>{language==="th"?"จำคำศัพท์ได้แล้ว ลองนำไปใช้ทำอาหารกัน!":"Now use your new words to cook a dish!"}</span><button type="button" onClick={backCatalog}>{language==="th"?"ไปเลือกเมนูอาหาร":"Choose a dish"} <UiIcon name="arrow-right" size={17}/></button></div>
     </div>}
    {screen==="recipe"&&<div className="menu-paper menu-recipe-paper">
-     <div className="menu-recipe-nav"><button type="button" onClick={backCatalog}><UiIcon name="arrow-left" size={16}/>{t.recipeBack}</button><span>{countryFlags[recipeCountry]} {countryName(recipeCountry,language)}</span></div>
+     <div className="menu-recipe-nav"><button type="button" onClick={backCatalog}><UiIcon name="arrow-left" size={16}/>{t.recipeBack}</button><span><b className="menu-country-inline-code">{countryCodes[recipeCountry]}</b> {countryName(recipeCountry,language)}</span></div>
      <section className="menu-recipe-poster">
-       <div className="menu-card-upper"><span>RECIPE COLLECTION</span><span>✦ {String(dishes.indexOf(selected)+1).padStart(2,"0")} / 08 ✦</span></div>
+       <div className="menu-card-upper"><span>RECIPE COLLECTION</span><span className="menu-recipe-count"><UiIcon name="star" size={12}/> {String(dishes.indexOf(selected)+1).padStart(2,"0")} / 08 <UiIcon name="star" size={12}/></span></div>
        <div className="menu-poster-number">{String(dishes.indexOf(selected)+1).padStart(2,"0")}</div>
        <div className="menu-poster-plate"><img src={illustration(selected.id)} alt={selected.name}/></div>
        <div className="menu-poster-title"><h1 lang="en">{selected.name}</h1><h2>{selected.thaiName}</h2><p>{language==="th"?selected.subtitleTh:selected.subtitle} · {selected.minutes} {t.min}</p></div>
@@ -202,7 +202,7 @@ export default function EnglishMenuExperience({initialLanguage="th"}:{initialLan
     onBack={()=>{setScreen("recipe");toTop()}}
     onFinish={()=>{setScreen("complete");setCompleted(prev=>{const next=prev.includes(selected.id)?prev:[...prev,selected.id];try{localStorage.setItem("english-menu-completed",JSON.stringify(next))}catch{}return next});toTop()}}/>}
    {screen==="complete"&&<div className="menu-paper menu-complete-paper">
-    <span className="menu-complete-star">✳ ✦ ✳</span><div className="menu-complete-illustration"><img src={illustration(selected.id)} alt={selected.name}/></div>
+    <span className="menu-complete-star" aria-hidden="true"><UiIcon name="asterisk" size={25}/><UiIcon name="star" size={32}/><UiIcon name="asterisk" size={25}/></span><div className="menu-complete-illustration"><img src={illustration(selected.id)} alt={selected.name}/></div>
     <h1>{t.completed}</h1><h2>{selected.thaiName}</h2><p>{t.completeDesc}</p>
     <div className="menu-learned-title">{t.finishWords}</div><div className="menu-finished-words">{[...selected.ingredients,...selected.tools].map(id=><button key={id} type="button" onClick={()=>speak(vocabulary[id].en)}><img src={vocabImage(id)} alt="" loading="lazy"/><span>{vocabulary[id].en}<small>{vocabulary[id].th}</small></span><UiIcon name="volume-2" size={16}/></button>)}</div>
     <div className="menu-finish-actions"><button type="button" onClick={startCooking}>{t.again}</button><button type="button" onClick={backCatalog}>{t.chooseOther}<UiIcon name="arrow-right" size={17}/></button></div>

@@ -1110,3 +1110,7 @@
  }
  .dsm-close{min-height:44px}
 }
+
+/* Outline motif in place of a Unicode emoji-capable ornament. */
+.dsm-art-letter em{display:inline-flex;align-items:center;vertical-align:middle}
+.dsm-art-letter em svg{width:clamp(25px,3.7vw,46px);height:clamp(25px,3.7vw,46px);stroke-width:1.5}
